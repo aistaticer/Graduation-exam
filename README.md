@@ -71,3 +71,7 @@
   使用する AWS：Amazon Rekognition
 - **ランキング上位のレシピと自分のレシピの違いを教えてくれる機能**<br>
   使用する AWS：Amazon Comprehend
+
+## ER図のリンク
+
+https://drive.google.com/file/d/1bdDHwRvjF2WWB-egjUZjMkUnxgiFo_af/view?usp=sharing
