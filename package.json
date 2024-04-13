@@ -11,6 +11,7 @@
     "babel-loader": "8.0.6",
     "bootstrap": "^5.3.3",
     "css-loader": "5.0.0",
+    "sass": "^1.75.0",
     "sass-loader": "10.1.1",
     "style-loader": "2",
     "webpack": "^4.46.0",

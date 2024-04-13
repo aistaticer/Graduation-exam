@@ -1,2 +1,21 @@
 @import "~bootstrap/scss/bootstrap";
 @import "bootstrap";
+
+.main {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.header {
+  //height: 48px;
+  background-color: lightcyan;
+  box-sizing: border-box;
+  border: 8px solid blue;
+}
