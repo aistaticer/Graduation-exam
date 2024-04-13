@@ -1,3 +1,11 @@
+- decorated_recipe = RecipeDecorator.new(recipe)
+= link_to recipe_path(recipe) do
+	= image_tag decorated_recipe.resized_recipe_thumbnail(size: 100), id: "yourImageId", class: "mr-3"
+
+
+
 = recipe.name
 br
 = recipe.bio
+
+= link_to 'レシピ削除', recipe_path(recipe), data: { turbo_method: :delete}

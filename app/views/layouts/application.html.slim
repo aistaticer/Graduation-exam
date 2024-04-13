@@ -5,12 +5,16 @@ html
     meta name="viewport" content="width=device-width,initial-scale=1"
     = csrf_meta_tags
     = csp_meta_tag
+    = javascript_pack_tag 'application', 'data-turbo-track': 'reload'
+    = stylesheet_link_tag "application", "data-turbo-track": "reload"
 
-    = stylesheet_pack_tag "application", "data-turbo-track": "reload"
-    = javascript_importmap_tags
-		= javascript_pack_tag 'application', 'data-turbo-track': 'reload'
-
+	/#= javascript_importmap_tags
 
   body
-    = render 'shared/always/header'
-    = yield
+    .header
+      = render 'shared/always/header'
+    .main
+      .sidebar
+        = render 'shared/always/sidebar' 
+      .content
+        = yield

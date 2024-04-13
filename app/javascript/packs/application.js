@@ -2,5 +2,8 @@
 import "@hotwired/turbo-rails"
 import "bootstrap"
 import "../stylesheets/application"
+import "../stylesheets/sidebar"
 
-console.log("application.js");
+document.addEventListener("DOMContentLoaded", function(){
+	console.log("aapplication.js");
+})
