@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  recipe_id: 1
+  number: MyString
+  integer: MyString
+  process: MyText
+
+two:
+  recipe_id: 1
+  number: MyString
+  integer: MyString
+  process: MyText

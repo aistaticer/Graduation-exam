@@ -10,8 +10,30 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_04_12_030555) do
-  create_table "users", force: :cascade do |t|
+ActiveRecord::Schema[7.0].define(version: 2024_04_13_070623) do
+  create_table "recipes", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.bigint "user_id"
+    t.text "bio"
+    t.string "thumbnail"
+    t.boolean "copy_permission"
+    t.integer "copy_recipe_id"
+    t.text "highlight"
+  end
+
+  create_table "steps", force: :cascade do |t|
+    t.integer "recipe_id"
+    t.string "number"
+    t.string "integer"
+    t.text "process"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "users", id: false, force: :cascade do |t|
+    t.bigint "id"
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"

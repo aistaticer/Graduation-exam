@@ -1,1 +1,8 @@
 p recipe index
+
+
+- @recipes.each do |recipe|
+	.card
+		= render 'shared/recipe/recipe_introduce', recipe: recipe
+		br
+		br
