@@ -1,8 +1,10 @@
-p recipe index
+.background
+br
+	.justify-content-center.d-flex
+		p 新着レシピ一覧
 
-
-- @recipes.each do |recipe|
-	.card
-		= render 'shared/recipe/recipe_introduce', recipe: recipe
-		br
-		br
+	.recipes-container
+		- @recipes.each do |recipe|
+			= render 'shared/recipe/recipe_introduce', recipe: recipe
+br
+br

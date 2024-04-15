@@ -1,0 +1,125 @@
+.background{
+  background: #fbebeb;
+}
+
+img{
+  /*画像の幅を100%に設定*/
+  width:100%;
+	height: auto;
+}
+.recipe_image {
+  display: block;
+	border-radius: 10%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text-overlay {
+  position: absolute;
+  font-size: 10px;
+  font-weight: bold;
+  top: 0;
+  left: 0;
+  right: 0; /* 右端と左端から0に設定して中央に配置 */
+  background-color: rgba(255, 255, 255, 0.5); /* 半透明の白 */
+  color: white;
+  text-shadow: 2px 2px 10px #a4c14d, -2px 2px 10px #a4c14d, 2px -2px 10px #a4c14d, -2px -2px 10px #a4c14d;
+  //-webkit-text-stroke: 1.3px rgb(103, 1, 1); /* 文字の縁取りを赤に */
+  text-decoration: underline; /* 下線を引く */
+  text-align: center; /* 中央揃え */
+  width: 100%;
+  padding: 10px 10px; /* 上下に余白を設ける */
+  border-radius: 10% 10% 0% 0%;
+}
+
+
+.recipe_card {
+  position: relative;
+  //margin: 2em 0;
+  margin: 10px auto;
+  padding: 0.5em 1em;
+  border: solid 1px #ffb15e;
+  background: #faf2f2;
+  box-shadow: 2px 2px 10px #c1874d, -2px 2px 10px #c1874d, 2px -2px 10px #c1874d, -2px -2px 10px #c1874d;
+  width: 220px;
+  height: auto;
+  border-radius: 0 0% 0% 0%; /* 左上の角だけ丸みをなくす */
+}
+
+@media (max-width: 767px) {
+  .recipe_card {
+    position: relative;
+    //margin: 2em 0;
+    margin: 15px auto;
+    padding: 0.5em 1em;
+    //border: solid 3px #ffb15e;
+    background: #ffffff;
+    width: 90%;
+    height: auto;
+    border-radius: 0 0% 0% 0%; /* 左上の角だけ丸みをなくす */
+  }
+}
+
+.recipe_card .recipe-title {
+  position: absolute;
+  display: inline-block;
+  top: -27px;
+  left: -3px;
+  padding: 0 9px;
+  width: calc(100% + 6px); /* レシピカードの幅に合わせて調整 */
+  height: auto; /* コンテンツの高さに合わせて自動調整 */
+  line-height: 25px; /* 必要に応じて調整 */
+  font-size: 17px;
+  background: #ffb15e;
+  color: #fdffff;
+  font-weight: bold;
+  border-radius: 5px 5px 0 0;
+  box-sizing: border-box; /* パディングとボーダーを含めた幅で計算 */
+  white-space: nowrap; /* 文字を1行にする */
+  overflow: hidden; /* はみ出たテキストを非表示にする */
+  text-overflow: ellipsis; /* はみ出たテキストの代わりに省略記号を表示する */
+}
+
+.recipe_card .recipe-title:hover {
+  white-space: normal; /* テキストを元の状態（複数行可）に戻す */
+  overflow: visible; /* テキストを全て表示 */
+  height: auto; /* テキスト量に応じて高さを自動調整 */
+  //background-color: rgba(255, 177, 94, 0.8); /* オプションで背景色を変更しても良い */
+}
+
+.recipe_bio{
+  //background: #f7ff5e;
+  border-radius: 10%;
+  padding: 10%;
+}
+
+
+.recipe_card p {
+  margin: 0; 
+  padding: 0;
+}
+
+.recipes-container {
+  //display: flex;
+  //flex-wrap: wrap;
+  //justify-content: flex-start; /* アイテムを左寄せにする */
+  //gap: 2vw; /* 画面の幅に対して2%の間隔 */
+  //padding-left: 5%; /* 画面の幅に対して左側に5%の間隔 */
+
+  display: grid;
+  grid-template-columns: repeat(6, 1fr); /* 3列の均等な幅で */
+  grid-gap: 10px; /* 画像の間隔は10px */
+}
+
+@media (max-width: 767px) {
+  .recipes-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 1px;
+    width: 100%; /* これを追加 */
+  }
+}
+
+.parent{
+  position: relative;
+}

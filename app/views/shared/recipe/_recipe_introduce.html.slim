@@ -1,11 +1,18 @@
-- decorated_recipe = RecipeDecorator.new(recipe)
-= link_to recipe_path(recipe) do
-	= image_tag decorated_recipe.resized_recipe_thumbnail(size: 100), id: "yourImageId", class: "mr-3"
+.recipe_card
+
+  - decorated_recipe = RecipeDecorator.new(recipe)
+  = link_to recipe_path(recipe) do
+    .parent
+      -if recipe.thumbnail.present?
+      = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "recipe_image"
+      .text-overlay
+        = recipe.name
+
+  br
+  .recipe_bio
+    = recipe.bio
 
 
+  br
 
-= recipe.name
-br
-= recipe.bio
-
-= link_to 'レシピ削除', recipe_path(recipe), data: { turbo_method: :delete}
+  = link_to 'レシピ削除', recipe_path(recipe), data: { turbo_method: :delete}
