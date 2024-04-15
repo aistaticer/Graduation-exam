@@ -38,9 +38,28 @@ class RecipesController < ApplicationController
   end
 
 	def set_step_build
+		@process_number = 0
     6.times {
-      #@process_number += 1
-			@steps = @recipe.steps.build
+      @process_number += 1
+			@recipe.steps.build
 		}
+  end
+
+	def recipe_params_carry_up_number
+    # まず、通常通りにparamsを取得
+    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :introduce, steps_attributes: [:id, :number, :description]).tap do |whitelisted|
+      # steps_attributesがあれば、descriptionが空のものを除外
+      if whitelisted[:steps_attributes]
+        whitelisted[:steps_attributes].each do |key, step_attribute|
+          if step_attribute[:description].blank?
+            whitelisted[:steps_attributes].delete(key)
+          end
+        end
+         # descriptionが空でないsteps_attributesのnumberを繰り上げる
+        whitelisted[:steps_attributes].values.each_with_index do |step_attribute, index|
+          step_attribute[:number] = index + 1
+        end
+      end
+    end
   end
 end
