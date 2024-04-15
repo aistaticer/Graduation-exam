@@ -6,15 +6,16 @@
   = f.label :thumbnail, '画像'
   = f.file_field :thumbnail
   br
-  = f.label :name, 'レシピ名'
   = f.label :bio, 'レシピ紹介文'
   br
   = f.text_field :bio, placeholder: 'ここにテキストを入力してください', class: 'form-control' 
   br
+  - process_number = 0
   = f.fields_for :steps do |step_form|
-    = 1
+    - process_number += 1
     br
-    = step_form.hidden_field :number
-    = step_form.text_area :description, placeholder: 'ここにテキストを入力してください', class: 'form-control' 
+    = process_number
+    = step_form.hidden_field :number, value: process_number
+    = step_form.text_area :process, placeholder: 'ここにテキストを入力してください', class: 'form-control' 
     br
   = f.submit 'レシピを作成する'
