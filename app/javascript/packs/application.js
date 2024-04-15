@@ -2,8 +2,9 @@
 import "@hotwired/turbo-rails"
 import "bootstrap"
 import "../stylesheets/application"
+import "../stylesheets/recipe_index"
 import "../stylesheets/sidebar"
 
 document.addEventListener("DOMContentLoaded", function(){
-	console.log("aapplication.js");
+	console.log("application.js");
 })

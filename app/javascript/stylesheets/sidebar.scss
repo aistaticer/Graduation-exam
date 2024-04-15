@@ -1,6 +1,19 @@
 .sidebar {
   width: 200px;
+  min-width: 200px;
+  height: 100%;
   background-color: moccasin;
   box-sizing: border-box;
   border: 8px solid chocolate;
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    width: 100px;
+    min-width: 100px;
+    height: 100%;
+    background-color: moccasin;
+    box-sizing: border-box;
+    border: 8px solid chocolate;
+  }
 }
