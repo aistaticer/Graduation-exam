@@ -11,6 +11,8 @@
     "babel-loader": "8.0.6",
     "bootstrap": "^5.3.3",
     "css-loader": "5.0.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
     "sass": "^1.75.0",
     "sass-loader": "10.1.1",
     "style-loader": "2",
@@ -22,6 +24,7 @@
     "@babel/plugin-proposal-logical-assignment-operators": "^7.20.7",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@babel/preset-env": "^7.24.4"
+    "@babel/preset-env": "^7.24.4",
+    "@babel/preset-react": "^7.24.1"
   }
 }

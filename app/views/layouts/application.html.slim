@@ -7,6 +7,8 @@ html
     = csp_meta_tag
     = javascript_pack_tag 'application', 'data-turbo-track': 'reload'
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    - if params[:action] == 'new'
+      = javascript_pack_tag 'new', 'data-turbo-track': 'reload'
 
 	/#= javascript_importmap_tags
 
@@ -18,3 +20,5 @@ html
         = render 'shared/always/sidebar' 
       .content
         = yield
+    - if params[:action] == 'new'
+      = javascript_pack_tag 'react/react_example.js', 'data-turbo-track': 'reload'

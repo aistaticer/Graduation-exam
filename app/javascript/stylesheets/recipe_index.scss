@@ -107,7 +107,7 @@ img{
   //padding-left: 5%; /* 画面の幅に対して左側に5%の間隔 */
 
   display: grid;
-  grid-template-columns: repeat(6, 1fr); /* 3列の均等な幅で */
+  grid-template-columns: repeat(5, 1fr); /* 3列の均等な幅で */
   grid-gap: 10px; /* 画像の間隔は10px */
 }
 

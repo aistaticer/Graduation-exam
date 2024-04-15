@@ -4,6 +4,9 @@ import "bootstrap"
 import "../stylesheets/application"
 import "../stylesheets/recipe_index"
 import "../stylesheets/sidebar"
+//import "./react/react_example"
+//import "./react/react_new"
+//import "./new"
 
 document.addEventListener("DOMContentLoaded", function(){
 	console.log("application.js");

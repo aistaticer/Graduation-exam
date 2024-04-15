@@ -13,7 +13,7 @@ class RecipesController < ApplicationController
 	end
 
 	def create
-		@recipe = Recipe.new(recipe_params)
+		@recipe = Recipe.new(recipe_params_carry_up_number)
 		if @recipe.save
 			redirect_to recipe_path(@recipe), flash: { success: 'レシピが正常に投稿されました。' }
 		else
@@ -47,11 +47,11 @@ class RecipesController < ApplicationController
 
 	def recipe_params_carry_up_number
     # まず、通常通りにparamsを取得
-    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :introduce, steps_attributes: [:id, :number, :description]).tap do |whitelisted|
+    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, steps_attributes: [:id, :number, :process]).tap do |whitelisted|
       # steps_attributesがあれば、descriptionが空のものを除外
       if whitelisted[:steps_attributes]
         whitelisted[:steps_attributes].each do |key, step_attribute|
-          if step_attribute[:description].blank?
+          if step_attribute[:process].blank?
             whitelisted[:steps_attributes].delete(key)
           end
         end
