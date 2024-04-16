@@ -1,0 +1,104 @@
+.addform{
+	width: 120px;
+	height: auto;
+	background-color: lightcyan;
+}
+
+.form_container{
+	position: relative;
+	width: 100%;
+  height: 300px;
+	border: solid #000;
+}
+
+.form{
+	width: 80%;
+	height: auto;
+	margin:0 0 10% 10%;
+}
+
+.select_image{
+	width: 170px;
+	height: auto;
+	margin-right: auto;
+	margin-left: 0;
+	border-radius: 10%;
+  margin-left: auto;
+  margin-right: auto;
+	background-color: rgb(151, 240, 240);
+
+}
+
+
+.split {
+  position: absolute;
+  width: 50%;
+  height: 100%;
+	border: solid #f10a0a;
+}
+.left-box {
+  left: 5%;
+	width: 40%;
+}
+
+.right-box {
+  right: 5%;
+	width: 40%;
+  overflow-y: scroll;
+}
+
+.custom-button {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.imagePreview {
+  max-width: 200px; /* 最大幅を200pxに設定 */
+  max-height: 200px; /* 最大高さを200pxに設定 */
+}
+
+.submitButton{
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+}
+
+.image_message{
+	position: absolute;
+	font-size: 10px;
+  font-weight: bold;
+	top: 50%;
+	text-align: center
+}
+
+.process{
+	position: relative;
+	display: flex;
+	margin: 5% 5% 5% 5%;
+}
+
+.process_form{
+	width: 80%;
+	height: auto;
+}
+
+.process_number {
+  padding: 5% 5% 5% 5%;
+  width: 30px;
+  height: 30px;
+  background-color: #000;
+  color: rgb(255, 255, 255);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center; /* 追加 */
+}
+
+.form-control-custom {
+  border-radius: 0 10px 10px 10px;
+}
