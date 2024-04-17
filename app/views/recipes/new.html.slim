@@ -3,14 +3,19 @@
     .split.left-box
       = f.label :name, 'レシピ名'
       br
-      = f.text_field :name, placeholder: 'レシピの名前を入力してください', class: 'form-control'
+      .form
+        = f.text_field :name, placeholder: 'レシピ名を入力', class: 'form-control'
+
+      .image_message
+        p クリックして料理の画像をのせてください
 
       .select_image
         = image_tag 'camera.jpg', id: 'imagePreview', class: 'select_image'
         = f.file_field :thumbnail, id: 'fileInput', style: 'display: none;'
-        .image_message
-          p クリックして料理の画像をのせてください
-      
+        br
+
+        /#.imagePreview
+          /#img#imagePreview[src="" alt="画像プレビュー"]      
       br
 
     .split.right-box
@@ -37,10 +42,3 @@
 
 
 .root id = "root"
-
-
-.a id="fileInfo"
-.imagePreview
-  img#imagePreview[src="" alt="画像プレビュー"]
-
-p aaa

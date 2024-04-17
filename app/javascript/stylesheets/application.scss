@@ -15,7 +15,26 @@
 
 .header {
   //height: 48px;
-  background-color: lightcyan;
+  background-image: linear-gradient(to right, #fff9b6, #ffa70e);
   box-sizing: border-box;
-  border: 8px solid blue;
+}
+
+.sidebar {
+  width: 200px;
+  min-width: 200px;
+  height: 100vh;
+  background-image: linear-gradient(to bottom, #FFB6C1, #00BFFF);
+  box-sizing: border-box;
+}
+
+@media (max-width: 767px) {
+  .sidebar {
+    display: none;
+    width: 100px;
+    min-width: 100px;
+    height: 100%;
+    background-color: moccasin;
+    box-sizing: border-box;
+    border: 8px solid chocolate;
+  }
 }
