@@ -1,1 +1,4 @@
-= button_to 'いいね！', recipe_stamp_middles_path(recipe_id: recipe.id), method: :post
+= link_to recipe_stamp_middles_path(recipe_id: recipe.id), id: "unliked_button_#{recipe.id}", data: { turbo_method: :post }, remote: true do
+  .i class="fa-regular fa-heart"
+
+

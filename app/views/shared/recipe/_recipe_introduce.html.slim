@@ -11,8 +11,16 @@
   br
   .recipe_bio
     = recipe.bio
+ 
+  - if recipe.user_like == true
+    = render 'shared/stamps/like_delete', recipe: recipe, stamp_middle: recipe.current_user_like_id
+  - else
+    = render 'shared/stamps/like_create', recipe: recipe
+
+  = render 'shared/stamps/like_count', recipe: recipe
+
 
 
   br
-  = render 'shared/stamps/like_create', recipe: recipe
+
   = link_to 'レシピ削除', recipe_path(recipe), data: { turbo_method: :delete}
