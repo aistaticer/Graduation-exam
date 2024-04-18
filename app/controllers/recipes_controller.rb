@@ -1,16 +1,19 @@
     class RecipesController < ApplicationController
     def index
-    @recipes = Recipe.includes(:steps).all
+      @recipes = Recipe.includes(:steps).with_attached_thumbnail.all
+      @stamp_middles = StampMiddle.all
+      StampMiddle.liked_by_user?(@recipes,current_user.id)
+      StampMiddle.count_like_recipe(@recipes)
     end
 
     def show
-    @recipe = Recipe.includes(:steps).find(params[:id])
+      @recipe = Recipe.includes(:steps).find(params[:id])
     end
 
     def new
-    @recipe = Recipe.new
-    @url_recipe_new = true
-    set_step_build
+      @recipe = Recipe.new
+      @url_recipe_new = true
+      set_step_build
     end
 
     def create
