@@ -14,5 +14,5 @@
 
 
   br
-
+  = render 'shared/stamps/like_create', recipe: recipe
   = link_to 'レシピ削除', recipe_path(recipe), data: { turbo_method: :delete}

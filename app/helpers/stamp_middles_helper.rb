@@ -1,0 +1,2 @@
+module StampMiddlesHelper
+end
