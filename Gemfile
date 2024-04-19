@@ -14,6 +14,7 @@ gem 'image_processing'
 gem 'mini_magick', '~> 4.8'
 gem 'sidekiq'
 gem 'slim-rails'
+gem 'kaminari'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"

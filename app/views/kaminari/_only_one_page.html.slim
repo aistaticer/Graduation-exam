@@ -1,0 +1,13 @@
+- if recipes.total_pages == 1
+  nav
+  ul.pagination
+    .li.page-item
+      = link_to "最初", "#", class: "page-link"
+    .li.page-item
+      = link_to "前", "#", class: "page-link"
+    .li.page-item.active
+      = link_to "1", "#", class: "page-link"
+    .li.page-item
+      = link_to "次", "#", class: "page-link"
+    .li.page-item
+      = link_to "最後", "#", class: "page-link"

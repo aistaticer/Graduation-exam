@@ -12,12 +12,13 @@
   .recipe_bio
     = recipe.bio
  
-  - if recipe.user_like == true
-    = render 'shared/stamps/like_delete', recipe: recipe, stamp_middle: recipe.current_user_like_id
-  - else
-    = render 'shared/stamps/like_create', recipe: recipe
-
-  = render 'shared/stamps/like_count', recipe: recipe
+  .flex
+    - if recipe.user_like == true
+      = render 'shared/stamps/like_delete', recipe: recipe, stamp_middle: recipe.current_user_like_id
+    - else
+      = render 'shared/stamps/like_create', recipe: recipe
+    .like-count
+      = render 'shared/stamps/like_count', recipe: recipe
 
 
 

@@ -9,7 +9,7 @@ class StampMiddle < ApplicationRecord
       .where(stamp_middles: { stamps_type_id: 1 })
       .group(:id)
       .count
-		
+
 		recipes.each do |recipe|
 			recipe.likes_count = likes_count[recipe.id] || 0
 		end

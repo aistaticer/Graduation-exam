@@ -128,3 +128,15 @@ img{
   color: red;
 }
 
+.flex{
+  display: flex;
+  //background-color: #abc8c9;
+  width: fit-content;
+  border-radius: 10%;
+  border:solid 2px #abc8c9;
+  padding: 0px 5px 0px 5px;
+}
+
+.like-count{
+  margin: 0px 0px 0px 5px;
+}

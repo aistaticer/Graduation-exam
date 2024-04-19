@@ -1,6 +1,8 @@
     class RecipesController < ApplicationController
+
     def index
-      @recipes = Recipe.includes(:steps).with_attached_thumbnail.all
+      @recipes = Recipe.includes(:steps).with_attached_thumbnail.all.page(params[:page]).per(10)
+
       @stamp_middles = StampMiddle.all
       StampMiddle.liked_by_user?(@recipes,current_user.id)
       StampMiddle.count_like_recipe(@recipes)

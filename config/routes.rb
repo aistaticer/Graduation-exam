@@ -6,6 +6,7 @@ Rails.application.routes.draw do
     resources :stamp_middles, only: [:create, :destroy]
   end
 
+  resources :likes, only: [:index]
 
   resources :recipes, only: [:index, :show, :new, :create, :destroy, :edit, :update]
 

@@ -1,0 +1,6 @@
+.justify-content-center.d-flex
+	p お気に入り
+
+.recipes-container
+	- @liked_recipes.each do |liked_recipe|
+		= render 'shared/recipe/recipe_introduce', recipe: liked_recipe
