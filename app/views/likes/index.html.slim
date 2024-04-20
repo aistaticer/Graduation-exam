@@ -4,3 +4,10 @@
 .recipes-container
 	- @liked_recipes.each do |liked_recipe|
 		= render 'shared/recipe/recipe_introduce', recipe: liked_recipe
+
+br
+.justify-content-center.d-flex
+	- if @liked_recipes.total_pages == 1
+		= render 'kaminari/only_one_page', recipes: @liked_recipes
+	- else
+		= paginate @liked_recipes, window: 2, remote: true

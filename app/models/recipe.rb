@@ -8,5 +8,11 @@ class Recipe < ApplicationRecord
 	attr_accessor :user_like
 	attr_accessor :current_user_like_id
 
+	has_many :categories_recipes
+  has_many :categories, through: :categories_recipes
 
+
+	def self.ransackable_attributes(auth_object = nil)
+		["bio", "copy_permission", "copy_recipe_id", "created_at", "highlight", "id", "name", "thumbnail", "updated_at", "user_id"]
+	end
 end

@@ -1,60 +1,76 @@
-    class RecipesController < ApplicationController
+class RecipesController < ApplicationController
+  include RecipesHelper
 
-    def index
-      @recipes = Recipe.includes(:steps).with_attached_thumbnail.all.page(params[:page]).per(10)
+  def index
+    @q = Recipe.ransack(params[:q])
+    @recipes = @q.result.includes(:steps,:categories).with_attached_thumbnail.all.page(params[:page]).per(10)
 
-      @stamp_middles = StampMiddle.all
-      StampMiddle.liked_by_user?(@recipes,current_user.id)
-      StampMiddle.count_like_recipe(@recipes)
+    #@stamp_middles = StampMiddle.all
+    StampMiddle.liked_by_user?(@recipes,current_user.id)
+    StampMiddle.count_like_recipe(@recipes)
+  end
+
+  def show
+    @recipe = Recipe.includes(:steps).find(params[:id])
+  end
+
+  def new
+    @recipe = Recipe.new
+
+    @q = Category.ransack(params[:q])
+    @categories = @q.result(distinct: true)
+    @url_recipe_new = true
+    set_step_build
+
+  end
+
+  def create
+    @recipe = Recipe.new(recipe_params_carry_up_number)
+    @recipe.user_id = current_user.id
+    if @recipe.save
+      redirect_to recipe_path(@recipe), flash: { success: 'レシピが正常に投稿されました。' }
+    else
+      flash.now[:danger] = 'レシピの投稿に失敗しました。'
+      render :new, status: :see_other
     end
+  end
 
-    def show
-      @recipe = Recipe.includes(:steps).find(params[:id])
-    end
+  def edit
+  end
 
-    def new
-      @recipe = Recipe.new
-      @url_recipe_new = true
-      set_step_build
-    end
+  def destroy
+    recipe = Recipe.find(params[:id])
+    recipe.destroy
+  end
 
-    def create
-      @recipe = Recipe.new(recipe_params_carry_up_number)
-      @recipe.user_id = current_user.id
-      if @recipe.save
-        redirect_to recipe_path(@recipe), flash: { success: 'レシピが正常に投稿されました。' }
-      else
-        flash.now[:danger] = 'レシピの投稿に失敗しました。'
-        render :new, status: :see_other
-      end
-    end
+  def copy_and_new
+    @url_recipe_new = true
+    @recipe = Recipe.find(params[:recipe_id])
+    @copied_recipe, @copied_recipe_steps = copy_recipe_helper(@recipe)
 
-    def edit
-    end
+    @recipe = @copied_recipe
+    @recipe.steps = @copied_recipe_steps
+  end
 
-    def destroy
-      recipe = Recipe.find(params[:id])
-      recipe.destroy
-    end
 
-    private
+  private
 
-    # Strong Parameters
-    def recipe_params
-      params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, steps_attributes: [:id, :number, :process])
-    end
+  # Strong Parameters
+  def recipe_params
+    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, steps_attributes: [:id, :number, :process])
+  end
 
-    def set_step_build
-      @process_number = 0
-      6.times {
-        @process_number += 1
-        @recipe.steps.build
-      }
-    end
+  def set_step_build
+    @process_number = 0
+    6.times {
+      @process_number += 1
+      @recipe.steps.build
+    }
+  end
 
     def recipe_params_carry_up_number
     # まず、通常通りにparamsを取得
-    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, steps_attributes: [:id, :number, :process]).tap do |whitelisted|
+    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, steps_attributes: [:id, :number, :process], category_ids: []).tap do |whitelisted|
       # steps_attributesがあれば、descriptionが空のものを除外
       if whitelisted[:steps_attributes]
         whitelisted[:steps_attributes].each do |key, step_attribute|

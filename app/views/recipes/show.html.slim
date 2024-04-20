@@ -1,1 +1,12 @@
 p show
+.container
+	- decorated_recipe = RecipeDecorator.new(@recipe)
+
+	= image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "recipe_image"
+	.text-overlay
+		= @recipe.name
+
+	- @recipe.steps.each do |step|
+		p #{step.process}
+
+	= link_to "copy",copy_and_new_recipes_path(recipe_id: @recipe.id) 
