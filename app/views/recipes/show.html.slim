@@ -1,11 +1,24 @@
 p show
 .container
-	- decorated_recipe = RecipeDecorator.new(@recipe)
+  - decorated_recipe = RecipeDecorator.new(@recipe)
 
-	= image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "recipe_image"
-	.text-overlay
-		= @recipe.name
+  /#= image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "recipe_image"
+  .text-overlay
+    = @recipe.name
 
-	- @recipe.steps.each do |step|
-		p #{step.process}
-	= link_to "copy",copy_and_new_recipes_path(recipe_id: @recipe.id) 
+  - @recipe.steps.each do |step|
+    p #{step.process}
+  = link_to "copy",copy_and_new_recipes_path(recipe_id: @recipe.id) 
+
+
+= form_with model: [@recipe, Comment.new], url: recipe_comments_path(@recipe), local: true, html: { class: "unique-form-class" } do |f| 
+  .row_margin
+    = f.text_field :body, placeholder: 'コメントを入力してください', class: 'form-control' 
+  = f.submit 'コメントを作成する'
+
+
+- @parent_comments.each do |comment|
+  = render partial: 'shared/comment/comment_body', locals: {recipe: @recipe, comment: comment }
+		
+  - comment.replies.each do | reply |
+	  = render partial: 'shared/comment/comment_reply', locals: { recipe: @recipe, comment: comment, replycomment: reply }
