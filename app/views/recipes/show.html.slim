@@ -8,5 +8,4 @@ p show
 
 	- @recipe.steps.each do |step|
 		p #{step.process}
-
 	= link_to "copy",copy_and_new_recipes_path(recipe_id: @recipe.id) 
