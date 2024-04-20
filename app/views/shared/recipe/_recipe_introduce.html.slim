@@ -11,6 +11,9 @@
   br
   .recipe_bio
     = recipe.bio
+
+  - recipe.categories.each do |category|
+    = category.name 
  
   .flex
     - if recipe.user_like == true

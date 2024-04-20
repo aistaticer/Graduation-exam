@@ -1,15 +1,7 @@
-= search_form_for @q, url: new_recipe_path, method: :get do |f|
-  = f.label :name_cont, "カテゴリー名検索"
-  = f.search_field :name_or_hiragana_cont
-  = f.submit "検索"
-
 .form_container
-  = form_with model: @recipe, local: true do |f|
+  = form_with model: @recipe, url: recipes_path, method: :post, local: true do |f| 
 
     .split.left-box
-      = f.label :category_ids, "カテゴリー"
-      = f.collection_select :category_ids, @categories, :id, :name, {}, {multiple: true}
-      /#= f.collection_select :category_ids, Category.all, :id, :name, {}, {multiple: true} 
 
       = f.label :name, 'レシピ名'
       br
@@ -50,7 +42,7 @@
       .addform id = "addformButton"
         p フォーム増やす
 
+- @copied_recipe_steps.each do |step|
+  p = step.process
 
-.root id = "root"
-
-
+p #{@copied_recipe_steps}

@@ -15,6 +15,7 @@ gem 'mini_magick', '~> 4.8'
 gem 'sidekiq'
 gem 'slim-rails'
 gem 'kaminari'
+gem 'ransack'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
