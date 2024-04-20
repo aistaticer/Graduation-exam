@@ -11,7 +11,12 @@ class RecipesController < ApplicationController
   end
 
   def show
+    @url_recipe_show = true
     @recipe = Recipe.includes(:steps).find(params[:id])
+    @comments = @recipe.comments.includes(:user, replies: [:user, {myreply: :user}]).order(created_at: :desc)
+    @comment = @recipe.comments.new
+    @replies = Comment.includes(:user).where.not(reply_to_id: nil)
+    @parent_comments = @comments.where(parent_id:nil)
   end
 
   def new

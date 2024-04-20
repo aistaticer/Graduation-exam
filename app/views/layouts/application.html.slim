@@ -9,6 +9,8 @@ html
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
     - if @url_recipe_new
       = javascript_pack_tag 'new', 'data-turbo-track': 'reload'
+    - elsif @url_recipe_show
+      = javascript_pack_tag 'show', 'data-turbo-track': 'reload'
 
 	/#= javascript_importmap_tags
 

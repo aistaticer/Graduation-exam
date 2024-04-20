@@ -8,7 +8,8 @@ module.exports = {
   entry: [
     'webpack-dev-server/client?http://' + os.hostname() + ':9090/',
     './app/javascript/packs/application.js', // ここにはあなたのメインのJavaScriptファイルのパスを入れてね
-    './app/javascript/packs/new.js'
+    './app/javascript/packs/new.js',
+    './app/javascript/packs/show.js'
   ],
   output: {
     filename: 'bundle.js',

@@ -11,6 +11,8 @@ class Recipe < ApplicationRecord
 	has_many :categories_recipes
   has_many :categories, through: :categories_recipes
 
+	has_many :comments, dependent: :destroy
+
 
 	def self.ransackable_attributes(auth_object = nil)
 		["bio", "copy_permission", "copy_recipe_id", "created_at", "highlight", "id", "name", "thumbnail", "updated_at", "user_id"]

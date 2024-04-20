@@ -1,0 +1,16 @@
+.reply_container
+  -if replycomment.myreply.present?
+    p 返信先: #{link_to replycomment.myreply.user.name,user_path(replycomment.myreply.user)}
+
+  .body-card
+    = replycomment.body
+
+  = form_with model: [recipe, @comment], id: "replyFormTemplate", local: true, html: { class: "unique-form-class" } do |f|
+    .row_margin id = "aaa"
+      /# 返信コメント主名前を表示
+      p 返信先 #{replycomment.user.name}
+      = f.text_field :body, placeholder: '返信を入力してください', class: 'form-control' 
+      = f.hidden_field :parent_id, value: comment.id, id: "parent_id"
+      = f.hidden_field :reply_to_id, value: replycomment.id, id: "reply_to_id"
+    .text-end
+      = f.submit '返信する', class: 'btn btn-warning text-white'
