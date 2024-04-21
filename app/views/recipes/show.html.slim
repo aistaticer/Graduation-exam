@@ -18,7 +18,14 @@ p show
 
 
 - @parent_comments.each do |comment|
-  = render partial: 'shared/comment/comment_body', locals: {recipe: @recipe, comment: comment }
-		
-  - comment.replies.each do | reply |
-	  = render partial: 'shared/comment/comment_reply', locals: { recipe: @recipe, comment: comment, replycomment: reply }
+  .comment
+    = render partial: 'shared/comment/comment_body', locals: {recipe: @recipe, comment: comment }
+
+    .replies.comment_container id = "replies_all_#{comment.id}"
+      - if comment.replies.present?
+        .icon-replies data-comment-id="#{comment.id}"
+          .i class="fa-solid fa-caret-down"
+          p #{comment.replies.count}件の返信
+  .hide id = "replies_#{comment.id}"
+    - comment.replies.each do | reply |
+	    = render partial: 'shared/comment/comment_reply', locals: { recipe: @recipe, comment: comment, replycomment: reply }

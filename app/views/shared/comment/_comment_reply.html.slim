@@ -1,11 +1,15 @@
 .reply_container
   -if replycomment.myreply.present?
     p 返信先: #{link_to replycomment.myreply.user.name,user_path(replycomment.myreply.user)}
+  p #{replycomment.user.name} さん　#{replycomment.created_at.strftime('%Y/%m/%d　%H:%M')}
 
   .body-card
     = replycomment.body
 
-  = form_with model: [recipe, @comment], id: "replyFormTemplate", local: true, html: { class: "unique-form-class" } do |f|
+    .icon id = "comment_reply_button_#{replycomment.id}" data-comment-id="#{replycomment.id}"
+      .i class="fa-solid fa-reply"
+
+  = form_with model: [recipe, @comment], id: "comment_replyForm_#{replycomment.id}", local: true, class: "hide" do |f|
     .row_margin id = "aaa"
       /# 返信コメント主名前を表示
       p 返信先 #{replycomment.user.name}

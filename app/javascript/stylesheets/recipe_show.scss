@@ -1,13 +1,27 @@
 .comment_container{
 	width: 70%;
 	height: auto;
-	margin: auto;
+	margin: 0px auto;
 }
 
 .reply_container{
 	width: 50%;
 	height: auto;
-	margin: auto;
+	margin: 0px auto 30px auto ;
+}
+
+.replies{
+	display: flex;
+	margin: 0px auto;
+}
+
+.comment-icon {
+  display: flex;
+  align-items: center; /* アイコンとテキストを垂直方向の中央に揃える */
+}
+
+.comment_container p {
+  margin-bottom: 0px; /* pタグの下マージンを0に設定 */
 }
 
 .body-card{
@@ -22,4 +36,26 @@
 
 .show{
 	display:block
+}
+
+.icon-replies{
+	display: flex;
+	align-items: center;
+	gap: 8px; 
+}
+
+.icon-replies :hover{
+	cursor: pointer;
+}
+
+.icon :hover{
+	cursor: pointer;
+}
+
+.comment{
+	margin-bottom: 30px;
+}
+
+.reply_container p{
+	margin: 0px
 }
