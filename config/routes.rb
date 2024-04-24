@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   
   resources :recipes do
     resources :stamp_middles, only: [:create, :destroy]
-    resources :comments, only: [:create, :destroy, :update]
+    resources :comments, only: [:index, :create, :destroy, :update]
     collection do
       get :copy_and_new
     end

@@ -1,31 +1,57 @@
-p show
-.container
+.show_container
   - decorated_recipe = RecipeDecorator.new(@recipe)
 
-  /#= image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "recipe_image"
-  .text-overlay
-    = @recipe.name
+  .culumn_set
+    p レシピ名
+    .recipe_name
+      = @recipe.name
 
-  - @recipe.steps.each do |step|
-    p #{step.process}
-  = link_to "copy",copy_and_new_recipes_path(recipe_id: @recipe.id) 
+  - ing = [["牛乳","150"],["牛乳","150"],["牛乳","150"],["牛乳","150"],["牛乳","150"],["牛乳","150"],["牛乳","150"],["牛乳","150"]]
+  - ing.each do |i|
+    /#p #{i[0]} と #{i[1]}
+
+  .horizontally_image
+    .vertical
+      = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "image"
+      p 材料
+      - ing.each do |i|
+        .ing_set
+          p #{i[0]}
+          p #{i[1]}
+
+    .how_to_make
+      p 作り方
+      .horizontally
+        - @recipe.steps.each do |step|
+          .step_margin
+
+            .make_number
+              p #{step.number}
+            .culumn_contents
+              p #{step.process}
+    = link_to "copy",copy_and_new_recipes_path(recipe_id: @recipe.id) 
 
 
-= form_with model: [@recipe, Comment.new], url: recipe_comments_path(@recipe), local: true, html: { class: "unique-form-class" } do |f| 
-  .row_margin
-    = f.text_field :body, placeholder: 'コメントを入力してください', class: 'form-control' 
-  = f.submit 'コメントを作成する'
+  .comment_container
+    p コメント
+    .bottom_border
+      .comment_arrangement
+        = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), class: "avater"
+        = render partial: 'shared/comment/comment_form', locals: {recipe: @recipe}
+
+  - @parent_comments.each do |comment|
+
+    .d-flex.width700.space_top
+      = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), class: "avater"
+      .space_left
+        = render partial: 'shared/comment/comment_body', locals: {recipe: @recipe, comment: comment }
+    
+    .space_top.hide id = "replies_#{comment.id}"
+      - comment.replies.each do | reply |
+        .d-flex.space_left50
+          = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), class: "avater-reply"
+          = render partial: 'shared/comment/comment_reply', locals: { recipe: @recipe, comment: comment, replycomment: reply }
 
 
-- @parent_comments.each do |comment|
-  .comment
-    = render partial: 'shared/comment/comment_body', locals: {recipe: @recipe, comment: comment }
-
-    .replies.comment_container id = "replies_all_#{comment.id}"
-      - if comment.replies.present?
-        .icon-replies data-comment-id="#{comment.id}"
-          .i class="fa-solid fa-caret-down"
-          p #{comment.replies.count}件の返信
-  .hide id = "replies_#{comment.id}"
-    - comment.replies.each do | reply |
-	    = render partial: 'shared/comment/comment_reply', locals: { recipe: @recipe, comment: comment, replycomment: reply }
+.root id = "root"
+.root1 id = "root1"

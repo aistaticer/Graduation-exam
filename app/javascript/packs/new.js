@@ -2,10 +2,12 @@ function addformEventListener() {
   const form = document.querySelector('form[action^="/recipes"]');
   const addformButton = document.getElementById('addformButton');
   const submit = document.getElementById('submit');
-  let process_number = form.querySelectorAll('.form-control').length - 2;
+  let process_number = document.querySelectorAll('.form-control.form-control-custom').length;
+  console.log(process_number);
 
   addformButton.addEventListener('click', function(e) {
     //e.preventDefault(); // ページのリロードを防ぐ
+    console.log(process_number)
     process_number++;
     const newField = document.createElement('div'); // 新しいフォーム要素のコンテナ
     newField.innerHTML = `

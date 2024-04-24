@@ -1,9 +1,9 @@
 function comment_replyform_look(commentId,classname){
   let comment_replyform = document.getElementById(classname + commentId)
-  if(comment_replyform.className == "show"){
+  if(comment_replyform.classList.contains("show") == true){
     comment_replyform.classList.add("hide");
     comment_replyform.classList.remove("show");
-  }else if(comment_replyform.className == "hide"){
+  }else if(comment_replyform.classList.contains("hide") == true){
     comment_replyform.classList.add("show");
     comment_replyform.classList.remove("hide");
   }
@@ -40,9 +40,22 @@ document.addEventListener('DOMContentLoaded', function() {
   })
 });
 
+/*document.addEventListener('DOMContentLoaded', function() {
+  let comment_icon = document.getElementById("comment_icon");
+  let xmark = document.getElementById("xmark");
+  let marks = [comment_icon, xmark];
+  marks.forEach(function(mark){
+    mark.addEventListener('click', function() {
+      console.log("実行");
+      console.log(mark.className);
+      comment_replyform_look("","comment_form");
+    })
+  })
+})*/
+
 
 
 document.addEventListener('click', function(event) {
 	const clickedElement = event.target;
-	console.log(clickedElement);
+	//console.log(clickedElement);
 });

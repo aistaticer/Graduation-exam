@@ -21,12 +21,11 @@ class RecipesController < ApplicationController
 
   def new
     @recipe = Recipe.new
-
     @q = Category.ransack(params[:q])
     @categories = @q.result(distinct: true)
     @url_recipe_new = true
     set_step_build
-
+    @recipe.ingredients.build
   end
 
   def create
@@ -62,7 +61,7 @@ class RecipesController < ApplicationController
 
   # Strong Parameters
   def recipe_params
-    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, steps_attributes: [:id, :number, :process])
+    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, ingredients_attributes: [:id, :name, :serving], steps_attributes: [:id, :number, :process])
   end
 
   def set_step_build
@@ -75,7 +74,7 @@ class RecipesController < ApplicationController
 
     def recipe_params_carry_up_number
     # まず、通常通りにparamsを取得
-    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, steps_attributes: [:id, :number, :process], category_ids: []).tap do |whitelisted|
+    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, ingredients_attributes: [:id, :name, :serving], steps_attributes: [:id, :number, :process], category_ids: []).tap do |whitelisted|
       # steps_attributesがあれば、descriptionが空のものを除外
       if whitelisted[:steps_attributes]
         whitelisted[:steps_attributes].each do |key, step_attribute|

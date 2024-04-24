@@ -1,19 +1,32 @@
-.comment_container
-  p #{comment.user.name} さん　#{comment.created_at.strftime('%Y/%m/%d　%H:%M')}
-
+.content_container
+  p #{comment.user.name}　#{time_ago_in_words(comment.created_at)}前
   .body-card
-    p #{comment.body}
-    .icon id = "comment_reply_button_#{comment.id}" data-comment-id="#{comment.id}"
-      .i class="fa-solid fa-reply"
+    = simple_format(comment.body)
+
+    
+    .d-flex.space_top
+      .replies id = "replies_all_#{comment.id}"
+        - if comment.replies.present?
+          .icon-replies data-comment-id="#{comment.id}"
+            .i class="fa-solid fa-caret-down"
+            .space_right
+              p #{comment.replies.count}件の返信
+
+      
+
+      .d-flex.align_center.icon id = "comment_reply_button_#{comment.id}" data-comment-id="#{comment.id}"
+        .i class="fa-solid fa-reply"
+        .font_small
+          p 返信
+
 
 
 
   = form_with model: [@recipe, Comment.new], method: :post, id: "comment_replyForm_#{comment.id}", class: "hide", local: true do |f|
-    .row_margin
       p 返信先 #{comment.user.name}
-      = f.text_field :body, placeholder: '返信を入力してください', class: 'form-control' 
-      = f.hidden_field :parent_id, value: comment.id, id: "parent_id"
-      = f.hidden_field :id
-    .text-end
-      = f.submit '返信する', class: 'btn btn-warning text-white'
+      .comment_arrangement
+        = f.text_area :body, class: 'form-control' 
+        = f.hidden_field :parent_id, value: comment.id, id: "parent_id"
+        = f.hidden_field :id
+        = f.submit '返信', class: 'submit_button'
 

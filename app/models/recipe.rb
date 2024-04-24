@@ -13,6 +13,8 @@ class Recipe < ApplicationRecord
 
 	has_many :comments, dependent: :destroy
 
+	has_many :ingredients, dependent: :destroy
+
 
 	def self.ransackable_attributes(auth_object = nil)
 		["bio", "copy_permission", "copy_recipe_id", "created_at", "highlight", "id", "name", "thumbnail", "updated_at", "user_id"]

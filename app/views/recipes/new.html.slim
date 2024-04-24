@@ -45,6 +45,8 @@
           .process_form
             = step_form.text_area :process, placeholder: '作り方を入力してください', class: 'form-control form-control-custom'
 
+      = render partial: 'shared/recipe/ingredient_form', locals: {form: f}
+
       = f.submit 'レシピを作成する', id: "submit", class: 'submitButton'
 
       .addform id = "addformButton"

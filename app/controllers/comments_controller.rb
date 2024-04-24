@@ -1,10 +1,28 @@
 class CommentsController < ApplicationController
 	before_action :set_recipe
 
+	def index
+		@parent_comments = @recipe.comments.includes(:user, replies: [:user, {myreply: :user}]).where(parent_id:nil).order(created_at: :desc)
+		@replies = @recipe.comments.where.not(parent_id:nil)
+
+		avatar_url = rails_blob_path(current_user.avatar, only_path: true) if current_user.avatar.attached?
+
+		user_data = [{"id": current_user.id, "name": current_user.name, "avatar_url": avatar_url}]
+
+		console.log();
+		parent_comments_json = @parent_comments.as_json(include: { user: { only: [:id, :name, :email] } })
+		replies_json = @replies.as_json(include: { user: { only: [:id, :name, :email] } })
+		render json: { parent_comments: parent_comments_json ,replies: replies_json, current_user: user_data}
+	end
+
 	def create
 		@comment = @recipe.comments.build(comment_params)
 		@comment.user = current_user
 		if @comment.save
+			respond_to do |format|
+        format.html { redirect_to @recipe }
+        format.json { render json: @comment }
+      end
     end
 	end
 

@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :stamp_middles
+  has_one_attached :avatar, dependent: :destroy
 
   has_many :comments, dependent: :destroy
   
