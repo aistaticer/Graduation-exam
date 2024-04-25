@@ -31,27 +31,25 @@
               p #{step.process}
     = link_to "copy",copy_and_new_recipes_path(recipe_id: @recipe.id) 
 
+  .root1 id = "root1"
 
-  .comment_container
-    p コメント
-    .bottom_border
-      .comment_arrangement
-        = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), class: "avater"
-        = render partial: 'shared/comment/comment_form', locals: {recipe: @recipe}
-
-  - @parent_comments.each do |comment|
-
-    .d-flex.width700.space_top
-      = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), class: "avater"
-      .space_left
-        = render partial: 'shared/comment/comment_body', locals: {recipe: @recipe, comment: comment }
-    
-    .space_top.hide id = "replies_#{comment.id}"
-      - comment.replies.each do | reply |
-        .d-flex.space_left50
-          = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), class: "avater-reply"
-          = render partial: 'shared/comment/comment_reply', locals: { recipe: @recipe, comment: comment, replycomment: reply }
-
-
-.root id = "root"
-.root1 id = "root1"
+  .root id = "root"
+/#  .comment_container
+/    .comment_container_p
+/      コメント
+/    .bottom_border
+/      .comment_arrangement
+/        = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), class: "avater"
+/        = render partial: 'shared/comment/comment_form', locals: {recipe: @recipe}
+/
+/  - @parent_comments.each do |comment|
+/    .d-flex.width700.space_top
+/      = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), class: "avater"
+/      .space_left
+/        = render partial: 'shared/comment/comment_body', locals: {recipe: @recipe, comment: comment }
+/    
+/    .space_top.hide id = "replies_#{comment.id}"
+/      - comment.replies.each do | reply |
+/        .d-flex.space_left50
+/          = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), class: "avater-reply"
+/          = render partial: 'shared/comment/comment_reply', locals: { recipe: @recipe, comment: comment, replycomment: reply }

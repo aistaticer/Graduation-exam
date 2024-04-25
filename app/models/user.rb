@@ -8,4 +8,20 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
+
+
+
+  # アバターのURLを返すメソッド
+
+  def avatar_url(size: 100)
+    if avatar.attached?
+      # トリミングされた画像のバリアントを生成
+      variant = avatar.variant(resize_to_fill: [size, size])
+      # トリミングされた画像のURLを生成
+      Rails.application.routes.url_helpers.rails_blob_path(variant.processed, only_path: true)
+    else
+      # アバターが添付されていない場合はnilを返す
+      nil
+    end
+  end
 end

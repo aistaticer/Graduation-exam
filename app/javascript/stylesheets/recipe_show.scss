@@ -161,7 +161,8 @@
 	height: auto;
 }
 
-.comment_container p{
+.comment_container_p{
+	//reactの影響よけでpを定義
 	border-left: 4px solid #000;
 	padding-left: 10px;
 }
@@ -174,7 +175,7 @@
 
 .form-control {
   width: 500px; /* 幅を300pxに設定 */
-	height: 10px;
+	height: 30px;
 	border-radius: 15px;
 	margin: 20px;
 }
