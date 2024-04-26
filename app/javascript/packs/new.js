@@ -1,3 +1,5 @@
+import "../stylesheets/recipe_new"
+
 function addformEventListener() {
   const form = document.querySelector('form[action^="/recipes"]');
   const addformButton = document.getElementById('addformButton');
@@ -10,16 +12,23 @@ function addformEventListener() {
     console.log(process_number)
     process_number++;
     const newField = document.createElement('div'); // 新しいフォーム要素のコンテナ
+
+
     newField.innerHTML = `
-      <br>
-      ${process_number}
-      <input type="hidden" name="recipe[steps_attributes][${process_number}][number]" value="${process_number}">
-      <textarea name="recipe[steps_attributes][${process_number}][process]" placeholder="ここにテキストを入力してください" class="form-control"></textarea>
-      <br>
+      <div = class = "form margin-top margin-left">
+        <div class = "d-flex width80">
+          <div class = "number">    
+            ${process_number}
+          </div>
+          <input type="hidden" name="recipe[steps_attributes][${process_number}][number]" value="${process_number}">
+          <textarea name="recipe[steps_attributes][${process_number}][process]" placeholder="ここにテキストを入力してください" class="form-control"></textarea>
+        </div>
+      </div>
     `;
-    //submit.appendChild(newField); // フォームに新しいフィールドを追加
+
     const parentElement = submit.parentNode;
     parentElement.insertBefore(newField,submit);
+    document.getElementById('step').appendChild(newField);
 
     newField.scrollIntoView();
   });
@@ -27,27 +36,35 @@ function addformEventListener() {
 
 document.addEventListener("turbo:load", addformEventListener);
 
+function addingre_form(){
+  let process_number = 6;
+  const addingreformButton = document.getElementById('addingreformButton'); // ボタンのIDがこれだと仮定
+  addingreformButton.addEventListener('click', function(e) {
+    e.preventDefault(); // ボタンのデフォルトの動作を防ぐ
+    process_number++; // フォームを追加するたびに数を増やす
+
+    const newField = document.createElement('div'); // 新しいフォーム要素のコンテナ
+    newField.className = "d-flex margin-top";
+    newField.innerHTML = `
+        <textarea name="recipe[ingredients_attributes][${process_number}][name]" placeholder="材料名" class="ingre_form"></textarea>
+        <textarea name="recipe[ingredients_attributes][${process_number}][quantity]" placeholder="量 50ccなど" class="ingre_form margin-left"></textarea>
+    `;
+
+    // フォームを追加する場所を指定する。例えば、idが`formContainer`の要素の中に追加。
+    document.getElementById('ingredients_form').appendChild(newField);
+    newField.scrollIntoView();
+  });
+}
+
+document.addEventListener("turbo:load", addingre_form);
+
+
 document.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById('fileInput').addEventListener('change', function() {
     console.log("aaa");
     // 以下、ファイル選択後の処理。
   });
 });
-
-function handleFileSelect(input) {
-  console.log("aaa");
-  /*if (input.files && input.files[0]) {
-    // ここでファイル選択後の処理を書く。例えば画像プレビュー表示など。
-    var reader = new FileReader();
-    
-    reader.onload = function(e) {
-      // 例えば、読み込んだ画像をプレビューする
-      document.getElementById('imagePreview').src = e.target.result;
-    }
-    
-    reader.readAsDataURL(input.files[0]);
-  }*/
-}
 
 
 function a(){

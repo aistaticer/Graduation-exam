@@ -61,7 +61,7 @@ class RecipesController < ApplicationController
 
   # Strong Parameters
   def recipe_params
-    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, ingredients_attributes: [:id, :name, :serving], steps_attributes: [:id, :number, :process])
+    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, ingredients_attributes: [:id, :name, :serving, :quantity], steps_attributes: [:id, :number, :process], category_ids: [])
   end
 
   def set_step_build
@@ -74,7 +74,7 @@ class RecipesController < ApplicationController
 
     def recipe_params_carry_up_number
     # まず、通常通りにparamsを取得
-    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, ingredients_attributes: [:id, :name, :serving], steps_attributes: [:id, :number, :process], category_ids: []).tap do |whitelisted|
+    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, ingredients_attributes: [:id, :name, :serving, :quantity], steps_attributes: [:id, :number, :process], category_ids: []).tap do |whitelisted|
       # steps_attributesがあれば、descriptionが空のものを除外
       if whitelisted[:steps_attributes]
         whitelisted[:steps_attributes].each do |key, step_attribute|

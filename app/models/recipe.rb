@@ -14,6 +14,7 @@ class Recipe < ApplicationRecord
 	has_many :comments, dependent: :destroy
 
 	has_many :ingredients, dependent: :destroy
+	accepts_nested_attributes_for :ingredients
 
 
 	def self.ransackable_attributes(auth_object = nil)

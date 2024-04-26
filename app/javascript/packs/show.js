@@ -1,3 +1,5 @@
+import "../stylesheets/recipe_show"
+
 function comment_replyform_look(commentId,classname){
   let comment_replyform = document.getElementById(classname + commentId)
   if(comment_replyform.classList.contains("show") == true){

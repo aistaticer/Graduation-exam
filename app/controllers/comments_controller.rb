@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
 			}
 		})
 		replies_json = @replies.as_json(include: { user: { methods: [:avatar_url], only: [:id, :name] } })
-		render json: { parent_comments: parent_comments_json ,replies: replies_json, current_user: user_data}
+		render json: { parent_comments: parent_comments_json ,replies: replies_json, current_user: user_data, comment_count: Comment.count}
 	end
 
 	def create

@@ -18,11 +18,6 @@
   height: 50%;
 }
 
-.form{
-	width: 80%;
-	height: auto;
-	margin:0 0 10% 10%;
-}
 
 .select_image{
 	max-width: 200px;
@@ -65,11 +60,7 @@
   max-height: 200px; /* 最大高さを200pxに設定 */
 }
 
-.submitButton{
-  position: fixed;
-  right: 20px;
-  bottom: 20px;
-}
+
 
 .image_message{
 	font-size: 10px;
@@ -108,3 +99,140 @@
 .form-control-custom {
   border-radius: 0 10px 10px 10px;
 }
+
+// 使うやつ
+
+.name_image{
+  width: 50%;
+  background-color: rgb(224, 245, 245);
+}
+
+.form{
+  //display: flex;
+	//width: 80%;
+}
+
+.number{
+  width: 30px;
+  height: 30px;
+  background-color: #000;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bio_proccess{
+  width: 50%;
+  height: 100%;
+  background-color: rgb(224, 245, 245);
+}
+
+.ingredient{
+  width: 80%;
+};
+
+.align-center{
+  align-items: center;
+}
+
+.margin-top{
+  margin-top: 10px;
+}
+
+.margin-top30{
+  margin-top: 30px;
+}
+
+.center{
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
+.width80{
+  width: 80%;
+}
+
+.margin-left{
+  margin-left:20px;
+}
+
+.image_color{
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.font_change{
+  font-family: "serif";
+}
+.ingre_form{
+  width: 150px;
+  height: 40px;
+  border-radius: 5px;
+  padding:5px;
+  resize: none;
+}
+.width20px{
+  width: 60px;
+}
+
+.addformbutton {
+  position: fixed;
+  right: 50%;
+  bottom: 20px;
+
+  text-align: center;
+  width: 30px;
+  height: 25px;
+  border-radius: 5px;
+  background-color: rgb(120, 126, 240);
+  cursor: pointer; /* デフォルトの状態でポインターにする */
+  box-sizing: border-box; /* パディングとボーダーを幅に含める */
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* スムーズな遷移効果 */
+}
+
+.addform_step{
+  position: fixed;
+  right: 20px;
+  bottom: 60px;
+}
+
+.addformbutton:hover {
+  background-color: rgb(70, 73, 141);/* 暗くする */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影をつける */
+}
+
+.addformbutton:active {
+  transform: scale(1.05); /* 少し広がる */
+}
+
+.submitButton{
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+
+  text-align: center;
+
+  border-radius: 5px;
+  background-color: rgb(185, 233, 241);
+  cursor: pointer; /* デフォルトの状態でポインターにする */
+  box-sizing: border-box; /* パディングとボーダーを幅に含める */
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* スムーズな遷移効果 */
+}
+
+.submitButton:hover {
+  background-color: rgb(140, 175, 181);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影をつける */
+}
+
+.submitButton:active {
+  transform: scale(1.02); /* 少し広がる */
+}
+
+.new_container{
+  background-color: rgb(224, 245, 245);
+  height: auto;
+  padding-bottom: 100px;
+}
+
+

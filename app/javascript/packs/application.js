@@ -5,8 +5,8 @@ import "bootstrap"
 import "../stylesheets/application"
 import "../stylesheets/recipe_index"
 import "../stylesheets/sidebar"
-import "../stylesheets/recipe_new"
-import "../stylesheets/recipe_show"
+//import "../stylesheets/recipe_new"
+//import "../stylesheets/recipe_show"
 //import "./react/react_example"
 //import "./react/react_new"
 //import "./new"
@@ -17,3 +17,9 @@ window.jQuery = $;
 document.addEventListener("DOMContentLoaded", function(){
 	console.log("application.js");
 })
+
+document.addEventListener("turbolinks:load", () => {
+  if (window.location.pathname === '/recipes/new') {
+    require("../stylesheets/recipe_new");
+  }
+});

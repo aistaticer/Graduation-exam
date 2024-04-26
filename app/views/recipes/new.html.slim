@@ -1,56 +1,59 @@
-= search_form_for @q, url: new_recipe_path, method: :get do |f|
-  = f.label :name_cont, "カテゴリー名検索"
-  = f.search_field :name_or_hiragana_cont
-  = f.submit "検索"
+/#= search_form_for @q, url: new_recipe_path, method: :get do |f|
+/  = f.label :name_cont, "カテゴリー名検索"
+/  = f.search_field :name_or_hiragana_cont
+/  = f.submit "検索"
 
-.form_container
-  = form_with model: @recipe, local: true do |f|
+= form_with model: @recipe, local: true do |f|
 
-    .split.left-box
+  .d-flex.new_container
+    .name_image
+      .margin-top30.margin-left
+        = f.label :name, 'レシピ名'
+        .width80
+          = f.text_field :name, placeholder: 'レシピ名を入力', class: 'form-control'
+
       = f.label :category_ids, "カテゴリー"
       = f.collection_select :category_ids, @categories, :id, :name, {}, {multiple: true}
-      /#= f.collection_select :category_ids, Category.all, :id, :name, {}, {multiple: true} 
 
-      = f.label :name, 'レシピ名'
-      br
-      .form
-        = f.text_field :name, placeholder: 'レシピ名を入力', class: 'form-control'
+      .image_color
+        .image_message
+          p クリックして料理の画像をのせてください
 
-      .image_message
-        p クリックして料理の画像をのせてください
+        .select_image
+          = image_tag 'camera.jpg', id: 'imagePreview', class: 'select_image'
+          = f.file_field :thumbnail, id: 'fileInput', style: 'display: none;'
 
-      .select_image
-        = image_tag 'camera.jpg', id: 'imagePreview', class: 'select_image'
-        = f.file_field :thumbnail, id: 'fileInput', style: 'display: none;'
-        br
+      .ingredient.margin-left.margin-top30 id = "ingredients_form"
+        = render partial: 'shared/recipe/ingredient_form', locals: {f: f}
 
-        /#.imagePreview
-          /#img#imagePreview[src="" alt="画像プレビュー"]      
-      br
+      .addingreform.addformbutton id = "addingreformButton"
+        p +
 
-    .split.right-box
-      = f.label :bio, 'レシピ紹介文'
+    .bio_proccess id = "step"
 
-      .form
-        = f.text_field :bio, placeholder: 'レシピ紹介文を入力', class: 'form-control' 
+
+      .margin-left.margin-top30
+        = f.label :bio, 'レシピ紹介文'
+        = f.text_field :bio, placeholder: 'レシピ紹介文を入力', class: 'form-control width80' 
 
       - process_number = 0
+      .margin-top.margin-left
+        = '作り方'
       = f.fields_for :steps do |step_form|
         - process_number += 1
 
-        .process
-          .process_number
-            = process_number
-          = step_form.hidden_field :number, value: process_number
-          .process_form
+        .form.margin-top.margin-left
+          .d-flex.width80
+            .number
+              = process_number
+            = step_form.hidden_field :number, value: process_number
             = step_form.text_area :process, placeholder: '作り方を入力してください', class: 'form-control form-control-custom'
-
-      = render partial: 'shared/recipe/ingredient_form', locals: {form: f}
+      .addformbutton.addform_step id = "addformButton"
+        p +
 
       = f.submit 'レシピを作成する', id: "submit", class: 'submitButton'
 
-      .addform id = "addformButton"
-        p フォーム増やす
+
 
 
 .root id = "root"
