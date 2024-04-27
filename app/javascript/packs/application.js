@@ -18,8 +18,10 @@ document.addEventListener("DOMContentLoaded", function(){
 	console.log("application.js");
 })
 
-document.addEventListener("turbolinks:load", () => {
+document.addEventListener("turbo:load", () => {
   if (window.location.pathname === '/recipes/new') {
     require("../stylesheets/recipe_new");
+  }else if(window.location.pathname === '/recipes/evolution'){
+    require("../stylesheets/recipe_evolution");
   }
 });

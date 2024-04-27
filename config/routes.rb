@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :comments, only: [:index, :create, :destroy, :update]
     collection do
       get :copy_and_new
+      get :evolution
     end
   end
 

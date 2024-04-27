@@ -1,3 +1,4 @@
+
 .addform{
 	width: 120px;
 	height: auto;
@@ -105,11 +106,6 @@
 .name_image{
   width: 50%;
   background-color: rgb(224, 245, 245);
-}
-
-.form{
-  //display: flex;
-	//width: 80%;
 }
 
 .number{
@@ -235,4 +231,10 @@
   padding-bottom: 100px;
 }
 
+.select2-container {
+  width: 80% !important; /* select2の幅を親要素の100%に設定 */
+}
 
+.margin-right{
+  margin-right: 100%;
+}

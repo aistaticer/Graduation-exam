@@ -1,45 +1,61 @@
-.form_container
-  = form_with model: @recipe, url: recipes_path, method: :post, local: true do |f| 
+render 
 
-    .split.left-box
+= form_with model: @copied_recipe, local: true do |f|
+  = render 'layouts/error_messages', model: f.object
+  .d-flex.new_container
+    .name_image
+      .margin-top30.margin-left
+        = f.label :name, 'レシピ名'
+        .width80
+          = f.text_field :name, placeholder: 'レシピ名を入力', class: 'form-control'
 
-      = f.label :name, 'レシピ名'
-      br
-      .form
-        = f.text_field :name, placeholder: 'レシピ名を入力', class: 'form-control'
+      .margin-top30.margin-left
+        = f.label :category_ids, "カテゴリー"
+      /#.margin-top.margin-left
+      /  = f.collection_select :category_ids, @categories, :id , :name, {},  {id: "category", multiple: true, class: "form-control"}
 
-      .image_message
-        p クリックして料理の画像をのせてください
 
-      .select_image
-        = image_tag 'camera.jpg', id: 'imagePreview', class: 'select_image'
-        = f.file_field :thumbnail, id: 'fileInput', style: 'display: none;'
-        br
+      .image_color
+        .image_message
+          p クリックして料理の画像をのせてください
 
-        /#.imagePreview
-          /#img#imagePreview[src="" alt="画像プレビュー"]      
-      br
+        .select_image
+          = image_tag 'camera.jpg', id: 'imagePreview', class: 'select_image'
+          = f.file_field :thumbnail, id: 'fileInput', style: 'display: none;'
 
-    .split.right-box
-      = f.label :bio, 'レシピ紹介文'
+      .ingredient.margin-left.margin-top30 id = "ingredients_form"
+        = render partial: 'shared/recipe/ingredient_form', locals: {f: f}
 
-      .form
-        = f.text_field :bio, placeholder: 'レシピ紹介文を入力', class: 'form-control' 
+      .addingreform.addformbutton id = "addingreformButton"
+        p +
+
+    .bio_proccess id = "step"
+
+
+      .margin-left.margin-top30
+        = f.label :bio, 'レシピ紹介文'
+        = f.text_field :bio, placeholder: 'レシピ紹介文を入力', class: 'form-control width80' 
 
       - process_number = 0
+      .margin-top.margin-left
+        = '作り方'
       = f.fields_for :steps do |step_form|
         - process_number += 1
 
-        .process
-          .process_number
-            = process_number
-          = step_form.hidden_field :number, value: process_number
-          .process_form
+        .form.margin-top.margin-left
+          .d-flex.width80
+            .number
+              = process_number
+            = step_form.hidden_field :number, value: process_number
             = step_form.text_area :process, placeholder: '作り方を入力してください', class: 'form-control form-control-custom'
+      .addformbutton.addform_step id = "addformButton"
+        p +
+      
+      = f.fields_for :copied_recipes do |copied_recipe_form|
+        = copied_recipe_form.hidden_field :original_recipes, value: params[:recipe_id]
+
 
       = f.submit 'レシピを作成する', id: "submit", class: 'submitButton'
 
-      .addform id = "addformButton"
-        p フォーム増やす
 
 

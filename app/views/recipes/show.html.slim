@@ -6,18 +6,15 @@
     .recipe_name
       = @recipe.name
 
-  - ing = [["牛乳","150"],["牛乳","150"],["牛乳","150"],["牛乳","150"],["牛乳","150"],["牛乳","150"],["牛乳","150"],["牛乳","150"]]
-  - ing.each do |i|
-    /#p #{i[0]} と #{i[1]}
-
   .horizontally_image
     .vertical
       = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "image"
       p 材料
-      - ing.each do |i|
+
+      - @recipe.ingredients.each do |a|
         .ing_set
-          p #{i[0]}
-          p #{i[1]}
+          p #{a.name}
+          p #{a.quantity}
 
     .how_to_make
       p 作り方
@@ -29,7 +26,10 @@
               p #{step.number}
             .culumn_contents
               p #{step.process}
-    = link_to "copy",copy_and_new_recipes_path(recipe_id: @recipe.id) 
+    = link_to "copy",copy_and_new_recipes_path(recipe_id: @recipe.id)
+
+    .space_left
+      = link_to "evolution",evolution_recipes_path(recipe_id: @recipe.id) 
 
   .root1 id = "root1"
 

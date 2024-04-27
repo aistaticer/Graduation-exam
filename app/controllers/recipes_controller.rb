@@ -12,7 +12,7 @@ class RecipesController < ApplicationController
 
   def show
     @url_recipe_show = true
-    @recipe = Recipe.includes(:steps).find(params[:id])
+    @recipe = Recipe.includes(:steps,:ingredients).find(params[:id])
     @comments = @recipe.comments.includes(:user, replies: [:user, {myreply: :user}]).order(created_at: :desc)
     @comment = @recipe.comments.new
     @replies = Comment.includes(:user).where.not(reply_to_id: nil)
@@ -22,7 +22,11 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     @q = Category.ransack(params[:q])
-    @categories = @q.result(distinct: true)
+
+    @categories = @q.result(distinct: true).order(:hiragana)
+    others = @categories.find { |category| category.name == "その他" }
+    @categories = @categories.reject { |category| category.name == "その他" } + [others] if others
+    
     @url_recipe_new = true
     set_step_build
     @recipe.ingredients.build
@@ -50,10 +54,43 @@ class RecipesController < ApplicationController
   def copy_and_new
     @url_recipe_new = true
     @recipe = Recipe.find(params[:recipe_id])
-    @copied_recipe, @copied_recipe_steps = copy_recipe_helper(@recipe)
 
-    @recipe = @copied_recipe
-    @recipe.steps = @copied_recipe_steps
+    #@q = Category.ransack(params[:q])
+    #@categories = @q.result(distinct: true).order(:hiragana)
+    #others = @categories.find { |category| category.name == "その他" }
+    #"@categories = @categories.reject { |category| category.name == "その他" } + [others] if others
+    
+    @categories = Category.all
+
+    @copied_recipe, @copied_recipe_steps, @copied_recipe_categories, @copied_recipe_ingredients = copy_recipe_helper(@recipe)
+
+
+    logger.debug(@categories)
+    logger.debug("あああああああああああああああああああああ")
+    
+
+
+    #@recipe = @copied_recipe
+    #@recipe.steps = @copied_recipe_steps
+    #@recipe.categories = @copied_recipe_categories
+    #@recipe.ingredients = @copied_recipe_ingredients
+
+    logger.debug(@copied_recipe)
+
+    @copied_recipe.steps = @copied_recipe_steps
+    @copied_recipe.categories = @copied_recipe_categories
+    @copied_recipe.ingredients = @copied_recipe_ingredients
+
+    #if @copied_recipe.copied_recipe.present?
+    #  @copied_recipe.copied_recipe.build(before_recipe: params[:recipe_id], original_recipe: params[:recipe_id] )
+    #else
+    # logger.debug("@copied_recipe.copied_recipe が nil だよ")
+    #end
+  end
+
+  def evolution
+    @recipe = Recipe.includes(:steps,:ingredients).find(params[:recipe_id])
+    @url_recipe_evolution = true
   end
 
 
@@ -61,7 +98,7 @@ class RecipesController < ApplicationController
 
   # Strong Parameters
   def recipe_params
-    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, ingredients_attributes: [:id, :name, :serving, :quantity], steps_attributes: [:id, :number, :process], category_ids: [])
+    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, ingredients_attributes: [:id, :name, :serving, :quantity], steps_attributes: [:id, :number, :process], copied_recipe_attributes: [:id, :original_recipe, :before_recipe], category_ids: [])
   end
 
   def set_step_build
@@ -72,9 +109,9 @@ class RecipesController < ApplicationController
     }
   end
 
-    def recipe_params_carry_up_number
+  def recipe_params_carry_up_number
     # まず、通常通りにparamsを取得
-    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, ingredients_attributes: [:id, :name, :serving, :quantity], steps_attributes: [:id, :number, :process], category_ids: []).tap do |whitelisted|
+    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, ingredients_attributes: [:id, :name, :serving, :quantity],copied_recipe_attributes: [:id, :original_recipe, :before_recipe], steps_attributes: [:id, :number, :process], category_ids: []).tap do |whitelisted|
       # steps_attributesがあれば、descriptionが空のものを除外
       if whitelisted[:steps_attributes]
         whitelisted[:steps_attributes].each do |key, step_attribute|

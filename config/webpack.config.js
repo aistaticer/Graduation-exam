@@ -10,7 +10,8 @@ module.exports = {
     './app/javascript/packs/application.js', // ここにはあなたのメインのJavaScriptファイルのパスを入れてね
     './app/javascript/packs/new.js',
     './app/javascript/packs/show.js',
-    './app/javascript/packs/react/recipe_show.js'
+    './app/javascript/packs/react/recipe_show.js',
+    './app/javascript/packs/evolution.js',
   ],
   output: {
     filename: 'bundle.js',

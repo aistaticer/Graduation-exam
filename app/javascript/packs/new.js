@@ -1,4 +1,7 @@
-import "../stylesheets/recipe_new"
+import "../stylesheets/recipe_new";
+import $ from 'jquery';
+import 'select2';
+import 'select2/dist/css/select2.css';
 
 function addformEventListener() {
   const form = document.querySelector('form[action^="/recipes"]');
@@ -111,9 +114,10 @@ $(document).ready(function() {
   });
 });
 
-/*document.getElementById('imagePreview').addEventListener('click', function() {
-  document.getElementById('fileInput').click();
-});*/
+$(document).ready(function() {
+  $('#category').select2();
+  console.log("aaaa");
+});
 
 function imageclick(){
   const setImage = document.getElementById('imagePreview')

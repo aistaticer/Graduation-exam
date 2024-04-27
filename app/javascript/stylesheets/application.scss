@@ -30,6 +30,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
   box-sizing: border-box;
   position: fixed;
   top: 0;
+  z-index: 1000
 }
 
 .sidebar {
