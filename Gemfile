@@ -17,6 +17,7 @@ gem 'slim-rails'
 gem 'kaminari'
 gem 'ransack'
 gem 'select2-rails'
+gem "ruby-openai"
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"

@@ -127,3 +127,10 @@ function imageclick(){
 }
 
 document.addEventListener("turbo:load", imageclick);
+
+$(document).ready(function(){
+  $('textarea').on('input', function () {
+    this.style.height = 'auto';  // 高さを一度リセット
+    this.style.height = (this.scrollHeight) + 'px';  // スクロール高さを高さとして設定
+  });
+});

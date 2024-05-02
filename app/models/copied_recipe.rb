@@ -1,3 +1,3 @@
 class CopiedRecipe < ApplicationRecord
-  belongs_to :recipe, dependent: :destroy
+  belongs_to :recipe
 end

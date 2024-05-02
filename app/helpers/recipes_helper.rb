@@ -1,6 +1,6 @@
 module RecipesHelper
   def copy_recipe_helper(recipe)
-    original_recipe = Recipe.includes(:steps,:categories,:ingredients).find(recipe.id)
+    original_recipe = Recipe.includes(:steps,:categories,:ingredients,:copied_recipe).find(recipe.id)
     copied_recipe = original_recipe.dup
     copied_recipe.name += "（コピー）"
 
@@ -17,6 +17,17 @@ module RecipesHelper
       copied_ingredient = ingredient.dup
       copied_ingredient.recipe = copied_recipe #これで関連付けるだけで、IDはまだ設定しない
       copied_ingredient
+    end
+
+    copied_recipe_copied_recipe = original_recipe.copied_recipe
+    #logger.debug(copied_recipe_copied_recipe.original_recipe)
+
+    if copied_recipe_copied_recipe.present?
+      logger.debug("@copied_recipe.copied_recipe が nil じゃない")
+      @new_copied_recipe = copied_recipe.build_copied_recipe(before_recipe: params[:recipe_id], original_recipe: copied_recipe_copied_recipe.original_recipe)
+    else
+      @new_copied_recipe = copied_recipe.build_copied_recipe(before_recipe: params[:recipe_id], original_recipe: params[:recipe_id])
+      logger.debug("@copied_recipe.copied_recipe が nil だよ")
     end
 
     # ここでは保存せずに、複製したレシピオブジェクトを返す

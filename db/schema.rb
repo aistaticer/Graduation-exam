@@ -64,7 +64,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_04_27_144855) do
   end
 
   create_table "copied_recipes", force: :cascade do |t|
-    t.integer "recipe_id"
+    t.bigint "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "original_recipe"

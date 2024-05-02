@@ -47,6 +47,9 @@
       .addformbutton.addform_step id = "addformButton"
         p +
 
+      = f.fields_for :copied_recipe do |copied_recipe_form|
+        = copied_recipe_form.text_area :original_recipe, value: @recipe.id
+
       = f.submit 'レシピを作成する', id: "submit", class: 'submitButton'
 
 

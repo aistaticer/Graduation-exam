@@ -11,8 +11,8 @@ render
 
       .margin-top30.margin-left
         = f.label :category_ids, "カテゴリー"
-      /#.margin-top.margin-left
-      /  = f.collection_select :category_ids, @categories, :id , :name, {},  {id: "category", multiple: true, class: "form-control"}
+      .margin-top.margin-left
+        = f.collection_select :category_ids, @categories, :id , :name, {},  {id: "category", multiple: true, class: "form-control"}
 
 
       .image_color
@@ -34,7 +34,7 @@ render
 
       .margin-left.margin-top30
         = f.label :bio, 'レシピ紹介文'
-        = f.text_field :bio, placeholder: 'レシピ紹介文を入力', class: 'form-control width80' 
+        = f.text_area :bio, placeholder: 'レシピ紹介文を入力', class: 'form-control width80' 
 
       - process_number = 0
       .margin-top.margin-left
@@ -50,10 +50,13 @@ render
             = step_form.text_area :process, placeholder: '作り方を入力してください', class: 'form-control form-control-custom'
       .addformbutton.addform_step id = "addformButton"
         p +
-      
-      = f.fields_for :copied_recipes do |copied_recipe_form|
-        = copied_recipe_form.hidden_field :original_recipes, value: params[:recipe_id]
 
+      = f.fields_for :copied_recipe do |copied_recipe_form|
+        = copied_recipe_form.hidden_field :original_recipe, value: @new_copied_recipe.original_recipe
+        = copied_recipe_form.hidden_field :before_recipe, value: @new_copied_recipe.before_recipe
+
+        = @new_copied_recipe.original_recipe
+        = @new_copied_recipe.before_recipe
 
       = f.submit 'レシピを作成する', id: "submit", class: 'submitButton'
 

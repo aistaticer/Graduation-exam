@@ -6,7 +6,7 @@ class StampMiddle < ApplicationRecord
   def self.count_like_recipe(recipes)
     #　ハッシュでレシピのidごとにいいねの数を取得している（例　{7=>1, 8=>1}）
     likes_count = Recipe.joins(:stamp_middles)
-      .where(stamp_middles: { stamps_type_id: 1 })
+      .where(stamp_middles: { stamps_type_id: StampMiddle.like_id_find() })
       .group(:id)
       .count
 
@@ -18,7 +18,7 @@ class StampMiddle < ApplicationRecord
   def self.liked_by_user?(recipes, user_id)
     # レシピIDとスタンプミドルIDのペアを取得
     liked_recipes_and_stamps = Recipe.joins(:stamp_middles)
-                                      .where(stamp_middles: { stamps_type_id: 1, user_id: user_id })
+                                      .where(stamp_middles: { stamps_type_id: StampMiddle.like_id_find(), user_id: user_id })
                                       .pluck('recipes.id', 'stamp_middles.id')
     
     # 各レシピに対して、liked_recipes_and_stampsから対応するいいねIDを設定
@@ -31,5 +31,10 @@ class StampMiddle < ApplicationRecord
       # 対応するいいねIDを設定
       recipe.current_user_like_id = current_user_like_id_for_recipe
     end
+  end
+
+  def self.like_id_find()
+    like_type = StampsType.find_by(name: 'Like')
+    return like_type.id
   end
 end
