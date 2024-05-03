@@ -3,7 +3,7 @@ import '@fortawesome/fontawesome-free/js/all';
 import "@hotwired/turbo-rails"
 import "bootstrap"
 import "../stylesheets/application"
-import "../stylesheets/recipe_index"
+//import "../stylesheets/recipe_index"
 import "../stylesheets/sidebar"
 //import "../stylesheets/recipe_new"
 //import "../stylesheets/recipe_show"

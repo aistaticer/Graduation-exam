@@ -1,10 +1,15 @@
-= link_to 'レシピ一覧', recipes_path
+.d-flex.justify-content-end
+  .close.content_center
+    = link_to 'レシピ一覧', recipes_path
 
-= link_to '新規レシピ', new_recipe_path 
-
-= link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }
-
-= link_to 'ログイン', new_user_password_path 
+  .close.content_center
+    = link_to '新規レシピ', new_recipe_path 
+  
+  .close.content_center
+    = link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }
+  
+  .close.content_center
+    = link_to 'ログイン', new_user_password_path 
 
 - if user_signed_in?
   br

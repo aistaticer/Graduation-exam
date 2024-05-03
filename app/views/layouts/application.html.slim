@@ -13,6 +13,11 @@ html
       = javascript_pack_tag 'show', 'data-turbo-track': 'reload'
     - elsif  @url_recipe_evolution
       = javascript_pack_tag 'evolution', 'data-turbo-track': 'reload'
+    - elsif  @url_recipe_index
+       = javascript_pack_tag 'index', 'data-turbo-track': 'reload'
+    - elsif @url_recipe_copy
+      = javascript_pack_tag 'new', 'data-turbo-track': 'reload'
+      = javascript_pack_tag 'copy', 'data-turbo-track': 'reload'
 
 
 	/#= javascript_importmap_tags
@@ -20,6 +25,7 @@ html
   body
     .header
       = render 'shared/always/header'
+    .header_border
     .main
       .sidebar
         = render 'shared/always/sidebar' 
@@ -29,3 +35,5 @@ html
       /#= javascript_pack_tag 'react/react_example.js', 'data-turbo-track': 'reload'
     - elsif @url_recipe_show
       = javascript_pack_tag 'react/react_show.js', 'data-turbo-track': 'reload'
+    - elsif  @url_recipe_evolution
+      /#= javascript_pack_tag 'evolution', 'data-turbo-track': 'reload'

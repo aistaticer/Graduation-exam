@@ -1,5 +1,3 @@
-render 
-
 = form_with model: @copied_recipe, local: true do |f|
   = render 'layouts/error_messages', model: f.object
   .d-flex.new_container
@@ -11,8 +9,8 @@ render
 
       .margin-top30.margin-left
         = f.label :category_ids, "カテゴリー"
-      /#.margin-top.margin-left
-      /  = f.collection_select :category_ids, @categories, :id , :name, {},  {id: "category", multiple: true, class: "form-control"}
+      .margin-top.margin-left
+        = f.collection_select :category_ids, @categories, :id , :name, {},  {id: "category", multiple: true, class: "form-control"}
 
 
       .image_color
@@ -34,7 +32,25 @@ render
 
       .margin-left.margin-top30
         = f.label :bio, 'レシピ紹介文'
-        = f.text_field :bio, placeholder: 'レシピ紹介文を入力', class: 'form-control width80' 
+        = f.text_area :bio, placeholder: 'レシピ紹介文を入力', class: 'form-control width80' 
+      
+      .margin-left.margin-top30
+        .d-flex
+          p AIによる改善案
+          .margin-left
+            .line id = "ai"
+              .i class="fa-solid fa-circle-question"
+        .append id = "append"
+          .margin-left
+            p AIが改善案を答えてくれます。
+            p 1日、1度に制限されています。
+        .result.padding id = "result"
+            .empty
+
+        .d-flex.justify-content-end.width80
+          .btn-solid id="askOpenAI"
+            p 出力
+
 
       - process_number = 0
       .margin-top.margin-left
@@ -50,12 +66,15 @@ render
             = step_form.text_area :process, placeholder: '作り方を入力してください', class: 'form-control form-control-custom'
       .addformbutton.addform_step id = "addformButton"
         p +
-      
-      = f.fields_for :copied_recipes do |copied_recipe_form|
-        = copied_recipe_form.hidden_field :original_recipes, value: params[:recipe_id]
 
+      = f.fields_for :copied_recipe do |copied_recipe_form|
+        = copied_recipe_form.hidden_field :original_recipe, value: @new_copied_recipe.original_recipe
+        = copied_recipe_form.hidden_field :before_recipe, value: @new_copied_recipe.before_recipe
 
       = f.submit 'レシピを作成する', id: "submit", class: 'submitButton'
+
+
+.step id = "steps" data-steps = @steps_array data-recipe_name = @recipe_name
 
 
 

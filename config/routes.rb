@@ -14,6 +14,8 @@ Rails.application.routes.draw do
     end
   end
 
+  post '/path_to_your_action', to: 'recipes#ask_open_ai'
+
   resources :likes, only: [:index]
 
   resources :recipes, only: [:index, :show, :new, :create, :destroy, :edit, :update]

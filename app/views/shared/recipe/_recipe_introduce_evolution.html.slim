@@ -1,0 +1,15 @@
+.original-box-shadow.d-flex
+  .align.margin_bio
+    - decorated_recipe = RecipeDecorator.new(recipe)
+    = link_to recipe_path(recipe) do
+      .margin-left
+        = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "evolution_image"
+      /#= recipe.name
+
+  .margin_bio
+    = recipe.bio
+
+  - recipe.categories.each do |category|
+    = category.name 
+
+

@@ -5,9 +5,10 @@ class StampMiddlesController < ApplicationController
     like_type = StampsType.find_by(name: 'Like')
 
     # 新しいいいねを作成
-    @like = StampMiddle.new(recipe_id: @recipe.id, user_id: current_user.id, stamps_type_id: like_type.id)
+    @like = StampMiddle.new(recipe_id: @recipe.id, user_id: current_user.id, stamps_type_id: StampMiddle.like_id_find())
     if @like.save
 			StampMiddle.count_like_recipe([@recipe])
+
 			respond_to do |format|
 
 				format.turbo_stream do

@@ -1,0 +1,1 @@
+import "../stylesheets/recipe_index"

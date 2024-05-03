@@ -3,7 +3,7 @@ class Recipe < ApplicationRecord
   has_one_attached :thumbnail, dependent: :destroy
   accepts_nested_attributes_for :steps
 
-  belongs_to :copied_recipe, dependent: :destroy
+  has_one :copied_recipe, dependent: :destroy
   accepts_nested_attributes_for :copied_recipe
 
   has_many :stamp_middles

@@ -1,7 +1,28 @@
+.background
+
+  .d-flex.justify-content-center.margin-top.font
+    .title
+      p #{@recipe.name}の進化の歴史
 
 
 
-.canvas.margin
-	<canvas id="canvas"></canvas>
+  - @recipes.each do |recipe|
+    .juel_introduce_set id = "set_#{recipe.id}"
+      .juel.absolute id = "#{recipe.id}"
+        img src="/assets/ruby.png" class = "small"
 
+      .introduce.absolute.hide id = "introduce_#{recipe.id}"
+        = render 'shared/recipe/recipe_introduce_evolution', recipe: recipe
+
+  .a.absolute id = "a"
+
+
+
+  .recipes id = "recipes" data-recipe_power = @recipe_power data-recipe_id = @recipe_id
+
+  - logger.debug(@recipe_id)
+  - logger.debug(@recipe_power)
+
+  .margin
+    <canvas id="canvas" class = "canvas_evolution"></canvas>
 

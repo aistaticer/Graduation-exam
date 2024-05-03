@@ -12,6 +12,8 @@ module.exports = {
     './app/javascript/packs/show.js',
     './app/javascript/packs/react/recipe_show.js',
     './app/javascript/packs/evolution.js',
+    './app/javascript/packs/index.js',
+    './app/javascript/packs/copy.js',
   ],
   output: {
     filename: 'bundle.js',

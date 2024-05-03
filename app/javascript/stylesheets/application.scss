@@ -12,6 +12,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
   display: flex;
   flex-direction: row;
   flex-grow: 1;
+
 }
 
 .content {
@@ -21,16 +22,26 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
   padding-top: 50px;
   padding-left: 150px;
   width: 100%;
+  background-color: rgb(245, 238, 224);
+  min-height: 100vh;
 }
 
 .header {
-  height: 50px;
+  height: 45px;
   width: 100vw;
-  background-image: linear-gradient(to right, #fff9b6, #ffa70e);
   box-sizing: border-box;
   position: fixed;
   top: 0;
-  z-index: 1000
+  z-index: 1000;
+  background-color: #ffe2b6;
+}
+
+.header_border{
+  height: 5px;
+  width: 100vw;
+  position: fixed;
+  top: 45px;
+  background-color: #e0c7a5;
 }
 
 .sidebar {
@@ -41,6 +52,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
   position: fixed;
   left: 0;
   bottom: 0;
+  z-index: 1000
 }
 
 @media (max-width: 767px) {
@@ -53,4 +65,22 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
     box-sizing: border-box;
     border: 8px solid chocolate;
   }
+}
+
+.margin-right{
+  margin-right: 20px;
+}
+
+.close{
+  margin-top: 10px;
+  width: 100px;
+  height: 40px;
+  background-color: #e0c7a5;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.content_center{
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

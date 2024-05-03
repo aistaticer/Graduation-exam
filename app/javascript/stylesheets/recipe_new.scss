@@ -20,15 +20,6 @@
 }
 
 
-.select_image{
-	max-width: 200px;
-	object-fit: cover;
-	max-height: 250px;
-	border-radius: 10%;
-	margin: 0 auto;
-}
-
-
 .split {
   position: absolute;
   width: 50%;
@@ -61,18 +52,6 @@
   max-height: 200px; /* 最大高さを200pxに設定 */
 }
 
-
-
-.image_message{
-	font-size: 10px;
-  font-weight: bold;
-	margin: 20px 0px auto;
-}
-
-.image_message p {
-  text-align: center;
-}
-
 .process{
 	position: relative;
 	display: flex;
@@ -88,7 +67,7 @@
   padding: 5% 5% 5% 5%;
   width: 30px;
   height: 30px;
-  background-color: #000;
+  background-color: #000000;
   color: rgb(255, 255, 255);
   display: flex;
   flex-direction: column;
@@ -103,15 +82,33 @@
 
 // 使うやつ
 
+.select_image{
+	max-width: 200px;
+	object-fit: cover;
+	max-height: 250px;
+	border-radius: 10%;
+	margin: 0 auto;
+  cursor: pointer;
+}
+
+.image_message{
+	font-size: 10px;
+  font-weight: bold;
+	margin: 20px 0px auto;
+}
+
+.image_message p {
+  text-align: center;
+}
+
 .name_image{
   width: 50%;
-  background-color: rgb(224, 245, 245);
 }
 
 .number{
   width: 30px;
   height: 30px;
-  background-color: #000;
+  background-color: #c18383;
   color: white;
   display: flex;
   align-items: center;
@@ -121,7 +118,6 @@
 .bio_proccess{
   width: 50%;
   height: 100%;
-  background-color: rgb(224, 245, 245);
 }
 
 .ingredient{
@@ -161,6 +157,7 @@
 .font_change{
   font-family: "serif";
 }
+
 .ingre_form{
   width: 150px;
   height: 40px;
@@ -181,7 +178,7 @@
   width: 30px;
   height: 25px;
   border-radius: 5px;
-  background-color: rgb(120, 126, 240);
+  background-color: rgb(240, 198, 120);
   cursor: pointer; /* デフォルトの状態でポインターにする */
   box-sizing: border-box; /* パディングとボーダーを幅に含める */
   transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* スムーズな遷移効果 */
@@ -194,7 +191,7 @@
 }
 
 .addformbutton:hover {
-  background-color: rgb(70, 73, 141);/* 暗くする */
+  background-color: rgb(211, 163, 107);/* 暗くする */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影をつける */
 }
 
@@ -226,7 +223,6 @@
 }
 
 .new_container{
-  background-color: rgb(224, 245, 245);
   height: auto;
   padding-bottom: 100px;
 }
@@ -237,4 +233,92 @@
 
 .margin-right{
   margin-right: 100%;
+}
+
+.result{
+  color: white;
+  width: 300px;
+  height: auto;
+  border-radius: 5px;
+  background-color: #e5cab4;
+  white-space: pre-wrap;
+}
+
+.empty{
+  height: 10px;
+}
+
+.btn-solid {
+  width: 50px;
+  color: #fff;
+  border-top: 4px solid #ecc348;
+  border-right: 4px solid #5f390a;
+  border-bottom: 4px solid #74510f;
+  border-left: 4px solid #f9dc8c;
+  border-radius: 0;
+  background: #e5a079;
+  border-radius: 5px;
+}
+
+.btn-solid p{
+  margin: 0;
+  text-align: center;
+}
+
+.btn-solid:hover {
+  color: #fff;
+  border-top: 4px solid #74570f;
+  border-right: 4px solid #f9cf8c;
+  border-bottom: 4px solid #ecb048;
+  border-left: 4px solid #5f4d0a;
+}
+
+.btn-solid:active {
+  color: #fff;
+  border-top: 4px solid #74570f;
+  border-right: 4px solid #f9cf8c;
+  border-bottom: 4px solid #ecb048;
+  border-left: 4px solid #5f4d0a;
+  background: #cc8e6a;
+}
+
+.append{
+  position: absolute;
+  display: none;
+  width: auto;
+  background-color: #000;
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+}
+
+.padding{
+  padding: 5px;
+}
+
+.line {
+  border-radius: 100%;
+  width: auto;
+  height: auto; /* 線の太さ */
+  background-color: rgb(226, 185, 185); /* 線の色 */
+  animation-name: drawLine; /* 定義したキーフレーム */
+  animation-duration: 2s; /* アニメーションの期間 */
+  animation-iteration-count: infinite; /* 無限に繰り返す */
+  animation-timing-function: linear; /* 一定速度で */
+
+}
+
+@keyframes drawLine {
+  0%, 100% { /* 開始点と終了点 */
+    width: 0;
+    height: 0;
+  }
+  50% { /* 中間点 */
+    width: 100%;
+    height: 100%;
+  }
+}
+
+p {
+  margin: 0;
 }
