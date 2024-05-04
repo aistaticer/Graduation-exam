@@ -1,18 +1,31 @@
-.d-flex.justify-content-end
-  .close.content_center
-    = link_to 'レシピ一覧', recipes_path
 
-  .close.content_center
-    = link_to '新規レシピ', new_recipe_path 
-  
-  .close.content_center
-    = link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }
-  
-  .close.content_center
-    = link_to 'ログイン', new_user_password_path 
+/#.logo.font_serif
+/  p evolution recipes
 
-- if user_signed_in?
-  br
-  ログインしています
-- else
-  p ログインしていません
+.d-flex-between
+
+  .d-flex.justify-content-start
+    .font_serif.text-center
+      p evolution recipes
+
+  .d-flex.justify-content-end
+    .close.content_center id = "index_action"
+      .i class="fa-solid fa-book-open icon_color"
+      = link_to 'レシピ一覧', recipes_path
+
+    .close.content_center id = "new_action"
+      .i class="fa-solid fa-file-pen icon_color"
+      = link_to '新規レシピ', new_recipe_path 
+    
+    - if user_signed_in?
+      .close.content_center id = "logout_action"
+        .i class="fa-solid fa-arrow-right-from-bracket icon_color"
+        = link_to 'ログアウト', destroy_user_session_path, data: { turbo_method: :delete }
+    - else
+      .close.content_center
+        .i class="fa-solid fa-arrow-right-to-bracket icon_color"
+        = link_to 'ログイン', new_user_password_path
+
+      .close.content_center
+        .i class="fa-solid fa-arrow-right-to-bracket icon_color"
+        = link_to 'ユーザー登録', new_user_sign_up_path 

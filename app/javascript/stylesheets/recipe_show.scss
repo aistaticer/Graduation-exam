@@ -2,7 +2,6 @@
 	width :auto;
 	height: auto;
 	max-width: 100vw;
-	background-color: rgb(224, 245, 245);
 	padding: 20px;
 	//box-sizing: border-box;  /* 追加 */
 	overflow-x: hidden;
@@ -88,7 +87,7 @@
 }
 
 .culumn_contents{
-	background-color: rgb(189, 246, 246);
+	background-color: rgb(246, 225, 189);
 	text-align: center;
 	vertical-align:sub;
 	padding: 5px;
@@ -125,7 +124,7 @@
 }
 
 .recipe_name{
-	background-color: rgb(189, 246, 246);
+	background-color: rgb(246, 229, 196);
 }
 
 .image{
@@ -236,6 +235,10 @@
 
 .space_left50{
 	margin-left: 50px
+}
+
+.height_limit{
+	height: 30px;
 }
 
 .space_right{

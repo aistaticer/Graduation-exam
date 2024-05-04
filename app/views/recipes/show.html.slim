@@ -26,9 +26,14 @@
               p #{step.number}
             .culumn_contents
               p #{step.process}
-    = link_to "copy",copy_and_new_recipes_path(recipe_id: @recipe.id)
 
-    .space_left
+    - if @recipe.copy_permission == true           
+      .d-flex.content_center.height_limit
+        .i class="fa-solid fa-copy icon_color"
+        = link_to "copy",copy_and_new_recipes_path(recipe_id: @recipe.id)
+
+    .space_left.height_limit.d-flex.content_center
+      .i class="fa-solid fa-arrow-trend-up icon_color"
       = link_to "evolution",evolution_recipes_path(recipe_id: @recipe.id) 
 
   .root1 id = "root1"

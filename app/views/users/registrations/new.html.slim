@@ -1,32 +1,65 @@
-h2
-  | Sign up
-= form_with model: @user, url: user_registration_path do |f|
-  = render "devise/shared/error_messages", resource: resource
-  .field
-    = f.label :name
-    br
-    = f.text_field :name, autofocus: true, autocomplete: "name"
-  .field
-    = f.label :画像
-    br
-    = f.file_field :avatar, autofocus: true, autocomplete: "avatar"
-  .field
-    = f.label :email
-    br
-    = f.email_field :email, autocomplete: "email"
-  .field
-    = f.label :password
-    - if @minimum_password_length
-      em
-        | (
-        = @minimum_password_length
-        |  characters minimum)
-    br
-    = f.password_field :password, autocomplete: "new-password"
-  .field
-    = f.label :password_confirmation
-    br
-    = f.password_field :password_confirmation, autocomplete: "new-password"
-  .actions
-    = f.submit "Sign up"
-= render "devise/shared/links"
+.user_container
+
+  = image_tag "cook.jpg", class: "images"
+  = image_tag "cook2.jpg", class: "images2"
+
+  .d-flex.justify-content-center
+    .title
+      .under_bar.margin-top25.d-flex.justify-content-center
+        p evolution recipes
+      .margin-top25
+        p 最高のレシピを見つけよう
+        p 作り出そう
+
+  .d-flex.justify-content-center.margin-top25
+    .title.under_bar
+      p ユーザー登録
+
+  .d-flex.justify-content-center.margin-top25
+    .width500
+      = form_with model: @user, url: user_registration_path do |f|
+        = render "devise/shared/error_messages", resource: resource
+        
+        .margin_auto
+          .d-flex
+            p ユーザー名
+            .caution
+              p 必須
+
+        .margin_auto 
+          = f.text_field :name, autofocus: true, autocomplete: "name", class: "width300"
+        
+        .margin_auto.font_serif
+          p 画像
+          = f.file_field :avatar, autofocus: true, autocomplete: "avatar"
+        
+        .margin_auto.margin-top25
+          .d-flex.font_serif
+            p メールアドレス
+            .caution
+              p 必須
+        .margin_auto 
+          = f.email_field :email, autocomplete: "email", class: "width300"
+        
+        .margin_auto.margin-top25
+          .d-flex.font_serif
+            p パスワード(６文字以上)
+            .caution
+                p 必須
+          
+          = f.password_field :password, autocomplete: "new-password", class: "width300"
+        .margin_auto
+          .d-flex.font_serif
+            p パスワード確認
+            .caution
+              p 必須
+        .margin_auto
+          = f.password_field :password_confirmation, autocomplete: "new-password", class: "width300"
+        .d-flex.justify-content-end.margin-top25
+          = f.submit "登録する", class: "sign_upButton sign_upButton2"
+        .d-flex.justify-content-center.margin-top25
+          - if controller_name != 'sessions'
+            .font_serif.text-center
+              p 登録済みのユーザーはこちらへ
+              = link_to "ログインページへ", new_session_path(resource_name), class: "sign_upButton"
+

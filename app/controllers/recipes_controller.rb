@@ -1,4 +1,6 @@
 class RecipesController < ApplicationController
+  before_action :custom_authenticate_user!
+
   include RecipesHelper
   require 'openai'
 
@@ -111,12 +113,13 @@ class RecipesController < ApplicationController
     user_id = current_user.id
     usage_record = UsageRecord.find_by(user_id: user_id)
 
+    logger.debug(Date.today)
     if usage_record && usage_record.last_used_on == Date.today
       render json: { content: "使用制限に到達しました" }, status: :forbidden
       return
     end
 
-    client = OpenAI::Client.new(access_token: OPENAI_API_KEY)
+    client = OpenAI::Client.new(access_token: ENV['OPENAI_API_KEY'])
 
     recipe_steps = params["recipe_steps"]
     recipe_name = params["recipe_name"]

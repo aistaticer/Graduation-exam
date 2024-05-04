@@ -1,7 +1,7 @@
 class User < ApplicationRecord
   has_many :stamp_middles
   has_one_attached :avatar, dependent: :destroy
-
+  has_many :recipes
   has_many :comments, dependent: :destroy
   
   # Include default devise modules. Others available are:

@@ -47,12 +47,22 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 .sidebar {
   width: 150px;
   height: calc(100vh - 50px);
-  background-image: linear-gradient(to bottom, #FFB6C1, #00BFFF);
+  background-color: rgb(237, 207, 148);
   box-sizing: border-box;
   position: fixed;
   left: 0;
   bottom: 0;
-  z-index: 1000
+  z-index: 500
+}
+
+.side_border{
+  height: 100vh;
+  width: 5px;
+  background-color: #e0c7a5;
+  position: fixed;
+  left: 145px;
+  bottom: 0;
+  z-index: 900
 }
 
 @media (max-width: 767px) {
@@ -73,10 +83,38 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 
 .close{
   margin-top: 10px;
-  width: 100px;
+  width: 120px;
   height: 40px;
-  background-color: #e0c7a5;
   border-radius: 10px 10px 0px 0px;
+}
+
+.close:hover{
+  background-color: rgb(190, 167, 135);
+}
+
+.close:active{
+  background-color: rgb(167, 146, 116);
+}
+
+.close_side{
+  margin-top: 10px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: 120px;
+  height: 40px;
+  border-radius: 10px 0px 0px 10px;
+}
+
+.close_side:hover{
+  background-color: rgb(190, 167, 135);
+}
+
+.close_side:active{
+  background-color: rgb(167, 146, 116);
+}
+
+.select{
+  background-color: #e0c7a5;
 }
 
 .content_center{
@@ -84,3 +122,125 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
   align-items: center;
   justify-content: center;
 }
+
+.icon_color{
+  color: rgb(88, 66, 44)
+}
+
+//recipe_introduce用
+
+.recipe_card {
+  position: relative;
+  //margin: 2em 0;
+  margin: 10px auto;
+  padding: 0.5em 1em;
+  border: solid 1px #ffb15e;
+  background: #faf2f2;
+  box-shadow: 2px 2px 10px #c1874d, -2px 2px 10px #c1874d, 2px -2px 10px #c1874d, -2px -2px 10px #c1874d;
+  width: 220px;
+  height: auto;
+  border-radius: 0 0% 0% 0%; /* 左上の角だけ丸みをなくす */
+}
+
+.recipe_bio{
+  font-size: 12px;
+  padding: 10px;
+  font-family:  serif;
+}
+
+.recipe_name{
+  font-size: 15px;
+  padding-top: 20px;
+  padding-left: 10px;
+  font-family:  serif;
+}
+
+.recipe_card p {
+  margin: 0; 
+  padding: 0;
+}
+
+.fa-heart {
+  color: red;
+}
+
+.flex{
+  display: flex;
+  //background-color: #abc8c9;
+  width: fit-content;
+  border-radius: 10%;
+  border:solid 2px #abc8c9;
+  padding: 0px 5px 0px 5px;
+}
+
+.parent{
+  position: relative;
+}
+
+
+.like-count{
+  margin: 0px 0px 0px 5px;
+}
+
+.recipe_image {
+  display: block;
+	border-radius: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  width: auto;
+  height: 150px;
+}
+
+.recipe_image:hover{
+  opacity: 0.5;
+}
+
+.categoty{
+  width: auto;
+  background-color: #e0c7a5;
+  border-radius: 5px;
+  color:#faf2f2;
+  padding: 2px;
+}
+.margin-left{
+  margin-left: 5px;
+}
+
+.recipes-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 3列の均等な幅で */
+  grid-gap: 10px; /* 画像の間隔は10px */
+}
+.margin-top25{
+  margin-top: 25px;
+}
+
+.font_small{
+  font-size: 11px;
+}
+
+.center{
+  display: flex;
+  align-items: center;
+}
+
+.logo{
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.font_serif{
+  font-family: serif;
+}
+
+.d-flex-between{
+  display: flex;
+  justify-content: space-between;
+}
+
+.text-center{
+  text-align: center;
+}
+
+

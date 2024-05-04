@@ -1,5 +1,7 @@
 class UsersController < ApplicationController
   def show
-    @user = User.find(params[:id])
+    @url_user_show = true;
+    @user = User.includes(:recipes).find(params[:id])
+
   end
 end

@@ -1,0 +1,113 @@
+.user_container{
+	background-color: rgb(245, 238, 224);
+	height: auto;
+	width: 100vw;
+	min-height: 100vh;
+}
+
+.title{
+	font-size: 20px;
+	font-family: serif;
+	text-align: center;
+}
+
+.under_bar{
+	border-bottom: solid 2px black;
+	height: 30px;
+}
+
+p{
+	margin: 0;
+}
+
+.submitButton{
+	width: 170px;
+	border: 0px;
+  text-align: center;
+  border-radius: 50px;
+  background-color: rgb(237, 224, 122);
+  cursor: pointer; /* デフォルトの状態でポインターにする */
+  box-sizing: border-box; /* パディングとボーダーを幅に含める */
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* スムーズな遷移効果 */
+}
+
+.submitButton:hover {
+  background-color: rgb(218, 205, 114);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影をつける */
+}
+
+.submitButton:active {
+  background-color: rgb(197, 185, 98);
+}
+
+.sign_upButton{
+	width: 190px;
+	border: 0px;
+	text-decoration: none; /* 下線を消す */
+	color: rgb(201, 129, 5);
+  text-align: center;
+  border-radius: 50px;
+  background-color: rgb(252, 252, 252);
+  cursor: pointer; /* デフォルトの状態でポインターにする */
+  box-sizing: border-box; /* パディングとボーダーを幅に含める */
+  transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s; /* スムーズな遷移効果 */
+}
+
+.sign_upButton2{
+	width: 100px;
+}
+
+.sign_upButton:hover {
+  background-color: rgb(236, 236, 236);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影をつける */
+}
+
+.sign_upButton:active {
+  background-color: rgb(217, 217, 217);
+}
+
+.margin_auto {
+	width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.width300{
+	width: 300px;
+}
+
+.width500{
+	width: 500px;
+}
+
+.caution{
+	font-size: 10px;
+	width: 22px;
+	height: 15px;
+	color: white;
+	border-radius: 5px;
+	background-color: rgb(228, 26, 26);
+}
+
+.font_serif{
+	font-family: serif;
+}
+
+.images{
+	position: absolute;
+	top: 20%;
+	left: 20%;
+	width: auto;
+	height: 250px;
+	border-radius: 10px;
+}
+
+.images2{
+	position: absolute;
+	top: 20%;
+	right: 20%;
+	width: auto;
+	height: 250px;
+	border-radius: 10px;
+}
+

@@ -1,6 +1,10 @@
-p サイドバー
+.d-flex.justify-content-end
+	.close_side.content_center id = "likes_action"
+		.i class="fa-regular fa-heart icon_color"
+		= link_to 'いいね一覧', likes_path
 
-= link_to 'いいね一覧', likes_path 
-p 2
-p 3
-p 4
+.d-flex.justify-content-end
+	.close_side.content_center id = "user_action"
+		.i class="fa-regular fa-user icon_color"
+		= link_to 'マイページ', user_path(current_user)
+

@@ -5,8 +5,11 @@ html
     meta name="viewport" content="width=device-width,initial-scale=1"
     = csrf_meta_tags
     = csp_meta_tag
+
+    - if user_signed_in?
     = javascript_pack_tag 'application', 'data-turbo-track': 'reload'
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
+    
     - if @url_recipe_new
       = javascript_pack_tag 'new', 'data-turbo-track': 'reload'
     - elsif @url_recipe_show
@@ -18,22 +21,34 @@ html
     - elsif @url_recipe_copy
       = javascript_pack_tag 'new', 'data-turbo-track': 'reload'
       = javascript_pack_tag 'copy', 'data-turbo-track': 'reload'
+    - elsif @url_user_show
+      = javascript_pack_tag 'user_show', 'data-turbo-track': 'reload'
+
 
 
 	/#= javascript_importmap_tags
 
   body
-    .header
-      = render 'shared/always/header'
-    .header_border
-    .main
-      .sidebar
-        = render 'shared/always/sidebar' 
-      .content
-        = yield
+    - if user_signed_in?
+      .header
+        = render 'shared/always/header'
+      .header_border
+      .main
+        .sidebar
+          = render 'shared/always/sidebar'
+        .side_border
+
     - if @url_recipe_new
       /#= javascript_pack_tag 'react/react_example.js', 'data-turbo-track': 'reload'
     - elsif @url_recipe_show
       = javascript_pack_tag 'react/react_show.js', 'data-turbo-track': 'reload'
     - elsif  @url_recipe_evolution
       /#= javascript_pack_tag 'evolution', 'data-turbo-track': 'reload'
+    
+    - if user_signed_in?
+      .user id = "user" data-user_state = "yes"
+      .content
+        = yield
+    - else
+      .user id = "user" data-user_state = "no"
+      = yield

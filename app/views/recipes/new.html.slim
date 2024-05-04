@@ -32,6 +32,13 @@
         = f.label :bio, 'レシピ紹介文'
         = f.text_field :bio, placeholder: 'レシピ紹介文を入力', class: 'form-control width80' 
 
+      .margin-left.margin-top30
+        = f.label :copy_permission, 'コピー許可'
+        = f.radio_button :copy_permission, 'true', checked: true
+        = f.label :copy_permission, 'Yes', value: 'true'
+        = f.radio_button :copy_permission, 'false'
+        = f.label :copy_permission, 'No', value: 'false'
+
       - process_number = 0
       .margin-top.margin-left
         = '作り方'
@@ -48,7 +55,7 @@
         p +
 
       = f.fields_for :copied_recipe do |copied_recipe_form|
-        = copied_recipe_form.text_area :original_recipe, value: @recipe.id
+        = copied_recipe_form.hidden_field :original_recipe, value: @recipe.id
 
       = f.submit 'レシピを作成する', id: "submit", class: 'submitButton'
 
