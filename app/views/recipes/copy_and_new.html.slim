@@ -1,5 +1,7 @@
+= render 'shared/error_recipe'
+
 = form_with model: @copied_recipe, local: true do |f|
-  = render 'layouts/error_messages', model: f.object
+  = hidden_field_tag :source, "copy_and_new" 
   .d-flex.new_container
     .name_image
       .margin-top30.margin-left

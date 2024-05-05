@@ -18,6 +18,6 @@ Rails.application.routes.draw do
 
   resources :likes, only: [:index]
 
-  resources :recipes, only: [:index, :show, :new, :create, :destroy, :edit, :update]
+  #resources :recipes, only: [:index, :show, :new, :create, :destroy, :edit, :update]
 
 end

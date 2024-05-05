@@ -38,6 +38,7 @@ function addformEventListener() {
 }
 
 document.addEventListener("turbo:load", addformEventListener);
+document.addEventListener("turbo:render", addformEventListener);
 
 function addingre_form(){
   let process_number = 6;
@@ -60,6 +61,7 @@ function addingre_form(){
 }
 
 document.addEventListener("turbo:load", addingre_form);
+document.addEventListener("turbo:render", addingre_form);
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
@@ -68,21 +70,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // 以下、ファイル選択後の処理。
   });
 });
-
-
-function a(){
-  const fileInput = document.getElementById('fileInput');
-  if (fileInput != null){
-    addEventListener('change', function() {
-      console.log('ファイルが選択されました！');
-
-    });
-    console.log(fileInput.id);
-  }
-}
-document.addEventListener("turbo:load", a);
-
-//document.addEventListener("turbo:load", handleFileSelect);
 
 $(document).ready(function() {
   $('#fileInput').change(function() {
@@ -127,6 +114,7 @@ function imageclick(){
 }
 
 document.addEventListener("turbo:load", imageclick);
+document.addEventListener("turbo:render", imageclick);
 
 $(document).ready(function(){
   $('textarea').on('input', function () {

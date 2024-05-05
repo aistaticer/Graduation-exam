@@ -1,5 +1,7 @@
 .user_container
 
+  = render 'shared/error'
+
   = image_tag "cook.jpg", class: "images"
   = image_tag "cook2.jpg", class: "images2"
 
@@ -18,7 +20,6 @@
   .d-flex.justify-content-center.margin-top25
     .width500
       = form_with model: @user, url: user_registration_path do |f|
-        = render "devise/shared/error_messages", resource: resource
         
         .margin_auto
           .d-flex
@@ -32,6 +33,11 @@
         .margin_auto.font_serif
           p 画像
           = f.file_field :avatar, autofocus: true, autocomplete: "avatar"
+
+        .margin_auto.margin-top25
+            p 紹介文
+        .margin_auto.padding2_5 
+          = f.text_area :bio, autofocus: true, autocomplete: "bio", class: "width300"
         
         .margin_auto.margin-top25
           .d-flex.font_serif

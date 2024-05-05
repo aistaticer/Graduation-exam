@@ -1,4 +1,28 @@
 ja:
+  devise:
+    failure:
+      not_found_in_database: "ログインできませんでした"
+      invalid: "ログインできませんでした"
+  errors:
+    format: "%{message}"
+  activerecord:
+    attributes:
+      user:
+        email: "メールアドレス"
+    errors:
+      models:
+        user:
+          attributes:
+            email:
+              blank: "メールアドレスを入力してください"
+            password:
+              blank: "パスワードを入力してください"
+            name:
+              blank: "ユーザー名を入力してください"
+        recipes:
+          attributes:
+            name: "レシピ名を入力してください"
+
   datetime:
     distance_in_words:
       less_than_x_minutes:

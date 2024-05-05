@@ -1,3 +1,5 @@
+= render 'shared/error_recipe'
+
 .show_container
   - decorated_recipe = RecipeDecorator.new(@recipe)
 
@@ -5,6 +7,15 @@
     p レシピ名
     .recipe_name
       = @recipe.name
+
+  .d-flex
+    .margin-top25
+      p ジャンル
+      = @recipe.genre.name
+
+    .margin-top25.margin-left
+      p メニュー
+      = @recipe.menu.name
 
   .horizontally_image
     .vertical
@@ -39,22 +50,22 @@
   .root1 id = "root1"
 
   .root id = "root"
-/#  .comment_container
-/    .comment_container_p
-/      コメント
-/    .bottom_border
-/      .comment_arrangement
-/        = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), class: "avater"
-/        = render partial: 'shared/comment/comment_form', locals: {recipe: @recipe}
-/
-/  - @parent_comments.each do |comment|
-/    .d-flex.width700.space_top
-/      = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), class: "avater"
-/      .space_left
-/        = render partial: 'shared/comment/comment_body', locals: {recipe: @recipe, comment: comment }
-/    
-/    .space_top.hide id = "replies_#{comment.id}"
-/      - comment.replies.each do | reply |
-/        .d-flex.space_left50
-/          = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), class: "avater-reply"
-/          = render partial: 'shared/comment/comment_reply', locals: { recipe: @recipe, comment: comment, replycomment: reply }
+  .comment_container
+    .comment_container_p
+      コメント
+    .bottom_border
+      .comment_arrangement
+        = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), class: "avater"
+        = render partial: 'shared/comment/comment_form', locals: {recipe: @recipe}
+
+  - @parent_comments.each do |comment|
+    .d-flex.width700.space_top
+      = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), class: "avater"
+      .space_left
+        = render partial: 'shared/comment/comment_body', locals: {recipe: @recipe, comment: comment }
+    
+    .space_top.hide id = "replies_#{comment.id}"
+      - comment.replies.each do | reply |
+        .d-flex.space_left50
+          = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), class: "avater-reply"
+          = render partial: 'shared/comment/comment_reply', locals: { recipe: @recipe, comment: comment, replycomment: reply }

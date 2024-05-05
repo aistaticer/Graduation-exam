@@ -7,6 +7,9 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/brands';
 @import '@fortawesome/fontawesome-free/scss/v4-shims';
 
+body {
+  font-family: serif, sans-serif;
+}
 
 .main {
   display: flex;
@@ -239,8 +242,14 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
   justify-content: space-between;
 }
 
-.text-center{
-  text-align: center;
+.padding2_5{
+  padding: 2.5px;
+}
+
+.logo_image{
+  width: 145px;
+  height: 40px;
+  border-radius: 10px;
 }
 
 

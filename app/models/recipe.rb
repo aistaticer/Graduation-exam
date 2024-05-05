@@ -19,6 +19,13 @@ class Recipe < ApplicationRecord
   has_many :ingredients, dependent: :destroy
   accepts_nested_attributes_for :ingredients
 
+  belongs_to :genre
+  belongs_to :menu
+
+  validates :user_id, :bio, :thumbnail, :copy_permission, :genre_id, :menu_id, presence: true
+  validates :name, length: { maximum: 25, message: "レシピ名は25文字以内で入力してください" }, presence: true
+  validates :bio, length: { maximum: 255, message: "レシピ紹介文は255文字以内で入力してください" }, presence: true
+  
   def self.ransackable_attributes(auth_object = nil)
     ["bio", "copy_permission", "copy_recipe_id", "created_at", "highlight", "id", "name", "thumbnail", "updated_at", "user_id"]
   end

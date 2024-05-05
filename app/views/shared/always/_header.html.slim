@@ -5,8 +5,8 @@
 .d-flex-between
 
   .d-flex.justify-content-start
-    .font_serif.text-center
-      p evolution recipes
+    = link_to recipes_path
+      = image_tag "logo5.png", class: "logo_image padding2_5"
 
   .d-flex.justify-content-end
     .close.content_center id = "index_action"

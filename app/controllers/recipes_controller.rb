@@ -1,5 +1,6 @@
 class RecipesController < ApplicationController
-  before_action :custom_authenticate_user!
+  #before_action :custom_authenticate_user!
+  #before_action :some_action
 
   include RecipesHelper
   require 'openai'
@@ -7,7 +8,7 @@ class RecipesController < ApplicationController
   def index
     @url_recipe_index = true;
     @q = Recipe.ransack(params[:q])
-    @recipes = @q.result.includes(:steps,:categories).with_attached_thumbnail.all.page(params[:page]).per(10)
+    @recipes = @q.result.includes(:steps,:categories).with_attached_thumbnail.all.page(params[:page]).per(8)
 
     #@stamp_middles = StampMiddle.all
     StampMiddle.liked_by_user?(@recipes,current_user.id)
@@ -16,7 +17,7 @@ class RecipesController < ApplicationController
 
   def show
     @url_recipe_show = true
-    @recipe = Recipe.includes(:steps,:ingredients).find(params[:id])
+    @recipe = Recipe.includes(:steps,:ingredients,:menu,:genre).find(params[:id])
     @comments = @recipe.comments.includes(:user, replies: [:user, {myreply: :user}]).order(created_at: :desc)
     @comment = @recipe.comments.new
     @replies = Comment.includes(:user).where.not(reply_to_id: nil)
@@ -29,28 +30,30 @@ class RecipesController < ApplicationController
   end
 
   def new
-    @recipe = Recipe.new
-    @q = Category.ransack(params[:q])
-
-    @categories = @q.result(distinct: true).order(:hiragana)
-    others = @categories.find { |category| category.name == "その他" }
-    @categories = @categories.reject { |category| category.name == "その他" } + [others] if others
-    
     @url_recipe_new = true
+    @recipe = Recipe.new
     set_step_build
     @recipe.ingredients.build
     @recipe.build_copied_recipe
   end
 
   def create
+
+    if params[:source] == "new"
+      @url_recipe_new = true
+    elsif params[:source] == "copy_and_new"
+      @url_recipe_copy = true
+    end
+
     @recipe = Recipe.new(recipe_params_carry_up_number)
     @recipe.user_id = current_user.id
     if @recipe.save
       original_recipe_update
-      redirect_to recipe_path(@recipe), flash: { success: 'レシピが正常に投稿されました。' }
+      redirect_to recipe_path(@recipe), flash: { notice: 'レシピが正常に投稿されました。' }
     else
-      flash.now[:danger] = 'レシピの投稿に失敗しました。'
-      render :new, status: :see_other
+      flash.now[:notice] = 'レシピの投稿に失敗しました。'
+      logger.debug(@recipe.errors.full_messages)
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -159,7 +162,7 @@ class RecipesController < ApplicationController
 
   # Strong Parameters
   def recipe_params
-    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, ingredients_attributes: [:id, :name, :serving, :quantity], steps_attributes: [:id, :number, :process], copied_recipe_attributes: [:id, :original_recipe, :before_recipe], category_ids: [])
+    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, :menu_id, :genre_id, ingredients_attributes: [:id, :name, :serving, :quantity], steps_attributes: [:id, :number, :process], copied_recipe_attributes: [:id, :original_recipe, :before_recipe], category_ids: [])
   end
 
   def set_step_build
@@ -172,15 +175,28 @@ class RecipesController < ApplicationController
 
   def recipe_params_carry_up_number
     # まず、通常通りにparamsを取得
-    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, ingredients_attributes: [:id, :name, :serving, :quantity], steps_attributes: [:id, :number, :process], copied_recipe_attributes: [:id, :original_recipe, :before_recipe], category_ids: []).tap do |whitelisted|
+    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, :menu_id, :genre_id, ingredients_attributes: [:id, :name, :serving, :quantity], steps_attributes: [:id, :number, :process], copied_recipe_attributes: [:id, :original_recipe, :before_recipe], category_ids: []).tap do |whitelisted|
       # steps_attributesがあれば、descriptionが空のものを除外
       if whitelisted[:steps_attributes]
-        whitelisted[:steps_attributes].each do |key, step_attribute|
-          if step_attribute[:process].blank?
-            whitelisted[:steps_attributes].delete(key)
-          end
+        whitelisted[:steps_attributes].reject! { |_, step_attribute| step_attribute[:process].blank? }
+  
+        # descriptionが空でないsteps_attributesのnumberを繰り上げる
+        whitelisted[:steps_attributes].values.each_with_index do |step_attribute, index|
+          step_attribute[:number] = index + 1
         end
-          # descriptionが空でないsteps_attributesのnumberを繰り上げる
+      end
+  
+      # steps_attributesが空になった場合、一つだけ残す
+      if whitelisted[:steps_attributes].blank?
+        whitelisted[:steps_attributes] = [{ number: 1, process: "" }]
+      end
+
+      if whitelisted[:ingredients_attributes]
+        whitelisted[:ingredients_attributes].reject! { |_, ingredients_attribute| step_attribute[:name].blank? }
+        whitelisted[:ingredients_attributes].reject! { |_, ingredients_attribute| step_attribute[:quantity].blank? }
+        whitelisted[:ingredients_attributes].reject! { |_, ingredients_attribute| step_attribute[:serving].blank? }
+
+        # descriptionが空でないsteps_attributesのnumberを繰り上げる
         whitelisted[:steps_attributes].values.each_with_index do |step_attribute, index|
           step_attribute[:number] = index + 1
         end
