@@ -3,25 +3,84 @@ ja:
     failure:
       not_found_in_database: "ログインできませんでした"
       invalid: "ログインできませんでした"
+
   errors:
-    format: "%{message}"
+    format: "%{attribute}%{message}"
+
   activerecord:
+
+    models:
+      step: ステップ
+      ingredient: 材料
     attributes:
-      user:
-        email: "メールアドレス"
+      steps:
+        process: 作り方
+      ingredients:
+        name: 材料名
+        quantity: 分量
+        serving: 何人前か
+      recipe:
+        one: "保存に失敗しました: %{count}つのエラーがあります"
+        other: "保存に失敗しました: %{count}つのエラーがあります"
+        user_id: ユーザーID
+        bio: レシピ紹介文
+        thumbnail: 料理の画像
+        copy_permission: コピー許可
+        genre: レシピのジャンル
+        menu: レシピの種類
+        name: レシピ名
+      genre:
+        required: "ジャンルを選択してください"
     errors:
+      template:
+        header:
+          one: "保存できませんでした。%{model}に1つのエラーがあります。"
+          other: "保存できませんでした。%{model}に%{count}個のエラーがあります。"
       models:
-        user:
+        genre:
           attributes:
-            email:
-              blank: "メールアドレスを入力してください"
-            password:
-              blank: "パスワードを入力してください"
+            required: "ジャンルを選択してください"
+        step:
+          attributes:
+            process:
+              blank: "を入力してください"
+              too_long: "は255文字以内で入力してください"
+        ingredient:
+          attributes:
             name:
-              blank: "ユーザー名を入力してください"
-        recipes:
+              blank: "を入力してください"
+              too_long: "は25文字以内で入力してください"
+            quantity:
+              blank: "を入力してください"
+              too_long: "は25文字以内で入力してください"
+            serving:
+              blank: "を入力してください"
+        recipe:
           attributes:
-            name: "レシピ名を入力してください"
+            name:
+              blank: "を入力してください"
+              too_long: "レシピ名は25文字以内で入力してください"
+            bio:
+              blank: "を入力してください"
+              too_long: "レシピ紹介文は255文字以内で入力してください"
+            thumbnail:
+              blank: "を設定してください"
+            genre_id:
+              blank: "を入力"
+            menu_id:
+              blank: "を入力"
+            genre:
+              blank: "を入力してください"
+              required: "を選択してください"
+            menu:
+              blank: "を入力してください"
+              required: "を選択してください"
+            copy_permission:
+              blank: "コピー許可は必須です"
+
+
+            
+
 
   datetime:
     distance_in_words:

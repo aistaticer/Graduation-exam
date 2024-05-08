@@ -82,6 +82,15 @@
 
 // 使うやつ
 
+.height20{
+  height: 20px;
+}
+
+.form-control {
+  resize: none;
+}
+
+
 .select_image{
 	max-width: 200px;
 	object-fit: cover;

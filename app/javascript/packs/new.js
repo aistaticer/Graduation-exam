@@ -3,6 +3,10 @@ import $ from 'jquery';
 import 'select2';
 import 'select2/dist/css/select2.css';
 
+document.addEventListener("DOMContentLoaded", function(){
+	console.log("new.js");
+})
+
 function addformEventListener() {
   const form = document.querySelector('form[action^="/recipes"]');
   const addformButton = document.getElementById('addformButton');
@@ -71,7 +75,7 @@ document.addEventListener('DOMContentLoaded', (event) => {
   });
 });
 
-$(document).ready(function() {
+function imagepreview(){
   $('#fileInput').change(function() {
 
     console.log("画像きた");
@@ -99,7 +103,10 @@ $(document).ready(function() {
     // ファイルをDataURLとして読み込む
     reader.readAsDataURL(file);
   });
-});
+};
+
+document.addEventListener("turbo:load", imagepreview);
+document.addEventListener("turbo:render", imagepreview);
 
 $(document).ready(function() {
   $('#category').select2();
@@ -116,9 +123,21 @@ function imageclick(){
 document.addEventListener("turbo:load", imageclick);
 document.addEventListener("turbo:render", imageclick);
 
-$(document).ready(function(){
-  $('textarea').on('input', function () {
-    this.style.height = 'auto';  // 高さを一度リセット
-    this.style.height = (this.scrollHeight) + 'px';  // スクロール高さを高さとして設定
+function initializeTextarea() {
+  $('textarea').each(function () {
+    this.style.overflowY = 'hidden';
+    this.style.height = (this.scrollHeight) + 'px';
+    this.baseScrollHeight = this.scrollHeight;
+  }).off('input').on('input', function () {
+    //this.style.height = 'auto';
+    if (this.scrollHeight > this.baseScrollHeight) {
+      this.style.height = (this.scrollHeight) + 'px';
+    }
   });
-});
+}
+
+document.addEventListener("turbo:load", initializeTextarea);
+document.addEventListener("turbo:render", initializeTextarea);
+
+
+

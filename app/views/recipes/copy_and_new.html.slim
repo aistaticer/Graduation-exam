@@ -1,7 +1,12 @@
-= render 'shared/error_recipe'
+/# エラー文が存在しない場合空の@error_messagesを定義
+- if defined?(@error_messages) == false
+  - @error_messages = []
+
+= render partial: 'shared/error_recipe_copy', locals: {recipe: @error_messages}
 
 = form_with model: @copied_recipe, local: true do |f|
-  = hidden_field_tag :source, "copy_and_new" 
+  = hidden_field_tag :source, "copy_and_new"
+  = hidden_field_tag :recipe_id, params[:recipe_id]
   .d-flex.new_container
     .name_image
       .margin-top30.margin-left
@@ -12,7 +17,9 @@
       .margin-top30.margin-left
         = f.label :category_ids, "カテゴリー"
       .margin-top.margin-left
-        = f.collection_select :category_ids, @categories, :id , :name, {},  {id: "category", multiple: true, class: "form-control"}
+        /#= f.collection_select :category_ids, @categories, :id , :name, {},  {id: "category", multiple: true, class: "form-control"}
+        = f.collection_select :genre_id, Genre.all, :id, :name, { prompt: 'ジャンルを選択してください' }
+        = f.collection_select :menu_id, Menu.all, :id, :name, { prompt: '料理名を選択してください' }
 
 
       .image_color
@@ -82,7 +89,7 @@
 
       = f.submit 'レシピを作成する', id: "submit", class: 'submitButton'
 
-
+/# jsでレシピの手順と名前が見れるようにする
 .step id = "steps" data-steps = @steps_array data-recipe_name = @recipe_name
 
 

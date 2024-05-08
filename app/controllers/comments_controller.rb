@@ -26,13 +26,21 @@ class CommentsController < ApplicationController
 		render json: { parent_comments: parent_comments_json ,replies: replies_json, current_user: user_data, comment_count: Comment.count}
 	end
 
-	def create
-		@comment = @recipe.comments.build(comment_params)
-		@comment.user = current_user
-		if @comment.save
-			respond_to do |format|
+  def create
+    @comment = @recipe.comments.build(comment_params)
+    @comment.user = current_user
+
+    @comments = @recipe.comments.includes(:user, replies: [:user, {myreply: :user}]).order(created_at: :desc)
+    @parent_comments = @comments.where(parent_id:nil)
+    decorated_recipe = RecipeDecorator.new(@recipe)
+    
+    if @comment.save
+      respond_to do |format|
         format.html { redirect_to @recipe }
         format.json { render json: @comment }
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.update("comments", partial: "shared/comment/comment_each", locals: { recipe: @recipe, parent_comments: @parent_comments, decorated_recipe: decorated_recipe  })
+        end
       end
     end
 	end

@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom/client';
 
+document.addEventListener("DOMContentLoaded", function(){
+	console.log("react_example.js");
+})
+
 function App() {
   // 入力フォームのリストを管理するstate
   const [forms, setForms] = useState([]);

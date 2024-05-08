@@ -11,7 +11,7 @@
       .font_small
         p 返信
 
-  = form_with model: [recipe, @comment], id: "comment_replyForm_#{replycomment.id}", local: true, class: "hide" do |f|
+  = form_with model: [recipe, Comment.new], id: "comment_replyForm_#{replycomment.id}", local: true, class: "hide" do |f|
     /# 返信コメント主名前を表示
     p 返信先 #{replycomment.user.name}
     .comment_arrangement

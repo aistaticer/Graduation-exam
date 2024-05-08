@@ -1,5 +1,9 @@
 import "../stylesheets/recipe_show"
 
+document.addEventListener("DOMContentLoaded", function(){
+	console.log("show.js");
+})
+
 function comment_replyform_look(commentId,classname){
   let comment_replyform = document.getElementById(classname + commentId)
   if(comment_replyform.classList.contains("show") == true){
@@ -11,6 +15,30 @@ function comment_replyform_look(commentId,classname){
   }
 }
 
+$(document).on('click', '.icon', function() {
+  comment_replyform_look($(this).data('comment-id'), 'comment_replyForm_');
+});
+
+$(document).on('click', '.icon-replies', function() {
+  comment_replyform_look($(this).data('comment-id'), 'replies_');
+});
+
+
+
+/*document.addEventListener('DOMContentLoaded', function() {
+  let comment_icon = document.getElementById("comment_icon");
+  let xmark = document.getElementById("xmark");
+  let marks = [comment_icon, xmark];
+  marks.forEach(function(mark){
+    mark.addEventListener('click', function() {
+      console.log("実行");
+      console.log(mark.className);
+      comment_replyform_look("","comment_form");
+    })
+  })
+})*/
+
+/* jQeryを使わずにコメントの返信ボタンなどを操作する関数
 document.addEventListener('DOMContentLoaded', function() {
   console.log("アイコンからコメントIDを受け取る関数");
   // アイコンを取得
@@ -40,24 +68,4 @@ document.addEventListener('DOMContentLoaded', function() {
       comment_replyform_look(commentId,"replies_");
     })
   })
-});
-
-/*document.addEventListener('DOMContentLoaded', function() {
-  let comment_icon = document.getElementById("comment_icon");
-  let xmark = document.getElementById("xmark");
-  let marks = [comment_icon, xmark];
-  marks.forEach(function(mark){
-    mark.addEventListener('click', function() {
-      console.log("実行");
-      console.log(mark.className);
-      comment_replyform_look("","comment_form");
-    })
-  })
-})*/
-
-
-
-document.addEventListener('click', function(event) {
-	const clickedElement = event.target;
-	//console.log(clickedElement);
-});
+});*/

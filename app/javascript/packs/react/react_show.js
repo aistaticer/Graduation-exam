@@ -1,6 +1,7 @@
 import React, { useState, useEffect, Component } from 'react';
 import ReactDOM from 'react-dom/client';
 import axios from 'axios';
+
 import {
   BrowserRouter as Router,
   Routes,
@@ -9,6 +10,10 @@ import {
   useParams,
 } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
+
+document.addEventListener("DOMContentLoaded", function(){
+	console.log("react_show.js");
+})
 
 function useCurrentUser() {
   const [current_user, setCurrentUser] = useState(null);

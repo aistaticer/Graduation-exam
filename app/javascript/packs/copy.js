@@ -1,9 +1,11 @@
+document.addEventListener("DOMContentLoaded", function(){
+	console.log("copy.js");
+})
+
 document.addEventListener('DOMContentLoaded', (event) => {
   var stepElement = document.getElementById("steps");
   var steps = JSON.parse(stepElement.dataset.steps);
   var name = JSON.parse(stepElement.dataset.recipe_name);
-  console.log(steps)
-  console.log(name)
 
   document.getElementById("askOpenAI").addEventListener("click", function() {
     fetch('/path_to_your_action', {

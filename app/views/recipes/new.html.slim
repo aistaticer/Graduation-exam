@@ -1,5 +1,6 @@
 = render 'shared/error_recipe'
-
+p new
+= @recipe.errors.full_messages
 = form_with model: @recipe, local: true do |f|
 
   = hidden_field_tag :source, "new" 
@@ -37,7 +38,7 @@
 
       .margin-left.margin-top30
         = f.label :bio, 'レシピ紹介文'
-        = f.text_field :bio, placeholder: 'レシピ紹介文を入力', class: 'form-control width80' 
+        = f.text_area :bio, placeholder: 'レシピ紹介文を入力', class: 'form-control width80 height20' 
 
       .margin-left.margin-top30
         p コピー許可

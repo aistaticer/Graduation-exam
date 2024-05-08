@@ -1,12 +1,12 @@
 .d-flex.justify-content-center
 	.margin
-		- if current_user.avatar?
-			= image_tag current_user.avatar
+		- if @user.avatar?
+			= image_tag @user.avatar, class:"user_image"
 		- else
 			= image_tag 'user.jpg', class:"user_image"
 
 .d-flex.justify-content-center.margin-top
-	p ユーザー名:　#{current_user.name}
+	p ユーザー名:　#{@user.name}
 
 .d-flex.justify-content-center
 	.margin-top
@@ -14,9 +14,10 @@
 
 .d-flex.justify-content-center
 	.user-profile.margin-top
+		= @user.bio
 
 .d-flex.justify-content-center.margin-top
-	p レシピ投稿数:　#{current_user.recipes.count}件
+	p レシピ投稿数:　#{@user.recipes.count}件
 
 .recipes-container.margin-left
 	- @user.recipes.each do |recipe|

@@ -1,0 +1,30 @@
+.comment_container
+    .comment_container_p
+      コメント
+    .bottom_border
+      .comment_arrangement
+        - if current_user.avatar.present?
+          = image_tag current_user.avatar, class: "avater"
+        - else
+          = image_tag 'user.jpg', class:"avater"
+        /#= image_tag current_user.avatar, class: "avater"
+        = render partial: 'shared/comment/comment_form', locals: {recipe: recipe}
+
+- parent_comments.each do |comment|
+  .d-flex.width700.space_top
+    - if comment.user.avatar.present?
+      = image_tag comment.user.avatar, class: "avater"
+    - else
+      = image_tag 'user.jpg', class:"avater"
+
+    .space_left
+      = render partial: 'shared/comment/comment_body', locals: {recipe: recipe, comment: comment }
+
+  .space_top.hide id = "replies_#{comment.id}"
+    - comment.replies.each do | reply |
+      .d-flex.space_left50
+        - if reply.user.avatar.present?
+          = image_tag reply.user.avatar, class: "avater-reply"
+        - else
+          = image_tag 'user.jpg', class:"avater-reply"
+        = render partial: 'shared/comment/comment_reply', locals: { recipe: recipe, comment: comment, replycomment: reply }

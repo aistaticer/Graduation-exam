@@ -51,9 +51,18 @@ class RecipesController < ApplicationController
       original_recipe_update
       redirect_to recipe_path(@recipe), flash: { notice: 'レシピが正常に投稿されました。' }
     else
+
+      if params[:source] == "new"
+        render :new, status: :unprocessable_entity
+
+      elsif params[:source] == "copy_and_new"
+        # @recipeをcopy_and_newで定義するためエラー文を変数に代入
+        @error_messages = @recipe.errors.full_messages
+        copy_and_new
+        render :copy_and_new, status: :unprocessable_entity
+      end
+
       flash.now[:notice] = 'レシピの投稿に失敗しました。'
-      logger.debug(@recipe.errors.full_messages)
-      render :new, status: :unprocessable_entity
     end
   end
 
@@ -68,6 +77,8 @@ class RecipesController < ApplicationController
   def copy_and_new
 
     @url_recipe_copy = true
+    
+    # オリジナルのレシピを検索して代入
     @recipe = Recipe.find(params[:recipe_id])
 
     @q = Category.ransack(params[:q])
@@ -75,13 +86,13 @@ class RecipesController < ApplicationController
     others = @categories.find { |category| category.name == "その他" }
     @categories = @categories.reject { |category| category.name == "その他" } + [others] if others
 
-    @copied_recipe, @copied_recipe_steps, @copied_recipe_categories, @copied_recipe_ingredients = copy_recipe_helper(@recipe)
-
+    @copied_recipe, @copied_recipe_steps, @copied_recipe_categories, @copied_recipe_ingredients, @new_copied_recipe = copy_recipe_helper(@recipe)
 
     @copied_recipe.steps = @copied_recipe_steps
     @copied_recipe.categories = @copied_recipe_categories
     @copied_recipe.ingredients = @copied_recipe_ingredients
 
+    # 配列にレシピの内容を入れてhtmlにわたし、jsが受け取れるようにする。AIのため
     @recipe_name = []
     @recipe_name.push(@copied_recipe.name)
     @steps_array = []
@@ -192,14 +203,13 @@ class RecipesController < ApplicationController
       end
 
       if whitelisted[:ingredients_attributes]
-        whitelisted[:ingredients_attributes].reject! { |_, ingredients_attribute| step_attribute[:name].blank? }
-        whitelisted[:ingredients_attributes].reject! { |_, ingredients_attribute| step_attribute[:quantity].blank? }
-        whitelisted[:ingredients_attributes].reject! { |_, ingredients_attribute| step_attribute[:serving].blank? }
+        whitelisted[:ingredients_attributes].reject! { |_, ingredients_attribute| ingredients_attribute[:name].blank? }
+        whitelisted[:ingredients_attributes].reject! { |_, ingredients_attribute| ingredients_attribute[:quantity].blank? }
+        whitelisted[:ingredients_attributes].reject! { |_, ingredients_attribute| ingredients_attribute[:serving].blank? }
+      end
 
-        # descriptionが空でないsteps_attributesのnumberを繰り上げる
-        whitelisted[:steps_attributes].values.each_with_index do |step_attribute, index|
-          step_attribute[:number] = index + 1
-        end
+      if whitelisted[:ingredients_attributes].blank?
+        whitelisted[:ingredients_attributes] = [{ serving: "", name: "", quantity: "" }]
       end
     end
   end

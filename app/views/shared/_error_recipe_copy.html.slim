@@ -1,0 +1,7 @@
+- if recipe.present?
+  #error_explanation
+    h2
+      p #{recipe.count}個のエラーがあります
+    ul
+      - recipe.each do |message|
+        li = message
