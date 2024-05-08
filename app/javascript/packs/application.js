@@ -2,14 +2,10 @@
 import '@fortawesome/fontawesome-free/js/all';
 import "@hotwired/turbo-rails"
 import "bootstrap"
-import "../stylesheets/application"
-//import "../stylesheets/recipe_index"
-import "../stylesheets/sidebar"
-//import "../stylesheets/recipe_new"
-//import "../stylesheets/recipe_show"
-//import "./react/react_example"
-//import "./react/react_new"
-//import "./new"
+
+import '../stylesheets/application.scss';
+import "../stylesheets/sidebar.scss"
+
 import $ from 'jquery';
 window.$ = $;
 window.jQuery = $;

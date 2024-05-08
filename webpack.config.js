@@ -10,7 +10,6 @@ module.exports = {
     './app/javascript/packs/application.js', // ここにはあなたのメインのJavaScriptファイルのパスを入れてね
     './app/javascript/packs/new.js',
     './app/javascript/packs/show.js',
-    './app/javascript/packs/react/recipe_show.js',
     './app/javascript/packs/evolution.js',
     './app/javascript/packs/index.js',
     './app/javascript/packs/copy.js',
@@ -51,6 +50,22 @@ module.exports = {
           'css-loader',   // CSSをCommonJSに変換する
           'sass-loader'   // SassをCSSにコンパイルする
         ]
+      },
+      {
+        test: /\.(ttf|eot|svg|woff|woff2)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
+            },
+          },
+        ],
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader']
       }
     ]
   }

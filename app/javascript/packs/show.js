@@ -1,4 +1,4 @@
-import "../stylesheets/recipe_show"
+import "../stylesheets/recipe_show.scss"
 
 document.addEventListener("DOMContentLoaded", function(){
 	console.log("show.js");
