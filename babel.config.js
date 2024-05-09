@@ -39,9 +39,6 @@ module.exports = function(api) {
     plugins: [
       'babel-plugin-macros',
       '@babel/plugin-syntax-dynamic-import',
-      '@babel/plugin-proposal-optional-chaining', //手動でかえた.
-      '@babel/plugin-proposal-nullish-coalescing-operator', //手動でかえた.
-      "@babel/plugin-proposal-logical-assignment-operators", //手動でかえた.
       isTestEnv && 'babel-plugin-dynamic-import-node',
       '@babel/plugin-transform-destructuring',
       [
