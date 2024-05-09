@@ -64,11 +64,18 @@ module.exports = {
         ],
       },
       {
+        test: /\.mjs$/,
+        include: /node_modules/,
+        type: "javascript/auto"
+      },
+      {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
       }
     ]
+  },
+  resolve: {
+    extensions: ['.js', '.mjs', '.json'], // .mjs を追加
   }
   // その他の設定...
-	
 };
