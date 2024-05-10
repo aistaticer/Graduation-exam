@@ -13,7 +13,8 @@
     "babel-loader": "^9.1.2",
     "bootstrap": "^5.3.3",
     "css-loader": "5.0.0",
-    "date-fns": "2.0",
+    "date-fns": "^3.6.0",
+    "file-loader": "^6.2.0",
     "jquery": "^3.7.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -30,9 +31,8 @@
     "@babel/plugin-proposal-logical-assignment-operators": "^7.20.7",
     "@babel/plugin-proposal-optional-chaining": "^7.21.0",
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "@babel/preset-env": "^7.24.5",
-    "@babel/preset-react": "^7.24.1",
-    "file-loader": "^6.2.0"
+    "@babel/preset-env": "^7.24.4",
+    "@babel/preset-react": "^7.24.1"
   },
   "scripts": {
     "start": "webpack-dev-server --config ./webpack.config.js"

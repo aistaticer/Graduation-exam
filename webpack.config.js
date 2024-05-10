@@ -18,18 +18,30 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+
   },
   devServer: {
     //contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 9090,
-    static: {
-      directory: path.join(__dirname, 'public'), // 静的ファイルのディレクトリを指定
-    },
+    host: '0.0.0.0',
+    port: 7090,
+    publicPath: '/packs/js/'
   },
   // babel-loaderの設定を追加
   module: {
     rules: [
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
+            },
+          },
+        ],
+      },
       {
         test: /\.js$/,
         exclude: /node_modules\/(?!@hotwired\/turbo)/, // @hotwired/turboを除外から除外
@@ -55,25 +67,8 @@ module.exports = {
         ]
       },
       {
-        test: /\.(ttf|eot|svg|woff|woff2)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-              outputPath: 'fonts/',
-            },
-          },
-        ],
-      },
-      //{
-      //  test: /\.mjs$/,
-      //  include: /node_modules/,
-      //  type: "javascript/auto"
-      //},
-      {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: ['style-loader', 'css-loader'],
       }
     ]
   },
