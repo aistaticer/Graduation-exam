@@ -927,6 +927,9 @@
 "@babel/preset-env@^7.15.0", "@babel/preset-env@^7.24.5":
 =======
 "@babel/preset-env@^7.15.0", "@babel/preset-env@^7.24.4":
+<<<<<<< HEAD
+>>>>>>> layout
+=======
 >>>>>>> layout
   version "7.24.5"
   resolved "https://registry.yarnpkg.com/@babel/preset-env/-/preset-env-7.24.5.tgz#6a9ac90bd5a5a9dae502af60dfc58c190551bbcd"
@@ -3945,7 +3948,10 @@ globalthis@^1.0.3:
     define-properties "^1.2.1"
     gopd "^1.0.1"
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> layout
 
 globby@^6.1.0:
   version "6.1.0"

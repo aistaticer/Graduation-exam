@@ -2,8 +2,7 @@
 import '@fortawesome/fontawesome-free/js/all';
 import "@hotwired/turbo-rails"
 import "bootstrap"
-
-import '../stylesheets/application.scss';
+import "../stylesheets/application.scss"
 import "../stylesheets/sidebar.scss"
 
 import $ from 'jquery';
