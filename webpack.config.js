@@ -10,7 +10,6 @@ module.exports = {
     './app/javascript/packs/application.js', // ここにはあなたのメインのJavaScriptファイルのパスを入れてね
     './app/javascript/packs/new.js',
     './app/javascript/packs/show.js',
-    './app/javascript/packs/react/recipe_show.js',
     './app/javascript/packs/evolution.js',
     './app/javascript/packs/index.js',
     './app/javascript/packs/copy.js',
@@ -19,15 +18,30 @@ module.exports = {
   output: {
     filename: 'bundle.js',
     path: path.resolve(__dirname, 'dist'),
+
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 9090
+    host: '0.0.0.0',
+    port: 7090,
+    publicPath: '/packs/js/'
   },
   // babel-loaderの設定を追加
   module: {
     rules: [
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
+            },
+          },
+        ],
+      },
       {
         test: /\.js$/,
         exclude: /node_modules\/(?!@hotwired\/turbo)/, // @hotwired/turboを除外から除外
@@ -51,6 +65,10 @@ module.exports = {
           'css-loader',   // CSSをCommonJSに変換する
           'sass-loader'   // SassをCSSにコンパイルする
         ]
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       }
     ]
   }

@@ -1,4 +1,4 @@
-import "../stylesheets/evolution";
+import "../stylesheets/evolution.scss";
 
 function evolution_figure(){
 
