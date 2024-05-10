@@ -20,9 +20,12 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
   },
   devServer: {
-    contentBase: path.join(__dirname, 'dist'),
+    //contentBase: path.join(__dirname, 'dist'),
     compress: true,
-    port: 9090
+    port: 9090,
+    static: {
+      directory: path.join(__dirname, 'public'), // 静的ファイルのディレクトリを指定
+    },
   },
   // babel-loaderの設定を追加
   module: {
@@ -63,19 +66,19 @@ module.exports = {
           },
         ],
       },
-      {
-        test: /\.mjs$/,
-        include: /node_modules/,
-        type: "javascript/auto"
-      },
+      //{
+      //  test: /\.mjs$/,
+      //  include: /node_modules/,
+      //  type: "javascript/auto"
+      //},
       {
         test: /\.css$/,
         use: ['style-loader', 'css-loader']
       }
     ]
   },
-  resolve: {
-    extensions: ['.js', '.mjs', '.json'], // .mjs を追加
-  }
+  //resolve: {
+  //  extensions: ['.js', '.mjs', '.json'], // .mjs を追加
+  //}
   // その他の設定...
 };
