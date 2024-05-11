@@ -1,0 +1,26 @@
+{
+  "application.js": "/packs/bundle.js",
+  "application.js.map": "/packs/bundle.js.map",
+  "entrypoints": {
+    "application": {
+      "js": [
+        "/packs/bundle.js"
+      ],
+      "js.map": [
+        "/packs/bundle.js.map"
+      ]
+    },
+    "copy": {},
+    "evolution": {},
+    "index": {},
+    "new": {},
+    "react/react_example": {},
+    "react/react_new": {},
+    "react/react_show": {},
+    "show": {},
+    "user_new_up": {},
+    "user_show": {}
+  },
+  "vendors~actioncable.js": "/packs/js/vendors~actioncable-21104559707729ae9208.chunk.js",
+  "vendors~actioncable.js.map": "/packs/js/vendors~actioncable-21104559707729ae9208.chunk.js.map"
+}
