@@ -33,11 +33,6 @@ services:
     depends_on:
       - db
       - chrome
-  webpack:
-    build: .
-    volumes:
-      - .:/app
-    command: bash -c "yarn run webpack-dev-server"
   chrome:
     image: seleniarm/standalone-chromium:latest
     shm_size: 256m
