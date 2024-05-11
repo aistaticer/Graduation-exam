@@ -21,7 +21,7 @@ module.exports = {
 
   },
   devServer: {
-    //contentBase: path.join(__dirname, 'dist'),
+    contentBase: path.join(__dirname, 'dist'),
     compress: true,
     host: '0.0.0.0',
     port: 7090,
@@ -71,9 +71,7 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       }
     ]
-  },
-  //resolve: {
-  //  extensions: ['.js', '.mjs', '.json'], // .mjs を追加
-  //}
+  }
   // その他の設定...
+	
 };
