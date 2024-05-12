@@ -39,5 +39,9 @@
     "heroku-postbuild": "webpack --config ./config/webpack.config.js",
     "build": "webpack --mode production --config ./config/webpack.config.js",
     "start": "webpack-dev-server --config ./config/webpack.config.js"
+  },
+  "engines": {
+    "node": "18.19.0"
   }
+  
 }
