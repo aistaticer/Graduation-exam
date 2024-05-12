@@ -6,6 +6,9 @@ ruby "3.2.2"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.8", ">= 7.0.8.1"
 
+#db
+gem 'mysql2'
+
 # Assets
 gem 'bootstrap-sass'
 gem 'devise'
@@ -25,7 +28,7 @@ gem "sprockets-rails"
 gem 'webpacker', '~> 5.0'
 
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
+#gem "sqlite3", "~> 1.4"
 
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
@@ -68,6 +71,7 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
   gem 'rspec-rails'
   gem 'factory_bot_rails'
+  gem "sqlite3", "~> 1.4"
 end
 
 group :development do
