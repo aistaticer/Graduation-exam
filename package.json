@@ -40,6 +40,7 @@
     "node": "18.19.0"
   },
   "scripts": {
+    "develop": "NODE_OPTIONS='--openssl-legacy-provider' gatsby develop",
     "build": "webpack --mode production --config ./config/webpack.config.js",
     "heroku-postbuild": "webpack --config ./config/webpack.config.js",
     "start": "webpack-dev-server --config ./config/webpack.config.js"
