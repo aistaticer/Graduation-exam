@@ -170,7 +170,6 @@ GEM
     minitest (5.22.3)
     msgpack (1.7.2)
     multipart-post (2.4.0)
-    mysql2 (0.5.6)
     net-http (0.4.1)
       uri
     net-imap (0.4.10)
@@ -190,6 +189,7 @@ GEM
     nokogiri (1.16.4-x86_64-linux)
       racc (~> 1.4)
     orm_adapter (0.5.0)
+    pg (1.5.6)
     psych (5.1.2)
       stringio
     public_suffix (5.0.5)
@@ -353,7 +353,7 @@ DEPENDENCIES
   jbuilder
   kaminari
   mini_magick (~> 4.8)
-  mysql2
+  pg (>= 0.18, < 2.0)
   puma (~> 5.0)
   rails (~> 7.0.8, >= 7.0.8.1)
   ransack

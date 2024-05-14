@@ -7,7 +7,7 @@ ruby "3.2.2"
 gem "rails", "~> 7.0.8", ">= 7.0.8.1"
 
 #db
-gem 'mysql2'
+gem 'pg', '>= 0.18', '< 2.0'
 
 # Assets
 gem 'bootstrap-sass'
