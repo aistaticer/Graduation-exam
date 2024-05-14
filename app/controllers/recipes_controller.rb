@@ -1,5 +1,5 @@
 class RecipesController < ApplicationController
-  #before_action :custom_authenticate_user!
+  before_action :custom_authenticate_user!
   #before_action :some_action
 
   include RecipesHelper
