@@ -19,7 +19,7 @@
             = image_tag @current_user.avatar, class:"user_image"
           - else
             p なし
-            = image_tag "user.jpg", class:"user_image"
+            = image_tag 'user.jpeg', class:"user_image"
         .margin-top25
           p 画像
           = f.file_field :avatar, autofocus: true, autocomplete: "avatar"
