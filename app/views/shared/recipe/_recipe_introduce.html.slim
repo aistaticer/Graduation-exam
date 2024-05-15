@@ -1,22 +1,25 @@
 .recipe_card
 
   - decorated_recipe = RecipeDecorator.new(recipe)
-  = link_to recipe_path(recipe) do
-      -if recipe.thumbnail.present?
-        = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "recipe_image"
-
-
-  .recipe_name
-    = recipe.name
+  = link_to recipe_path(recipe) , class: "bottom_border_erase"do
+    -if recipe.thumbnail.present?
+      = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "recipe_image"
+    - else
+      = image_tag "no_image.jpg", class: "recipe_image"
+    .recipe_name
+      = recipe.name
   
   .recipe_bio
     = recipe.bio
 
   .d-flex
-    - recipe.categories.each do |category|
-      .categoty
-        = category.name 
+    = recipe.genre.name
+    .margin-left
+      = recipe.menu.name
+  
+  .height
 
+  .d-flex.stamp_position
     .flex.margin-left
       - if recipe.user_like == true
         = render 'shared/stamps/like_delete', recipe: recipe, stamp_middle: recipe.current_user_like_id
@@ -24,3 +27,7 @@
         = render 'shared/stamps/like_create', recipe: recipe
       .like-count
         = render 'shared/stamps/like_count', recipe: recipe
+    - if @url_user_show
+      .margin-left
+        = link_to recipe_path(recipe), class: "trash", data: { turbo_method: :delete, confirm: 'Are you sure?' }
+          .i class="fa-solid fa-trash"

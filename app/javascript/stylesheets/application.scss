@@ -156,6 +156,11 @@ body {
   padding-top: 20px;
   padding-left: 10px;
   font-family:  serif;
+  color: #000000;
+}
+
+.recipe_name:hover{
+  color: #b0b0b0;
 }
 
 .recipe_card p {
@@ -169,10 +174,7 @@ body {
 
 .flex{
   display: flex;
-  //background-color: #abc8c9;
   width: fit-content;
-  border-radius: 10%;
-  border:solid 2px #abc8c9;
   padding: 0px 5px 0px 5px;
 }
 
@@ -279,3 +281,20 @@ p {
   margin: 0;
 }
 
+.stamp_position{
+  position: absolute;
+  bottom: 3px;
+  right: 10px
+}
+
+.trash{
+  color: #000000;
+}
+
+.trash:hover{
+  color: #a8a8a8;
+}
+
+.height{
+  height: 30px;
+}

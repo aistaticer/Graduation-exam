@@ -1,0 +1,33 @@
+.d-flex.justify-content-center.margin-top25
+  .width500
+    = form_with model: @user, url: user_registration_path do |f|
+      
+      .margin_auto
+        .d-flex
+          p ユーザー名
+          .caution
+            p 必須
+
+      .margin_auto 
+        = f.text_field :name, autofocus: true, autocomplete: "name", class: "width300"
+      
+      .margin_auto.margin-top25
+        .d-flex
+          p 登録画像
+          - if @current_user.avatar.present?
+            p あり
+            = image_tag @current_user.avatar, class:"user_image"
+          - else
+            p なし
+            = image_tag "user.jpg", class:"user_image"
+        .margin-top25
+          p 画像
+          = f.file_field :avatar, autofocus: true, autocomplete: "avatar"
+
+      .margin_auto.margin-top25
+          p 紹介文
+      .margin_auto.padding2_5 
+        = f.text_area :bio, autofocus: true, autocomplete: "bio", class: "width300"
+
+      .d-flex.justify-content-end.margin-top25
+        = f.submit "更新する", class: "sign_upButton sign_upButton2"

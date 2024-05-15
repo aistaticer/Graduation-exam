@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_05_023039) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_15_131934) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -79,8 +79,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_05_023039) do
 
   create_table "ingredients", force: :cascade do |t|
     t.string "name"
-    t.integer "serving"
-    t.bigint "recipe_id"
+    t.integer "recipe_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "quantity"
@@ -104,6 +103,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_05_023039) do
     t.text "highlight"
     t.integer "genre_id"
     t.integer "menu_id"
+    t.integer "serving"
     t.index ["genre_id"], name: "index_recipes_on_genre_id"
     t.index ["menu_id"], name: "index_recipes_on_menu_id"
   end

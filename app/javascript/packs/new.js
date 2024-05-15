@@ -45,7 +45,7 @@ document.addEventListener("turbo:load", addformEventListener);
 document.addEventListener("turbo:render", addformEventListener);
 
 function addingre_form(){
-  let process_number = 6;
+  let process_number = 0;
   const addingreformButton = document.getElementById('addingreformButton'); // ボタンのIDがこれだと仮定
   addingreformButton.addEventListener('click', function(e) {
     e.preventDefault(); // ボタンのデフォルトの動作を防ぐ

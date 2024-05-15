@@ -21,6 +21,8 @@ document.addEventListener("turbo:load", () => {
   // getAttributeを使う方法
   const userStateViaAttribute = userElement.getAttribute('data-user_state');
   console.log(userStateViaAttribute)
+
+  //userStateViaAttribute=yesならログインしている
   if (userStateViaAttribute == "no"){
     import("./user_new_up.js").then(module => {
       // モジュールの使用
@@ -37,10 +39,18 @@ document.addEventListener("turbo:load", () => {
   }else if(window.location.pathname === '/likes'){
     var index = document.getElementById("likes_action")
     index.classList.add("select")
+  }else if(window.location.pathname.startsWith('/users/edit')){
+    var index = document.getElementById("edit_action")
+    index.classList.add("select")
+    import("./user_new_up.js").then(module => {
+      // モジュールの使用
+    });
+    import("./user_show.js").then(module => {
+      // モジュールの使用
+    });
   }else if(window.location.pathname.startsWith('/users')){
     var index = document.getElementById("user_action")
     index.classList.add("select")
   }
 });
-
 

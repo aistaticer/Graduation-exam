@@ -21,7 +21,8 @@
     .vertical
       = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "image"
       p 材料
-
+      p #{@recipe.serving}人前
+      
       - @recipe.ingredients.each do |a|
         .ing_set
           p #{a.name}

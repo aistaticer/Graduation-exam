@@ -29,6 +29,7 @@ ja:
         genre: レシピのジャンル
         menu: レシピの種類
         name: レシピ名
+        serving: 何人前
       genre:
         required: "ジャンルを選択してください"
     errors:
@@ -60,6 +61,8 @@ ja:
             name:
               blank: "を入力してください"
               too_long: "レシピ名は25文字以内で入力してください"
+            serving:
+              blank: "かを入力してください"
             bio:
               blank: "を入力してください"
               too_long: "レシピ紹介文は255文字以内で入力してください"

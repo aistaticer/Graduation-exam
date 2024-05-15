@@ -72,6 +72,7 @@ class RecipesController < ApplicationController
   def destroy
     recipe = Recipe.find(params[:id])
     recipe.destroy
+    redirect_back(fallback_location: recipes_path, notice: 'Recipe was successfully destroyed.')
   end
 
   def copy_and_new
@@ -173,7 +174,7 @@ class RecipesController < ApplicationController
 
   # Strong Parameters
   def recipe_params
-    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, :menu_id, :genre_id, ingredients_attributes: [:id, :name, :serving, :quantity], steps_attributes: [:id, :number, :process], copied_recipe_attributes: [:id, :original_recipe, :before_recipe], category_ids: [])
+    params.require(:recipe).permit(:name, :serving, :thumbnail, :thumbnail_edited, :bio, :copy_permission, :menu_id, :genre_id, ingredients_attributes: [:id, :name, :quantity], steps_attributes: [:id, :number, :process], copied_recipe_attributes: [:id, :original_recipe, :before_recipe], category_ids: [])
   end
 
   def set_step_build
@@ -186,7 +187,7 @@ class RecipesController < ApplicationController
 
   def recipe_params_carry_up_number
     # まず、通常通りにparamsを取得
-    params.require(:recipe).permit(:name, :thumbnail, :thumbnail_edited, :bio, :copy_permission, :menu_id, :genre_id, ingredients_attributes: [:id, :name, :serving, :quantity], steps_attributes: [:id, :number, :process], copied_recipe_attributes: [:id, :original_recipe, :before_recipe], category_ids: []).tap do |whitelisted|
+    params.require(:recipe).permit(:name, :serving, :thumbnail, :thumbnail_edited, :bio, :copy_permission, :menu_id, :genre_id, ingredients_attributes: [:id, :name, :quantity], steps_attributes: [:id, :number, :process], copied_recipe_attributes: [:id, :original_recipe, :before_recipe], category_ids: []).tap do |whitelisted|
       # steps_attributesがあれば、descriptionが空のものを除外
       if whitelisted[:steps_attributes]
         whitelisted[:steps_attributes].reject! { |_, step_attribute| step_attribute[:process].blank? }
@@ -205,11 +206,10 @@ class RecipesController < ApplicationController
       if whitelisted[:ingredients_attributes]
         whitelisted[:ingredients_attributes].reject! { |_, ingredients_attribute| ingredients_attribute[:name].blank? }
         whitelisted[:ingredients_attributes].reject! { |_, ingredients_attribute| ingredients_attribute[:quantity].blank? }
-        whitelisted[:ingredients_attributes].reject! { |_, ingredients_attribute| ingredients_attribute[:serving].blank? }
       end
 
       if whitelisted[:ingredients_attributes].blank?
-        whitelisted[:ingredients_attributes] = [{ serving: "", name: "", quantity: "" }]
+        whitelisted[:ingredients_attributes] = [{name: "", quantity: "" }]
       end
     end
   end

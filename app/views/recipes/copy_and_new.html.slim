@@ -21,7 +21,6 @@
         = f.collection_select :genre_id, Genre.all, :id, :name, { prompt: 'ジャンルを選択してください' }
         = f.collection_select :menu_id, Menu.all, :id, :name, { prompt: '料理名を選択してください' }
 
-
       .image_color
         .image_message
           p クリックして料理の画像をのせてください
@@ -31,7 +30,9 @@
           = f.file_field :thumbnail, id: 'fileInput', style: 'display: none;'
 
       .ingredient.margin-left.margin-top30 id = "ingredients_form"
-        = render partial: 'shared/recipe/ingredient_form', locals: {f: f}
+        = f.select :serving, options_for_select((1..10).step(1).map { |n| [n, n] }.unshift(["何人前", nil])), {}, { class: 'ingre_form width20px' }
+        .margin-top30
+          = render partial: 'shared/recipe/ingredient_form', locals: {f: f}
 
       .addingreform.addformbutton id = "addingreformButton"
         p +

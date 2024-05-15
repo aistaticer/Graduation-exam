@@ -3,10 +3,7 @@
     - if @user.avatar?
       = image_tag @user.avatar, class:"user_image"
     - else
-      /#= image_tag 'user.jpeg', class:"user_image"
-      = image_tag 'cook.jpeg', class:"user_image"
-      = image_tag 'ruby.png', class:"user_image"
-
+      = image_tag 'user.jpeg', class:"user_image"
 
 .d-flex.justify-content-center.margin-top
   p ユーザー名:　#{@user.name}

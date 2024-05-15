@@ -10,3 +10,8 @@
       .i class="fa-regular fa-user icon_color"
       p マイページ
 
+.d-flex.justify-content-end
+  = link_to edit_user_registration_path(current_user), class: "bottom_border_erase" do
+    .close_side.content_center.sideber_font id = "edit_action"
+      .i class="fa-regular fa-user icon_color"
+      p ユーザー設定
