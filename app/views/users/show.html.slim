@@ -1,24 +1,24 @@
 .d-flex.justify-content-center
-	.margin
-		- if @user.avatar?
-			= image_tag @user.avatar, class:"user_image"
-		- else
-			= image_tag 'user.jpeg', class:"user_image"
+  .margin
+    - if @user.avatar?
+      = image_tag @user.avatar, class:"user_image"
+    - else
+      = image_tag 'user.jpeg', class:"user_image"
 
 .d-flex.justify-content-center.margin-top
-	p ユーザー名:　#{@user.name}
+  p ユーザー名:　#{@user.name}
 
 .d-flex.justify-content-center
-	.margin-top
-		p 自己紹介
+  .margin-top
+    p 自己紹介
 
 .d-flex.justify-content-center
-	.user-profile.margin-top
-		= @user.bio
+  .user-profile.margin-top
+    = @user.bio
 
 .d-flex.justify-content-center.margin-top
-	p レシピ投稿数:　#{@user.recipes.count}件
+  p レシピ投稿数:　#{@user.recipes.count}件
 
 .recipes-container.margin-left
-	- @user.recipes.each do |recipe|
-		= render 'shared/recipe/recipe_introduce', recipe: recipe
+  - @user.recipes.each do |recipe|
+    = render 'shared/recipe/recipe_introduce', recipe: recipe
