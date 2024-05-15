@@ -1,10 +1,12 @@
 .d-flex.justify-content-end
-	.close_side.content_center id = "likes_action"
-		.i class="fa-regular fa-heart icon_color"
-		= link_to 'いいね一覧', likes_path
+  = link_to likes_path, class: "bottom_border_erase" do
+    .close_side.content_center.sideber_font id = "likes_action"
+      .i class="fa-regular fa-heart icon_color"
+      p いいね一覧
 
 .d-flex.justify-content-end
-	.close_side.content_center id = "user_action"
-		.i class="fa-regular fa-user icon_color"
-		= link_to 'マイページ', user_path(current_user)
+  = link_to user_path(current_user), class: "bottom_border_erase" do
+    .close_side.content_center.sideber_font id = "user_action"
+      .i class="fa-regular fa-user icon_color"
+      p マイページ
 

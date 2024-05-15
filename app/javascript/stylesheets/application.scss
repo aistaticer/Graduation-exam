@@ -7,7 +7,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '~bootstrap/scss/bootstrap';
 
 
-.body {
+body {
   font-family: serif, sans-serif;
 }
 
@@ -54,7 +54,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
   box-sizing: border-box;
   position: fixed;
   left: 0;
-  bottom: 0;
+  top: 45px;
   z-index: 500
 }
 
@@ -180,7 +180,6 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
   position: relative;
 }
 
-
 .like-count{
   margin: 0px 0px 0px 5px;
 }
@@ -205,6 +204,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
   color:#faf2f2;
   padding: 2px;
 }
+
 .margin-left{
   margin-left: 5px;
 }
@@ -252,4 +252,30 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
   border-radius: 10px;
 }
 
+.header_font {
+  font-size: 15px;
+  color: #1b0000;
+}
+
+.sideber_font{
+  font-size: 15px;
+  cursor: pointer;
+  color: #554e4e;
+  text-decoration: none; /* 下線を消す */
+}
+
+.sideber_font:hover{
+  font-size: 15px;
+  cursor: pointer;
+  color: #554e4e;
+  text-decoration: none; /* 下線を消す */
+}
+
+.bottom_border_erase:hover{
+  text-decoration: none;
+}
+
+p {
+  margin: 0;
+}
 
