@@ -15,7 +15,7 @@
     - if comment.user.avatar.present?
       = image_tag comment.user.avatar, class: "avater"
     - else
-      = image_tag 'user.jpg', class:"avater"
+      = image_tag 'user.jpeg', class:"avater"
 
     .space_left
       = render partial: 'shared/comment/comment_body', locals: {recipe: recipe, comment: comment }
