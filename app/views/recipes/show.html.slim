@@ -19,7 +19,11 @@
 
   .horizontally_image
     .vertical
-      = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "image"
+      -if @recipe.thumbnail.present?
+        = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "image"
+      - else
+        = image_tag "no_image.jpg", class: "image"
+
       p 材料
       p #{@recipe.serving}人前
       
