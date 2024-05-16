@@ -9,7 +9,7 @@
   - @recipes.each do |recipe|
     .juel_introduce_set id = "set_#{recipe.id}"
       .juel.absolute id = "#{recipe.id}"
-        img src="/assets/ruby.png" class = "small"
+        = image_tag "ruby.png", class: "small"
 
       .introduce.absolute.hide id = "introduce_#{recipe.id}"
         = render 'shared/recipe/recipe_introduce_evolution', recipe: recipe
