@@ -1,5 +1,9 @@
 .content_container
-  p #{comment.user.name}　#{time_ago_in_words(comment.created_at)}前
+  - if comment.user.present?
+    p #{link_to comment.user.name, user_path(comment.user), class: 'comment_link'}　#{time_ago_in_words(comment.created_at)}前
+  - else
+    p #{comment.user.name}　#{time_ago_in_words(comment.created_at)}前
+
   .body-card
     = simple_format(comment.body)
 

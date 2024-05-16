@@ -1,7 +1,12 @@
 .reply_container
+  /# 親コメントの中で返信先を持つか否か
   -if replycomment.myreply.present?
-    p 返信先: #{link_to replycomment.myreply.user.name,user_path(replycomment.myreply.user)}
-  p #{replycomment.user.name}　#{time_ago_in_words(comment.created_at)}前
+    p 返信先: #{link_to replycomment.myreply.user.name,user_path(replycomment.myreply.user), class: 'comment_link'}
+  
+  - if replycomment.user.present?
+    p #{link_to replycomment.user.name, user_path(replycomment.user), class: 'comment_link'}　#{time_ago_in_words(replycomment.created_at)}前
+  - else
+    p #{replycomment.user.name}　#{time_ago_in_words(replycomment.created_at)}前
 
   .body-card
     = replycomment.body
