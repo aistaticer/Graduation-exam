@@ -31,7 +31,7 @@ body {
 
 .header {
   height: 45px;
-  width: 100vw;
+  width: calc(100vw - (100vw - 100%));
   box-sizing: border-box;
   position: fixed;
   top: 0;
@@ -298,3 +298,30 @@ p {
 .height{
   height: 30px;
 }
+
+//トップページのscss
+
+.top_images{
+  width: 80%;
+  height: auto;
+}
+
+.explanation{
+  background-color: rgb(228, 195, 154);
+  border-radius: 5px;
+  margin: 10%;
+  padding: 5px;
+}
+
+.explanation_title{
+  font-size: 20px;
+  border-bottom:1px solid #000000;
+  margin-bottom: 50px;
+}
+
+.margin40{
+  margin: 40px;
+}
+
+
+

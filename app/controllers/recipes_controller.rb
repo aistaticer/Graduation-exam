@@ -8,7 +8,7 @@ class RecipesController < ApplicationController
   def index
     @url_recipe_index = true;
     @q = Recipe.ransack(params[:q])
-    @recipes = @q.result.includes(:steps,:categories).with_attached_thumbnail.all.page(params[:page]).per(8)
+    @recipes = @q.result.includes(:steps,:genre,:menu).with_attached_thumbnail.all.page(params[:page]).per(8)
 
     #@stamp_middles = StampMiddle.all
     StampMiddle.liked_by_user?(@recipes,current_user.id)

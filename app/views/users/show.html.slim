@@ -21,4 +21,4 @@
 
 .recipes-container.margin-left
   - @user.recipes.each do |recipe|
-    = render 'shared/recipe/recipe_introduce', recipe: recipe
+    = render 'shared/recipe/recipe_introduce', recipe: recipe, user: @user

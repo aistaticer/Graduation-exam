@@ -29,4 +29,8 @@ class Recipe < ApplicationRecord
   def self.ransackable_attributes(auth_object = nil)
     ["bio", "copy_permission", "copy_recipe_id", "created_at", "highlight", "id", "name", "thumbnail", "updated_at", "user_id"]
   end
+
+  def self.ransackable_associations(auth_object = nil)
+    ["genre", "menu"]
+  end
 end

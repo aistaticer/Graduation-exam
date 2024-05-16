@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'pages/home'
   devise_for :users, controllers: {
     registrations: 'users/registrations'
   }
@@ -18,6 +19,6 @@ Rails.application.routes.draw do
 
   resources :likes, only: [:index]
 
-  #resources :recipes, only: [:index, :show, :new, :create, :destroy, :edit, :update]
+  root 'pages#home'
 
 end

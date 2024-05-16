@@ -29,10 +29,11 @@ html
 	/#= javascript_importmap_tags
 
   body
-    - if user_signed_in?
-      .header
-        = render 'shared/always/header'
+    .header
+      = render 'shared/always/header'
       .header_border
+
+    - if user_signed_in?
       .main
         .sidebar
           = render 'shared/always/sidebar'
@@ -46,7 +47,7 @@ html
       /#= javascript_pack_tag 'evolution', 'data-turbo-track': 'reload'
     
     - if user_signed_in?
-      .user id = "user" data-user_state = "yes"
+      .user id = "user" data-user_state = "yes" data-user_id = "#{current_user.id}"
       .content
         = yield
     - else
