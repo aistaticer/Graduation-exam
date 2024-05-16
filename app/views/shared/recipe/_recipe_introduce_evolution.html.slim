@@ -1,15 +1,17 @@
-.original-box-shadow.d-flex
-  .align.margin_bio
-    - decorated_recipe = RecipeDecorator.new(recipe)
-    = link_to recipe_path(recipe) do
+.original-box-shadow.d-flex.link
+  = link_to recipe_path(recipe), class: 'link' do
+
+    .align.margin_bio
+      - decorated_recipe = RecipeDecorator.new(recipe)
       .margin-left
-        = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "evolution_image"
-      /#= recipe.name
+        -if recipe.thumbnail.present?
+          = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "evolution_image"
+        - else
+          = image_tag "no_image.jpg", class: "evolution_image"
 
-  .margin_bio
-    = recipe.bio
-
-  - recipe.categories.each do |category|
-    = category.name 
+      .margin_bio.link
+        = recipe.name
+        br
+        = recipe.bio
 
 

@@ -1,26 +1,25 @@
 .hide{
-	display: none;
+  display: none;
 }
 
 .absolute{
-	position: absolute;
+  position: absolute;
 }
 
 
 .small{
-	width: 20px;
-	height: 20px;
+  width: 20px;
+  height: 20px;
 }
 
 .p{
-	margin: 0;
+  margin: 0;
 }
 
 .recipe_container{
-	width: 100px;
-	height: 150px;
-	background-color: rgb(136, 139, 138);
-
+  width: 100px;
+  height: 150px;
+  background-color: rgb(136, 139, 138);
 }
 
 .original-box-shadow {
@@ -47,65 +46,65 @@
 }
 
 .evolution_image{
-	width: 100px;
-	height: 100px;
+  width: 100px;
+  height: 100px;
 }
 
 .canvas_evolution{
-	width: auto;
-	box-shadow: 0 0 40px 15px rgba(0, 0, 0, .5);
-	background-color: white;
-	animation: slideIn 3s ease-in-out;
+  width: auto;
+  box-shadow: 0 0 40px 15px rgba(0, 0, 0, .5);
+  background-color: white;
+  animation: slideIn 3s ease-in-out;
 
-	position: fixed;
+  position: fixed;
   left: 300px;
-	top: 200px;
+  top: 200px;
 }
 
 .juel{
-	animation: slide 3s ease-in-out;
-	z-index: 500;
+  animation: slide 3s ease-in-out;
+  z-index: 500;
 }
 
 .text{
-	animation: slideIn 3s ease-in-out;
+  animation: slideIn 3s ease-in-out;
 }
 
 .align{
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .margin-left{
-	margin-left: 5px;
+  -left: 5px;
 }
 .margin_bio{
-	white-space: pre-wrap; 
-	margin: 10px 5px 10px 5px;
+  white-space: pre-wrap; 
+  margin: 10px 5px 10px 5px;
 }
 
 .background {
-	height: 100vh;
-	background-color: rgb(250, 228, 228)
+  height: 100vh;
+  background-color: rgb(250, 228, 228)
 }
 
 .introduce{
-	z-index: 1000
+  z-index: 1000
 }
 
 .font{
-	font-family: 'Arial', sans-serif; /* フォントをArialに変更する */
+  font-family: 'Arial', sans-serif; /* フォントをArialに変更する */
 }
 
 .point{
-	width: 12px;
-	height: 15px;
-	background-color: white;
-	z-index: 500;
+  width: 12px;
+  height: 15px;
+  background-color: white;
+  z-index: 500;
 }
 
 .margin{
-	margin: 100px;
+  margin: 100px;
 }
 
 .margin-top{
@@ -118,29 +117,38 @@
 }
 
 .font_test {
-	font-size: 30px;
-	font-family:  serif;   
+  font-size: 30px;
+  font-family:  serif;   
 }
 
 .p{
-	margin: 0;
+  margin: 0;
 }
 
 .title{
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	width: 80vw;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 80vw;
   border-bottom: 2px solid orange;
 
-	animation: slideIn 2s ease-in-out;
+  animation: slideIn 2s ease-in-out;
+}
+
+.link{
+  color: rgb(0, 0, 0);
+}
+
+.link:hover{
+  color: rgb(0, 0, 0);
+  text-decoration: none;
 }
 
 @keyframes blink {
 
   0% { opacity: 0; }
-	
-	100% { opacity: 1; }
+
+  100% { opacity: 1; }
 }
 
 @keyframes slideIn {
@@ -156,11 +164,11 @@
 
 @keyframes slide {
   0% {
-		opacity: 0;
+    opacity: 0;
     transform: translateY(-100px);
   }
   100% {
-		opacity: 1;
+    opacity: 1;
     transform: translateX(0);
   }
 }
