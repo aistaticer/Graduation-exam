@@ -22,11 +22,6 @@ class RecipesController < ApplicationController
     @comment = @recipe.comments.new
     @replies = Comment.includes(:user).where.not(reply_to_id: nil)
     @parent_comments = @comments.where(parent_id:nil)
-
-    @recipe.steps.each do |a|
-      logger.debug(a.process)
-      logger.debug("あああああああああああああ")
-    end
   end
 
   def new
@@ -49,7 +44,8 @@ class RecipesController < ApplicationController
     @recipe.user_id = current_user.id
     if @recipe.save
       original_recipe_update
-      redirect_to recipe_path(@recipe), flash: { notice: 'レシピが正常に投稿されました。' }
+      redirect_to recipe_path(@recipe), flash: { notice: 'レシピが正常に投稿されました。' }, allow_other_host: false
+      Rails.logger.debug("Flash notice: #{flash[:notice]}")
     else
 
       if params[:source] == "new"
@@ -62,7 +58,7 @@ class RecipesController < ApplicationController
         render :copy_and_new, status: :unprocessable_entity
       end
 
-      flash.now[:notice] = 'レシピの投稿に失敗しました。'
+      flash.now[:notice] = 'レシピの投稿に失敗しました'
     end
   end
 
@@ -72,7 +68,7 @@ class RecipesController < ApplicationController
   def destroy
     recipe = Recipe.find(params[:id])
     recipe.destroy
-    redirect_back(fallback_location: recipes_path, notice: 'Recipe was successfully destroyed.')
+    redirect_back(fallback_location: recipes_path, notice: 'レシピの削除に成功しました')
   end
 
   def copy_and_new

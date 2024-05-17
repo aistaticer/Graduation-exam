@@ -323,5 +323,19 @@ p {
   margin: 40px;
 }
 
+.flash.notice {
+  background-color: #dff0d8;
+  color: #3c763d;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.flash.alert {
+  background-color: #f2dede;
+  color: #a94442;
+  padding: 10px;
+  border-radius: 5px;
+}
+
 
 

@@ -3,6 +3,11 @@ ja:
     failure:
       not_found_in_database: "ログインできませんでした"
       invalid: "ログインできませんでした"
+    passwords:
+      send_instructions: "パスワードリセットの指示を送信しました"
+    mailer:
+      reset_password_instructions:
+        subject: "パスワードリセットのご案内"
 
   errors:
     format: "%{attribute}%{message}"

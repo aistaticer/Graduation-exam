@@ -1,4 +1,4 @@
-= f.fields_for :ingredients do |ingredients_form|
+= f.fields_for :ingredients, local: true do |ingredients_form|
   .d-flex
     = ingredients_form.text_area :name, placeholder: '材料名', class: 'ingre_form'
     .margin-left

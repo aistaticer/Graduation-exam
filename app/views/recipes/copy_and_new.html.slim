@@ -4,7 +4,7 @@
 
 = render partial: 'shared/error_recipe_copy', locals: {recipe: @error_messages}
 
-= form_with model: @copied_recipe, local: true do |f|
+= form_with model: @copied_recipe,  html: { data: { turbo: false } }  do |f|
   = hidden_field_tag :source, "copy_and_new"
   = hidden_field_tag :recipe_id, params[:recipe_id]
   .d-flex.new_container
