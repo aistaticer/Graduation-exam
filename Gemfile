@@ -8,6 +8,8 @@ gem "rails", "~> 7.0.8", ">= 7.0.8.1"
 
 #db
 gem 'pg', '>= 0.18', '< 2.0'
+#gem 'fog-aws'
+gem 'aws-sdk-s3', require: false
 
 # Assets
 gem 'bootstrap-sass'
