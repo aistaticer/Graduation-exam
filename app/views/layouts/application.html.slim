@@ -8,7 +8,9 @@ html
 
     = javascript_pack_tag 'application', 'data-turbo-track': 'reload'
     = stylesheet_link_tag "application", "data-turbo-track": "reload"
-    
+    link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css"
+    script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"
+
     - if @url_recipe_new
       = javascript_pack_tag 'new', 'data-turbo-track': 'reload'
     - elsif @url_recipe_show

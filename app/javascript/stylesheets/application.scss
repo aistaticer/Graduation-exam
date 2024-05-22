@@ -5,6 +5,7 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '@fortawesome/fontawesome-free/scss/v4-shims';
 //@import '@fortawesome/fontawesome-free/scss/fontawesome';
 @import '~bootstrap/scss/bootstrap';
+@import 'swiper/swiper-bundle';
 
 
 body {
@@ -132,17 +133,38 @@ body {
 
 //recipe_introduce用
 
+.recipes-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 3列の均等な幅で */
+  grid-gap: 10px; /* 画像の間隔は10px */
+}
+
 .recipe_card {
   position: relative;
   //margin: 2em 0;
   margin: 10px auto;
-  padding: 0.5em 1em;
+  padding: 20px 20px 40px 20px;
   border: solid 1px #ffb15e;
   background: #faf2f2;
   box-shadow: 2px 2px 10px #c1874d, -2px 2px 10px #c1874d, 2px -2px 10px #c1874d, -2px -2px 10px #c1874d;
   width: 220px;
   height: auto;
-  border-radius: 0 0% 0% 0%; /* 左上の角だけ丸みをなくす */
+}
+
+.ranking-container {
+  width: 90%;
+  overflow: hidden;
+  background: #faf2f2;
+}
+
+.swiper-slide {
+  margin-right: 0px;
+  cursor: grab;
+}
+
+/* 親要素に position: relative を設定 */
+.parent-element {
+  position: relative;
 }
 
 .recipe_bio{
@@ -211,11 +233,6 @@ body {
   margin-left: 5px;
 }
 
-.recipes-container {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 3列の均等な幅で */
-  grid-gap: 10px; /* 画像の間隔は10px */
-}
 .margin-top25{
   margin-top: 25px;
 }
@@ -281,10 +298,17 @@ p {
   margin: 0;
 }
 
-.stamp_position{
+.like_position{
   position: absolute;
   bottom: 3px;
   right: 10px
+}
+
+.stamp_position{
+  position: absolute;
+  width: auto;
+  bottom: 8px;
+  left: 10px;
 }
 
 .trash{
@@ -337,5 +361,36 @@ p {
   border-radius: 5px;
 }
 
+.delicious{
+  font-size: 10px;
+  color: #a46824;
+  background-color: #f8e3e3;
+  border-radius: 25%;
+}
+
+.delicious_count{
+  font-size: 10px;
+  margin: 0px 0px 0px 5px;
+}
+
+.undelicious{
+  font-size: 10px;
+  color: #a46824;
+  background-color: #ffffff;
+  border-radius: 25%;
+}
+
+.stamp_container{
+  display: flex;
+  position: absolute;
+  height: 30px;
+  width: 90%;
+  bottom: 0;
+}
+
+.width{
+  width: auto;
+  flex:1;
+}
 
 

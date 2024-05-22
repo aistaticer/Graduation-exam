@@ -1,4 +1,5 @@
 class Recipe < ApplicationRecord
+
   has_many :steps, dependent: :destroy
   has_one_attached :thumbnail, dependent: :destroy
   accepts_nested_attributes_for :steps
@@ -7,9 +8,14 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :copied_recipe
 
   has_many :stamp_middles
+  
   attr_accessor :likes_count
   attr_accessor :user_like
   attr_accessor :current_user_like_id
+  
+  attr_accessor :delicious_count
+  attr_accessor :user_delicious
+  attr_accessor :current_user_delicious_id
 
   has_many :categories_recipes
   has_many :categories, through: :categories_recipes

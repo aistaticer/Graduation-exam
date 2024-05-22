@@ -5,6 +5,12 @@
       p いいね一覧
 
 .d-flex.justify-content-end
+  = link_to ranking_index_path, class: "bottom_border_erase" do
+    .close_side.content_center.sideber_font id = "likes_action"
+      .i class="fa-regular fa-heart icon_color"
+      p ランキング
+
+.d-flex.justify-content-end
   = link_to user_path(current_user), class: "bottom_border_erase" do
     .close_side.content_center.sideber_font id = "user_action"
       .i class="fa-regular fa-user icon_color"

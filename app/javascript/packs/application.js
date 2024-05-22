@@ -4,10 +4,33 @@ import "@hotwired/turbo-rails"
 import "bootstrap"
 import "../stylesheets/application.scss"
 import "../stylesheets/sidebar.scss"
+//import Swiper from 'swiper';
+//import 'swiper/swiper-bundle.css';
+
 
 import $ from 'jquery';
 window.$ = $;
 window.jQuery = $;
+
+
+// Swiperを初期化するコード
+function swipe(){
+  var swiper = new Swiper('.swiper-container', {
+    slidesPerView: 3,
+    spaceBetween: 0,
+    scrollbar: {
+      el: ".swiper-scrollbar",
+      hide: true,
+    },
+    pagination: {
+      el: '.swiper-pagination',
+    },
+  });
+};
+
+document.addEventListener("turbo:load",swipe);
+document.addEventListener("turbo:render", swipe);
+
 
 document.addEventListener("DOMContentLoaded", function(){
 	console.log("application.js");
@@ -54,4 +77,5 @@ document.addEventListener("turbo:load", () => {
     index.classList.add("select")
   }
 });
+
 

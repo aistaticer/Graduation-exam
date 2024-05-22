@@ -11,8 +11,13 @@ class RecipesController < ApplicationController
     @recipes = @q.result.includes(:steps,:genre,:menu).with_attached_thumbnail.all.page(params[:page]).per(8)
 
     #@stamp_middles = StampMiddle.all
-    StampMiddle.liked_by_user?(@recipes,current_user.id)
-    StampMiddle.count_like_recipe(@recipes)
+    #StampMiddle.liked_by_user?(@recipes,current_user.id)
+    #StampMiddle.count_like_recipe(@recipes)
+
+    delicious_type = StampsType.find_by(name: "Delicious")
+    like_type = StampsType.find_by(name: "Like")
+    StampMiddle.stamped_by_user?(@recipes,current_user.id,delicious_type,like_type)
+    StampMiddle.count_stamp_recipe(@recipes,delicious_type,like_type)
   end
 
   def show
@@ -33,14 +38,17 @@ class RecipesController < ApplicationController
   end
 
   def create
+    @recipe = Recipe.new(recipe_params_carry_up_number)
 
     if params[:source] == "new"
       @url_recipe_new = true
     elsif params[:source] == "copy_and_new"
       @url_recipe_copy = true
+      @before_recipe = Recipe.includes(:steps).find(@recipe.copied_recipe.before_recipe)
+      unless check_before_recipe(@before_recipe, @recipe) and return
+      end
     end
 
-    @recipe = Recipe.new(recipe_params_carry_up_number)
     @recipe.user_id = current_user.id
     if @recipe.save
       original_recipe_update
@@ -57,8 +65,6 @@ class RecipesController < ApplicationController
         copy_and_new
         render :copy_and_new, status: :unprocessable_entity
       end
-
-      flash.now[:notice] = 'レシピの投稿に失敗しました'
     end
   end
 
@@ -210,9 +216,24 @@ class RecipesController < ApplicationController
     end
   end
 
+  #　新しく保存するレシピの元を辿ったオリジナルののレシピを保存している
   def original_recipe_update
     if @recipe.copied_recipe.original_recipe == nil
       @recipe.create_copied_recipe(original_recipe: @recipe.id)
     end
+  end
+
+  def check_before_recipe(before_recipe,recipe)
+    recipe_processes = [];
+    before_processes = before_recipe.steps.pluck(:process)
+    @recipe.steps.each do |step|
+      recipe_processes << step.process
+    end
+
+    if before_processes == recipe_processes
+      flash.now[:alert] = "作り方が完全に一致しています。一部変更してください"
+      render :new
+    end
+    return true
   end
 end

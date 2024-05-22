@@ -1,2 +1,2 @@
-= link_to recipe_stamp_middle_path(recipe, stamp_middle), data: { turbo_method: :delete }, remote: true, id: "liked_button_#{recipe.id}" do
+= link_to recipe_stamp_middle_path(recipe, stamp_middle, stamp_type: 'Like'), data: { turbo_method: :delete }, remote: true, id: "liked_button_#{recipe.id}", onclick: "this.href += '&referrer=' + encodeURIComponent(window.location.href);" do
   .i class="fa-solid fa-heart"

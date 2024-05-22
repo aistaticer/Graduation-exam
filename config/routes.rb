@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   post '/path_to_your_action', to: 'recipes#ask_open_ai'
 
   resources :likes, only: [:index]
+  resources :ranking, only: [:index]
 
   root 'pages#home'
 

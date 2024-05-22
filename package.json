@@ -31,6 +31,7 @@
     "sass-loader": "10.1.1",
     "select2": "^4.1.0-rc.0",
     "style-loader": "2",
+    "swiper": "^11.1.3",
     "webpack": "^4.46.0",
     "webpack-cli": "^3.3.12",
     "webpack-dev-server": "^3"

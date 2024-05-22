@@ -1,0 +1,6 @@
+= link_to recipe_stamp_middles_path(recipe_id: recipe.id, stamp_type: 'Delicious'), data: { turbo_method: :post }, remote: true, id: "unstamped_delicious_button_#{recipe.id}", onclick: "this.href += '&referrer=' + encodeURIComponent(window.location.href);" do
+  .undelicious
+    .d-flex
+      p おいしそー？
+
+

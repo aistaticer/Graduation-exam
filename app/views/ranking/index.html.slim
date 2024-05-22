@@ -1,0 +1,18 @@
+.h2
+  p いいねランキング Top10
+
+.ranking-container.swiper-container.margin40
+  .swiper-wrapper
+    - @sorted_recipes.each_with_index do |recipe, index|
+      .swiper-slide
+        = "#{index+1}位"
+        = render 'shared/recipe/recipe_introduce', recipe: recipe
+
+.h2
+  p おいしそーランキング Top10
+.ranking-container.swiper-container.margin40
+  .swiper-wrapper
+    - @delicious_sorted_recipes.each_with_index do |recipe, index|
+      .swiper-slide
+        = "#{index+1}位"
+        = render 'shared/recipe/recipe_introduce', recipe: recipe

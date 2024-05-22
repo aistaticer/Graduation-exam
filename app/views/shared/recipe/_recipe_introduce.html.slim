@@ -16,18 +16,28 @@
     = recipe.genre.name
     .margin-left
       = recipe.menu.name
-  
-  .height
 
-  .d-flex.stamp_position
-    .flex.margin-left
+  .d-flex.width
+    /# 美味しそうスタンプ
+    - if recipe.user_delicious == true
+      = render 'shared/stamps/delicious_delete', recipe: recipe, stamp_middle: recipe.current_user_delicious_id
+    - else
+      = render 'shared/stamps/delicious_create', recipe: recipe
+    .delicious_count
+      = render 'shared/stamps/delicious_count', recipe: recipe
+
+  .stamp_container
+    .d-flex.justify-content-end.width
+      /# いいね.
       - if recipe.user_like == true
         = render 'shared/stamps/like_delete', recipe: recipe, stamp_middle: recipe.current_user_like_id
       - else
         = render 'shared/stamps/like_create', recipe: recipe
       .like-count
         = render 'shared/stamps/like_count', recipe: recipe
+
+    /# レシピ削除.
     - if @url_user_show == true && current_user == user
       .margin-left
         = link_to recipe_path(recipe), class: "trash", data: { turbo_method: :delete, confirm: 'Are you sure?' }
-          .i class="fa-solid fa-trash"
+        .i class="fa-solid fa-trash"

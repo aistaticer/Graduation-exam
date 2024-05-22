@@ -1,55 +1,99 @@
 class StampMiddlesController < ApplicationController
-	def create
-    @recipe = Recipe.find(params[:recipe_id])
-    # いいねの種類のIDを見つける（ここでは、nameが'Like'のものとする）
-    like_type = StampsType.find_by(name: 'Like')
+  
+  def create
+    stamp
+  end
 
-    # 新しいいいねを作成
-    @like = StampMiddle.new(recipe_id: @recipe.id, user_id: current_user.id, stamps_type_id: StampMiddle.like_id_find())
-    if @like.save
-			StampMiddle.count_like_recipe([@recipe])
+  def destroy
+    stamp_delete
+  end
 
-			respond_to do |format|
+  private
 
-				format.turbo_stream do
-					render turbo_stream: [
-						turbo_stream.replace("unliked_button_#{@recipe.id}", partial: 'shared/stamps/like_delete', locals: { recipe: @recipe, stamp_middle: @like.id}),
-						turbo_stream.replace("like_count_#{@recipe.id}", partial: 'shared/stamps/like_count', locals: { recipe: @recipe})
-					]
-				end
-				format.html { redirect_to recipes_path }
-			end
-
-			Rails.logger.debug("成功");
-    else
-			Rails.logger.debug("失敗");
-			#Rails.logger.debug(@like.errors.full_messages)
+  def page_load
+    referrer_url = params[:referrer]
+    if referrer_url == 'http://localhost:3000/ranking'
+      redirect_to ranking_index_path
     end
-	end
+  end
 
-	def destroy
-		@stamp = StampMiddle.find(params[:id])
-		@recipe = Recipe.find(params[:recipe_id])
+  def stamp
+    @recipe = Recipe.find(params[:recipe_id])
+    stamp_name = params[:stamp_type]
+    stamp_type = StampsType.find_by(name: stamp_name)
+    @stamp = StampMiddle.new(recipe_id: @recipe.id, user_id: current_user.id, stamps_type_id: stamp_type.id)
+  
+    if @stamp.save
+      page_load and return
+      
+      if stamp_name == "Delicious"
+        StampMiddle.count_stamp_recipe([@recipe], stamp_type, nil)
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: [
+              turbo_stream.replace("unstamped_delicious_button_#{@recipe.id}", partial: 'shared/stamps/delicious_delete', locals: { recipe: @recipe, stamp_middle: @stamp.id}),
+              turbo_stream.replace("delicious_count_#{@recipe.id}", partial: 'shared/stamps/delicious_count', locals: { recipe: @recipe})
+            ]
+          end
+          format.html { redirect_to recipes_path }
+        end
+      end
 
-		if @stamp.destroy
-			StampMiddle.count_like_recipe([@recipe])
-			Rails.logger.debug("like_count_#{@recipe.id}");
-			respond_to do |format|
+      if stamp_name == "Like"
+        StampMiddle.count_stamp_recipe([@recipe], nil, stamp_type)
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: [
+              turbo_stream.replace("unliked_button_#{@recipe.id}", partial: 'shared/stamps/like_delete', locals: { recipe: @recipe, stamp_middle: @stamp.id}),
+              turbo_stream.replace("like_count_#{@recipe.id}", partial: 'shared/stamps/like_count', locals: { recipe: @recipe})
+            ]
+          end
+          format.html { redirect_to recipes_path }
+        end
+      end
 
-				format.turbo_stream do
-					render turbo_stream: [
-						turbo_stream.replace("like_count_#{@recipe.id}", partial: 'shared/stamps/like_count', locals: { recipe: @recipe}),
-						turbo_stream.replace("liked_button_#{@recipe.id}", partial: 'shared/stamps/like_create', locals: { recipe: @recipe })
-					]
-				end
-				format.html { redirect_to recipes_path }
-			end
-		else
-			# 失敗した場合の処理（必要に応じて）
-		end
-	end
+    else
+    end
+  end
 
-	private
+  def stamp_delete
+    @stamp = StampMiddle.find(params[:id])
+    @recipe = Recipe.find(params[:recipe_id])
 
+    stamp_name = params[:stamp_type]
+    stamp_type = StampsType.find_by(name: stamp_name)
+    StampMiddle.count_stamp_recipe([@recipe], stamp_type, nil)
 
+    if @stamp.destroy
+      
+      page_load and return
+
+      if stamp_name == "Delicious"
+        logger.debug("Delicious")
+        StampMiddle.count_stamp_recipe([@recipe], stamp_type, nil)
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: [
+              turbo_stream.replace("stamped_delicious_button_#{@recipe.id}", partial: 'shared/stamps/delicious_create', locals: { recipe: @recipe, stamp_middle: @stamp.id}),
+              turbo_stream.replace("delicious_count_#{@recipe.id}", partial: 'shared/stamps/delicious_count', locals: { recipe: @recipe})
+            ]
+          end
+          format.html { redirect_to recipes_path }
+        end
+      end
+
+      if stamp_name == "Like"
+        StampMiddle.count_stamp_recipe([@recipe], nil, stamp_type)
+        respond_to do |format|
+          format.turbo_stream do
+            render turbo_stream: [
+              turbo_stream.replace("liked_button_#{@recipe.id}", partial: 'shared/stamps/like_create', locals: { recipe: @recipe, stamp_middle: @stamp.id}),
+              turbo_stream.replace("like_count_#{@recipe.id}", partial: 'shared/stamps/like_count', locals: { recipe: @recipe})
+            ]
+          end
+          format.html { redirect_to recipes_path }
+        end
+      end
+    end
+  end
 end
