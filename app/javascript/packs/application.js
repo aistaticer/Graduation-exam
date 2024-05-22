@@ -75,6 +75,9 @@ document.addEventListener("turbo:load", () => {
   }else if(window.location.pathname.startsWith('/users/'+ current_user_id)){
     var index = document.getElementById("user_action")
     index.classList.add("select")
+  }else if(window.location.pathname.startsWith('/ranking')){
+    var index = document.getElementById("ranking")
+    index.classList.add("select")
   }
 });
 
