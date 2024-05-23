@@ -30,6 +30,19 @@ body {
   min-height: 100vh;
 }
 
+@media (max-width: 768px) {
+  .content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding-top: 50px;
+    padding-left: 0px;
+    width: 100%;
+    background-color: rgb(245, 238, 224);
+    min-height: 100vh;
+  }
+}
+
 .header {
   height: 45px;
   width: calc(100vw - (100vw - 100%));
@@ -69,15 +82,12 @@ body {
   z-index: 900
 }
 
-@media (max-width: 767px) {
+@media (max-width: 768px) {
   .sidebar {
     display: none;
-    width: 100px;
-    min-width: 100px;
-    height: 100%;
-    background-color: moccasin;
-    box-sizing: border-box;
-    border: 8px solid chocolate;
+  }
+  .side_border {
+    display: none;
   }
 }
 
@@ -135,8 +145,17 @@ body {
 
 .recipes-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 3列の均等な幅で */
+  grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px; /* 画像の間隔は10px */
+}
+
+@media (max-width: 767px) {
+  .recipes-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 5px;
+    margin:5px;
+  }
 }
 
 .recipe_card {
@@ -151,10 +170,26 @@ body {
   height: auto;
 }
 
+@media (max-width: 768px) {
+  .recipe_card {
+    position: relative;
+    //margin: 2em 0;
+    margin: 10px auto;
+    border: solid 1px #ffb15e;
+    background: #faf2f2;
+    //box-shadow: 2px 2px 10px #c1874d, -2px 2px 10px #c1874d, 2px -2px 10px #c1874d, -2px -2px 10px #c1874d;
+    width: 95%;
+    height: auto;
+    padding: 20px 20px 40px 20px;
+  }
+}
+
 .ranking-container {
   width: 90%;
   overflow: hidden;
   background: #faf2f2;
+  border-radius: 10%;
+  padding: 3%;
 }
 
 .swiper-slide {
@@ -167,10 +202,11 @@ body {
   position: relative;
 }
 
-.recipe_bio{
+.recipe_bio {
   font-size: 12px;
   padding: 10px;
-  font-family:  serif;
+  font-family: serif;
+  overflow-wrap: break-word;
 }
 
 .recipe_name{
@@ -215,6 +251,17 @@ body {
   margin-right: auto;
   width: auto;
   height: 150px;
+}
+
+@media (max-width: 768px) {
+  .recipe_image {
+    display: block;
+    border-radius: 10%;
+    margin-left: auto;
+    margin-right: auto;
+    width: auto;
+    height: 120px;
+  }
 }
 
 .recipe_image:hover{
@@ -384,8 +431,17 @@ p {
   display: flex;
   position: absolute;
   height: 30px;
-  width: 90%;
+  width: 85%;
   bottom: 0;
+}
+@media (max-width: 768px) {
+  .stamp_container{
+    display: flex;
+    position: absolute;
+    height: 30px;
+    width: 80%;
+    bottom: 0;
+  }
 }
 
 .width{
@@ -393,7 +449,28 @@ p {
   flex:1;
 }
 
+h2 {
+  position: relative;
+  display: inline-block;
+  padding: 0 65px;
+  //text-align: center;
+}
 
-.hidden {
-  display: none;
+h2:before,
+h2:after {
+  position: absolute;
+  top: calc(50% - 3px);
+  width: 50px;
+  height: 6px;
+  content: '';
+  border-top: solid 2px #000;
+  border-bottom: solid 2px #000;
+}
+
+h2:before {
+  left: 0;
+}
+
+h2:after {
+  right: 0;
 }

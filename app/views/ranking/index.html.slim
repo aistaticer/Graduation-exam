@@ -1,21 +1,31 @@
-.h2
-  p いいねランキング Top10
+.d-flex.justify-content-center.margin-top25
+  h2.span
+    p いいねランキング
 
-.ranking-container.swiper-container.margin40
-  .swiper-wrapper
-    - @sorted_recipes.each_with_index do |recipe, index|
-      .swiper-slide
-        = "#{index+1}位"
-        = render 'shared/recipe/recipe_introduce', recipe: recipe
+.d-flex.justify-content-center  
+  h2.span
+    p Top10
 
-.h2
-  p おいしそーランキング Top10
-.ranking-container.swiper-container.margin40
-  .swiper-wrapper
-    - @delicious_sorted_recipes.each_with_index do |recipe, index|
-      .swiper-slide
-        = "#{index+1}位"
-        = render 'shared/recipe/recipe_introduce', recipe: recipe
+.d-flex.justify-content-center
+  .ranking-container.swiper-container
+    .swiper-wrapper
+      - @sorted_recipes.each_with_index do |recipe, index|
+        .swiper-slide
+          = "#{index+1}位"
+          = render 'shared/recipe/recipe_introduce', recipe: recipe
 
-.hidden
-  p aaa
+.d-flex.justify-content-center.margin-top25
+  h2
+    p おいしそーランキング
+
+.d-flex.justify-content-center
+  h2
+    p Top10
+.d-flex.justify-content-center
+  .ranking-container.swiper-container
+    .swiper-wrapper
+      - @delicious_sorted_recipes.each_with_index do |recipe, index|
+        .swiper-slide
+          = "#{index+1}位"
+          = render 'shared/recipe/recipe_introduce', recipe: recipe
+

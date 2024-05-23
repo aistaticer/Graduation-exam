@@ -8,20 +8,6 @@ img{
 	height: auto;
 }
 
-@media (max-width: 767px) {
-  .recipe_card {
-    position: relative;
-    //margin: 2em 0;
-    margin: 15px auto;
-    padding: 0.5em 1em;
-    //border: solid 3px #ffb15e;
-    background: #ffffff;
-    width: 90%;
-    height: auto;
-    border-radius: 0 0% 0% 0%; /* 左上の角だけ丸みをなくす */
-  }
-}
-
 .recipe_card .recipe-title {
   position: absolute;
   display: inline-block;
@@ -49,23 +35,11 @@ img{
   //background-color: rgba(255, 177, 94, 0.8); /* オプションで背景色を変更しても良い */
 }
 
-@media (max-width: 767px) {
-  .recipes-container {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 1px;
-    width: 100%; /* これを追加 */
-  }
-}
-
 .parent_search_form {
   display: flex;
   //align-items: center; /* アイテムを中央揃えにする */
   justify-content: center;
   width: 80%;
   margin: auto;
-
-}
-.search_form{
 
 }

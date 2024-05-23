@@ -16,8 +16,17 @@ window.jQuery = $;
 // Swiperを初期化するコード
 function swipe(){
   var swiper = new Swiper('.swiper-container', {
-    slidesPerView: 3,
-    spaceBetween: 0,
+    slidesPerView: 3,  // パソコンでは3つ表示
+    breakpoints: {
+      0: {
+        slidesPerView: 1  // 画面幅が768px以下の場合は1つ表示
+      },
+
+      768: {
+        slidesPerView: 3  // 画面幅が768px以下の場合は1つ表示
+      }
+    },
+    spaceBetween: 10,
     scrollbar: {
       el: ".swiper-scrollbar",
       hide: true,

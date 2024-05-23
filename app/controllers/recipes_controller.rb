@@ -45,8 +45,11 @@ class RecipesController < ApplicationController
     elsif params[:source] == "copy_and_new"
       @url_recipe_copy = true
       @before_recipe = Recipe.includes(:steps).find(@recipe.copied_recipe.before_recipe)
-      unless check_before_recipe(@before_recipe, @recipe) and return
+      if check_before_recipe(@before_recipe, @recipe)
+      else
+        return
       end
+
     end
 
     @recipe.user_id = current_user.id
@@ -233,7 +236,9 @@ class RecipesController < ApplicationController
     if before_processes == recipe_processes
       flash.now[:alert] = "作り方が完全に一致しています。一部変更してください"
       render :new
+      return false
+    else 
+      return true
     end
-    return true
   end
 end

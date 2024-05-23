@@ -4,6 +4,7 @@
 	height: auto;
 	width: 100vw;
 	min-height: 100vh;
+  z-index: 1;
 }
 
 .title{
@@ -95,20 +96,25 @@ p{
 }
 
 .images{
-	position: absolute;
-	top: 20%;
-	left: 20%;
-	width: auto;
-	height: 250px;
-	border-radius: 10px;
+  position: absolute;
+  top: 20%;
+  left: 20%;
+  width: auto;
+  height: 40%;
+  border-radius: 10px;
+  z-index: 0;
 }
 
 .images2{
-	position: absolute;
-	top: 20%;
-	right: 20%;
-	width: auto;
-	height: 250px;
-	border-radius: 10px;
+  position: absolute;
+  top: 20%;
+  right: 20%;
+  width: auto;
+  height: 40%;
+  border-radius: 10px;
+}
+
+.aaa{
+  z-index: 100000000000000;
 }
 

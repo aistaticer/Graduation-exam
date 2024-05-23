@@ -12,7 +12,7 @@ class StampMiddlesController < ApplicationController
 
   def page_load
     referrer_url = params[:referrer]
-    if referrer_url == 'http://localhost:3000/ranking'
+    if referrer_url == 'https://evolution-recipes-949263457034.herokuapp.com/ranking'
       redirect_to ranking_index_path
     end
   end
