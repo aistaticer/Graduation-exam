@@ -1,4 +1,5 @@
 .user_container{
+  position: relative;
 	padding-top: 50px;
 	background-color: rgb(245, 238, 224);
 	height: auto;
@@ -95,26 +96,32 @@ p{
 	font-family: serif;
 }
 
-.images{
+.user_container .images{
   position: absolute;
+  left: 10%;
   top: 20%;
-  left: 20%;
   width: auto;
   height: 40%;
   border-radius: 10px;
   z-index: 0;
 }
 
-.images2{
+.user_container .images2{
   position: absolute;
+  right: 10%;
   top: 20%;
-  right: 20%;
   width: auto;
   height: 40%;
   border-radius: 10px;
 }
 
-.aaa{
-  z-index: 100000000000000;
+@media (max-width: 768px) {
+  .images,
+  .images2{
+    display: none;
+  }
 }
+
+
+
 
