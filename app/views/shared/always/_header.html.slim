@@ -1,7 +1,14 @@
 .header
-  .d-flex-between.header_pc
 
-    .d-flex.justify-content-start
+  .header_pc
+
+    .logo_position
+      .sidebar_display id = "sidebar_display"
+        .list id = "list"
+          .i class="fa-solid fa-bars"
+        .x.active_state id = "x"
+          .i class="fa-solid fa-xmark"
+
       = link_to pages_home_path
         = image_tag "logo5.png", class: "logo_image padding2_5"
 
@@ -22,44 +29,40 @@
             p ログアウト
       - else
         = link_to new_user_session_path, class: "close_header" do
-          .close_header
-            .i class="fa-solid fa-arrow-right-to-bracket icon_color"
-            p ログイン
+          .i class="fa-solid fa-arrow-right-to-bracket icon_color"
+          p ログイン
 
         = link_to new_user_registration_path, class: "close_header" do
           .i class="fa-solid fa-arrow-right-to-bracket icon_color"
           p ユーザー登録
 
-.header_border
-
 - if user_signed_in?
   .user id = "user" data-user_state = "yes" data-user_id = "#{current_user.id}"
 
-  .sidebar
+  .sidebar.active_state id = "sidebar"
     .d-flex-end
       = link_to likes_path, class: "bottom_border_erase" do
         .close_side id = "likes_action"
-          .i class="fa-regular fa-heart icon_color"
+          .i class="fa-regular fa-heart icon_color_side"
           p いいね一覧
 
     .d-flex-end
       = link_to ranking_index_path, class: "bottom_border_erase" do
         .close_side id = "ranking"
-          .i class="fa-solid fa-ranking-star"
+          .i class="fa-solid fa-ranking-star icon_color_side"
           p ランキング
 
-    .d-flex-end
+    .d-flex-end.hidden
       = link_to user_path(current_user), class: "bottom_border_erase" do
         .close_side id = "user_action"
-          .i class="fa-regular fa-user icon_color"
+          .i class="fa-regular fa-user icon_color_side"
           p マイページ
 
     .d-flex-end
       = link_to edit_user_registration_path(current_user), class: "bottom_border_erase" do
         .close_side id = "edit_action"
-          .i class="fa-regular fa-user icon_color"
+          .i class="fa-regular fa-user icon_color_side"
           p ユーザー設定
-  .side_border
 
 
 

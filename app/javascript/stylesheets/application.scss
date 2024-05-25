@@ -20,12 +20,13 @@ body {
   flex-grow: 1;
   padding-top: 50px;
   padding-left: 150px;
+  padding-bottom: 100px;
   width: 100%;
   background-color: rgb(245, 238, 224);
   min-height: 100vh;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 767px) {
   .content {
     display: flex;
     flex-direction: column;
@@ -46,14 +47,7 @@ body {
   top: 0;
   z-index: 1000;
   background-color: #ffe2b6;
-}
-
-.header_border{
-  height: 5px;
-  width: 100vw;
-  position: fixed;
-  top: 45px;
-  background-color: #e0c7a5;
+  border-bottom: 5px solid #e0c7a5;
 }
 
 .margin-right{
@@ -79,10 +73,6 @@ body {
   background-color: #e0c7a5;
 }
 
-.icon_color{
-  color: rgb(88, 66, 44)
-}
-
 //recipe_introduce用
 
 .recipes-container {
@@ -91,13 +81,23 @@ body {
   grid-gap: 10px; /* 画像の間隔は10px */
 }
 
-@media (max-width: 767px) {
+@media (max-width: 1010px) {
+  .recipes-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* ギャップを考慮 */
+    grid-gap: 5px;
+    margin:10px;
+  }
+}
+
+@media (max-width: 920px) {
   .recipes-container {
     display: grid;
     grid-template-columns: repeat(2, calc(50% - 2.5px)); /* ギャップを考慮 */
     grid-gap: 5px;
     margin:10px;
   }
+
 }
 
 .recipe_card {
@@ -411,15 +411,71 @@ h2:after {
   justify-content: end;
 }
 
+.header_pc{
+  display: flex;
+  max-height: 45px;
+  justify-content: space-between;
+  visibility: visible;
+  padding-right: 10px;
+}
+
+@media (max-width: 767px) {
+  .header_pc{
+    display: block;
+    visibility: hidden;
+  }
+}
 
 .header_mp{
   display: none;
 }
 
+.logo_position{
+  display: flex;
+  justify-content: start;
+}
+
 @media (max-width: 767px) {
-  .header_pc{
-    display: none;
+  .logo_position{
+    display: flex;
+    justify-content: center;
+    visibility: visible;
   }
+}
+
+.sidebar_display{
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .sidebar_display{
+    display: block;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+  }
+}
+
+.footer{
+  display: none;
+  //visibility: hidden;
+}
+
+.icon_color{
+  color: rgb(88, 66, 44)
+}
+
+.icon_color_side{
+  color: rgb(88, 66, 44)
+}
+
+@media (max-width: 767px) {
+  .icon_color{
+    color: white;
+  }
+}
+
+@media (max-width: 767px) {
 
   .header_mp{
     display: block;
@@ -430,51 +486,12 @@ h2:after {
     color: white;
   }
 
-  .icon_color{
-    color: white;
-  }
-
   .close_footer{
     width: 80px;
   }
 
-  .header_1{
-    position: fixed;
-    bottom: 0;
-    left: 0%;
-    width: 80px;
-    z-index: 1000;
-    border:1px solid white;
-  }
-
-  .header_2{
-    position: fixed;
-    bottom: 0%;
-    left: 80px;
-    width: 80px;
-    z-index: 1000;
-    border:1px solid white;
-  }
-
-  .header_3{
-    position: fixed;
-    bottom: 0%;
-    left: 160px;
-    width: 80px;
-    z-index: 1000;
-    border:1px solid white;
-  }
-
-  .header_4{
-    position: fixed;
-    bottom: 0%;
-    left: 240px;
-    width: 80px;
-    z-index: 1000;
-    border:1px solid white;
-  }
-
   .footer{
+    display: flex;
     position: fixed;
     bottom: 0;
     width: 100%;
@@ -482,6 +499,7 @@ h2:after {
     background-color: #171717;
     z-index: 100;
     color: white;
+    visibility: visible;
   }
 }
 
@@ -491,7 +509,10 @@ h2:after {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-top: 10px;
+
+  // .headerの下線と合わせるため
+  margin-top: 4px;
+  
   width: 120px;
   height: 40px;
   border-radius: 10px 10px 0px 0px;
@@ -568,30 +589,44 @@ h2:after {
 
 .sidebar {
   width: 150px;
-  height: calc(100vh - 50px);
+  height: calc(100vh - 45px);
   background-color: rgb(237, 207, 148);
   box-sizing: border-box;
   position: fixed;
   left: 0;
   top: 45px;
-  z-index: 500
+  border-right: 5px solid #e0c7a5;
+  z-index: 500;
 }
 
-.side_border{
-  height: 100vh;
-  width: 5px;
-  background-color: #e0c7a5;
-  position: fixed;
-  left: 145px;
-  bottom: 0;
-  z-index: 900
+.sidebar_animation{
+  transform: translateX(-100%); /* 初期位置を左の外に設定 */
+  animation: slideIn 2s forwards; /* 2秒かけてスライドイン */
 }
 
-@media (max-width: 768px) {
-  .sidebar {
-    visibility: hidden;
+@keyframes slideIn {
+  0% {
+    transform: translateX(-100%); /* 始点は左の外 */
   }
-  .side_border {
+  100% {
+    transform: translateX(0); /* 終点は元の位置 */
+  }
+}
+
+.active_state{
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .hidden{
     display: none;
   }
+}
+
+
+.using{
+  background-color: #a9a6a6;
+  opacity: 0.5;
+  z-index: 10;
+  pointer-events: none;
 }

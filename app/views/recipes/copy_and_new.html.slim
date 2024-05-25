@@ -7,7 +7,7 @@
 = form_with model: @copied_recipe,  html: { data: { turbo: false } }  do |f|
   = hidden_field_tag :source, "copy_and_new"
   = hidden_field_tag :recipe_id, params[:recipe_id]
-  .d-flex.new_container
+  .new_container.new_back
     .name_image
       .margin-top30.margin-left
         = f.label :name, 'レシピ名'
@@ -30,12 +30,13 @@
           = f.file_field :thumbnail, id: 'fileInput', style: 'display: none;'
 
       .ingredient.margin-left.margin-top30 id = "ingredients_form"
-        = f.select :serving, options_for_select((1..10).step(1).map { |n| [n, n] }.unshift(["何人前", nil])), {}, { class: 'ingre_form width20px' }
+        = f.select :serving, options_for_select((1..10).step(1).map { |n| [n, n] }.unshift(["何人前", nil])), {}, { class: 'ingre_form width20px　custom-select-container' }
         .margin-top30
           = render partial: 'shared/recipe/ingredient_form', locals: {f: f}
 
-      .addingreform.addformbutton id = "addingreformButton"
-        p +
+      .d-flex.justify-content-end.width80.margin-top
+        .addingreform.addformbutton id = "addingreformButton"
+          p +
 
     .bio_proccess id = "step"
 
@@ -62,9 +63,9 @@
             p AIが改善案を答えてくれます。
             p 1日、1度に制限されています。
         .result.padding id = "result"
-            .empty
+          .empty
 
-        .d-flex.justify-content-end.width80
+        .d-flex.justify-content-end.width80.margin-top30
           .btn-solid id="askOpenAI"
             p 出力
 
@@ -81,14 +82,17 @@
               = process_number
             = step_form.hidden_field :number, value: process_number
             = step_form.text_area :process, placeholder: '作り方を入力してください', class: 'form-control form-control-custom'
-      .addformbutton.addform_step id = "addformButton"
-        p +
+      
+      .d-flex.justify-content-end.width80.margin-top id = "addformButton"
+        .addformbutton.addform_step
+          p +
 
       = f.fields_for :copied_recipe do |copied_recipe_form|
         = copied_recipe_form.hidden_field :original_recipe, value: @new_copied_recipe.original_recipe
         = copied_recipe_form.hidden_field :before_recipe, value: @new_copied_recipe.before_recipe
 
-      = f.submit 'レシピを作成する', id: "submit", class: 'submitButton'
+      .d-flex.justify-content-end.width80.margin-top30
+        = f.submit 'レシピを作成する', id: "submit", class: 'submitButton'
 
 /# jsでレシピの手順と名前が見れるようにする
 .step id = "steps" data-steps = @steps_array data-recipe_name = @recipe_name

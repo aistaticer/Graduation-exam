@@ -41,9 +41,9 @@ html
       /#= javascript_pack_tag 'evolution', 'data-turbo-track': 'reload'
     
     - if user_signed_in?
-      .content
+      .content id = "content"
         = render 'shared/flash_error'
-        .footer.d-flex.align-items-center.justify-content-center
+        .footer.align-items-center.justify-content-center
           .header_mp.d-flex
             = render 'shared/always/footer'
         = yield

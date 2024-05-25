@@ -88,3 +88,24 @@ document.addEventListener("turbo:load", () => {
     index.classList.add("select")
   }
 });
+
+function sidebar_display() {
+
+  const sidebarDisplay = document.getElementById('sidebar_display');
+  const sideber = document.getElementById('sidebar');
+  const content = document.getElementById('content');
+  const list = document.getElementById('list');
+  const x = document.getElementById('x');
+  
+  sidebarDisplay.addEventListener('click', function() {
+    sideber.classList.toggle('sidebar_animation');
+    sideber.classList.toggle('active_state'); // 'active' クラスをトグル（追加・削除）する
+    content.classList.toggle('using');
+
+    list.classList.toggle('active_state');
+    x.classList.toggle('active_state')
+  });
+};
+
+document.addEventListener("turbo:load",sidebar_display);
+//document.addEventListener("turbo:render", sidebar_display);

@@ -4,9 +4,9 @@
 
   = hidden_field_tag :source, "new" 
 
-  .d-flex.new_container
+  .new_container.new_back
     .name_image
-      .margin-top30.margin-left
+      .margin-left
         = f.label :name, 'レシピ名'
         .width80
           = f.text_field :name, placeholder: 'レシピ名を入力', class: 'form-control'
@@ -32,14 +32,13 @@
         = f.select :serving, options_for_select((1..10).step(1).map { |n| [n, n] }.unshift(["何人前", nil])), {}, { class: 'ingre_form width20px' }
         .margin-top30
           = render partial: 'shared/recipe/ingredient_form', locals: {f: f}
-
-      .addingreform.addformbutton id = "addingreformButton"
-        p +
+      .d-flex.justify-content-end.width80.margin-top
+        .addingreform.addformbutton id = "addingreformButton"
+          p +
 
     .bio_proccess id = "step"
 
-
-      .margin-left.margin-top30
+      .margin-left
         = f.label :bio, 'レシピ紹介文'
         = f.text_area :bio, placeholder: 'レシピ紹介文を入力', class: 'form-control width80 height20' 
 
@@ -62,13 +61,16 @@
               = process_number
             = step_form.hidden_field :number, value: process_number
             = step_form.text_area :process, placeholder: '作り方を入力してください', class: 'form-control form-control-custom'
-      .addformbutton.addform_step id = "addformButton"
-        p +
+      
+      .d-flex.justify-content-end.width80.margin-top id = "addformButton"
+        .addformbutton.addform_step id = ""
+          p +
 
       = f.fields_for :copied_recipe do |copied_recipe_form|
         = copied_recipe_form.hidden_field :original_recipe, value: @recipe.id
-
-      = f.submit 'レシピを作成する', id: "submit", class: 'submitButton'
+      br
+      .d-flex.justify-content-end.width8
+        = f.submit 'レシピを作成する', id: "submit", class: 'submitButton'
 
 
 

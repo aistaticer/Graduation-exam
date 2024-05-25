@@ -32,12 +32,8 @@ function addformEventListener() {
         </div>
       </div>
     `;
-
-    const parentElement = submit.parentNode;
-    parentElement.insertBefore(newField,submit);
-    document.getElementById('step').appendChild(newField);
-
-    newField.scrollIntoView();
+    step.insertBefore(newField, addformButton);
+    addformButton.scrollIntoView();
   });
 }
 
@@ -60,7 +56,7 @@ function addingre_form(){
 
     // フォームを追加する場所を指定する。例えば、idが`formContainer`の要素の中に追加。
     document.getElementById('ingredients_form').appendChild(newField);
-    newField.scrollIntoView();
+    addingreformButton.scrollIntoView();
   });
 }
 
