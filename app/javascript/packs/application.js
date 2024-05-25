@@ -53,7 +53,6 @@ document.addEventListener("turbo:load", () => {
   // getAttributeを使う方法
   const userStateViaAttribute = userElement.getAttribute('data-user_state');
   const current_user_id = userElement.getAttribute('data-user_id');
-  console.log(current_user_id)
 
   //userStateViaAttribute=yesならログインしている
   if (userStateViaAttribute == "no"){
@@ -89,5 +88,3 @@ document.addEventListener("turbo:load", () => {
     index.classList.add("select")
   }
 });
-
-

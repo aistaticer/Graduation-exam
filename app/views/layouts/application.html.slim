@@ -30,9 +30,8 @@ html
 	/#= javascript_importmap_tags
 
   body
-    .header
-      = render 'shared/always/header'
-      .header_border
+    = render 'shared/always/header'
+      
 
     - if @url_recipe_new
       /#= javascript_pack_tag 'react/react_example.js', 'data-turbo-track': 'reload'
@@ -42,13 +41,11 @@ html
       /#= javascript_pack_tag 'evolution', 'data-turbo-track': 'reload'
     
     - if user_signed_in?
-      .user id = "user" data-user_state = "yes" data-user_id = "#{current_user.id}"
-      .main
-        .sidebar
-          = render 'shared/always/sidebar'
-        .side_border
       .content
         = render 'shared/flash_error'
+        .footer.d-flex.align-items-center.justify-content-center
+          .header_mp.d-flex
+            = render 'shared/always/footer'
         = yield
     - else
       .user id = "user" data-user_state = "no"

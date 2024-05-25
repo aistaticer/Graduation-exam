@@ -1,0 +1,28 @@
+- if user_signed_in?
+  .close_footer
+    = link_to recipes_path, class: "close_header_mp" do
+      .d-flex.justify-content-center
+        .i.fa-solid.fa-book-open.icon_color
+      .d-flex.justify-content-center
+        p レシピ一覧
+
+  .close_footer
+    = link_to new_recipe_path, class: "close_header_mp" do
+      .d-flex.justify-content-center 
+        .i class="fa-solid fa-file-pen icon_color"
+      .d-flex.justify-content-center
+        p レシピ作成
+
+  .close_footer
+    = link_to user_path(current_user), class: "close_header_mp" do
+      .d-flex.justify-content-center 
+        .i class="fa-regular fa-user icon_color"
+      .d-flex.justify-content-center 
+        p マイページ
+
+  .close_footer
+    = link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "close_header_mp" do
+        .d-flex.justify-content-center 
+          .i class="fa-solid fa-arrow-right-from-bracket icon_color"
+        .d-flex.justify-content-center 
+          p ログアウト

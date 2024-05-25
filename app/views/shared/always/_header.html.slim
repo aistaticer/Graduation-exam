@@ -1,39 +1,68 @@
+.header
+  .d-flex-between.header_pc
 
-/#.logo.font_serif
-/  p evolution recipes
+    .d-flex.justify-content-start
+      = link_to pages_home_path
+        = image_tag "logo5.png", class: "logo_image padding2_5"
 
-.d-flex-between
-
-  .d-flex.justify-content-start
-    = link_to pages_home_path
-      = image_tag "logo5.png", class: "logo_image padding2_5"
-
-  
-  .d-flex.justify-content-end
-    - if user_signed_in?
-      = link_to recipes_path do
-        .close.content_center.header_font id="index_action"
+    
+    .d-flex-end
+      - if user_signed_in?
+        = link_to recipes_path, class: "close_header", id:"index_action" do
           .i.fa-solid.fa-book-open.icon_color
           p レシピ一覧
 
-      = link_to new_recipe_path do
-        .close.content_center.header_font id = "new_action"
+        = link_to new_recipe_path, class: "close_header", id: "new_action" do
           .i class="fa-solid fa-file-pen icon_color"
           p レシピ作成
-    
-    - if user_signed_in?
-      = link_to destroy_user_session_path, data: { turbo_method: :delete }
-        .close.content_center.header_font id = "logout_action"
-          .i class="fa-solid fa-arrow-right-from-bracket icon_color"
-          p ログアウト
-    - else
-      = link_to new_user_session_path do
-        .close.content_center.header_font
-          .i class="fa-solid fa-arrow-right-to-bracket icon_color"
-          p ログイン
+      
+      - if user_signed_in?
+        = link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "close_header", id: "logout_action" do
+            .i class="fa-solid fa-arrow-right-from-bracket icon_color"
+            p ログアウト
+      - else
+        = link_to new_user_session_path, class: "close_header" do
+          .close_header
+            .i class="fa-solid fa-arrow-right-to-bracket icon_color"
+            p ログイン
 
-      = link_to new_user_registration_path do
-        .close.content_center.header_font
+        = link_to new_user_registration_path, class: "close_header" do
           .i class="fa-solid fa-arrow-right-to-bracket icon_color"
           p ユーザー登録
+
+.header_border
+
+- if user_signed_in?
+  .user id = "user" data-user_state = "yes" data-user_id = "#{current_user.id}"
+
+  .sidebar
+    .d-flex-end
+      = link_to likes_path, class: "bottom_border_erase" do
+        .close_side id = "likes_action"
+          .i class="fa-regular fa-heart icon_color"
+          p いいね一覧
+
+    .d-flex-end
+      = link_to ranking_index_path, class: "bottom_border_erase" do
+        .close_side id = "ranking"
+          .i class="fa-solid fa-ranking-star"
+          p ランキング
+
+    .d-flex-end
+      = link_to user_path(current_user), class: "bottom_border_erase" do
+        .close_side id = "user_action"
+          .i class="fa-regular fa-user icon_color"
+          p マイページ
+
+    .d-flex-end
+      = link_to edit_user_registration_path(current_user), class: "bottom_border_erase" do
+        .close_side id = "edit_action"
+          .i class="fa-regular fa-user icon_color"
+          p ユーザー設定
+  .side_border
+
+
+
+
+
 
