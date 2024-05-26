@@ -3,6 +3,11 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def google_oauth2
+
+    auth = request.env["omniauth.auth"]
+    token = auth.credentials.token
+    Rails.logger.info "ここだよおおおおお  Google OAuth Token: #{token}"
+
     @user = User.find_for_google_oauth2(request.env["omniauth.auth"])
 
     # 保存済みかどうかのチェック
