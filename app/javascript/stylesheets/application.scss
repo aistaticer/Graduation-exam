@@ -614,7 +614,13 @@ h2:after {
 }
 
 .active_state{
-  display: none;
+  display: block;
+}
+
+@media (max-width: 767px) {
+  .active_state{
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {

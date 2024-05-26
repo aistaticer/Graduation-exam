@@ -2,6 +2,14 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  def create
+
+    logger.debug("いいいいいいいいいいいいい")
+    if (user = User.find_or_create_from_auth_hash(auth_hash))
+      log_in user
+    end
+    #redirect_to logout_path
+  end
 
 
 

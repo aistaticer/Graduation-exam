@@ -49,3 +49,4 @@
       .d-flex.justify-content-center 
         = link_to "パスワード再送ページへ", new_password_path(resource_name), class: "sign_upButton"
 
+      = link_to 'Signin with Google', user_omniauth_authorize_path(:google_oauth2)

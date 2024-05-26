@@ -1,26 +1,52 @@
-<h2>Log in</h2>
+.user_container
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+  = render 'shared/flash_error'
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
-  </div>
+  = image_tag "cook.jpg", class: "images"
+  = image_tag "cook2.jpg", class: "images2"
 
-  <% if devise_mapping.rememberable? %>
-    <div class="field">
-      <%= f.check_box :remember_me %>
-      <%= f.label :remember_me %>
-    </div>
-  <% end %>
+  .d-flex.justify-content-center
+    .title
+      .under_bar.margin-top25
+        p evolution recipes
+      .margin-top25
+        p 最高のレシピを見つけよう
+        p 作り出そう
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
-  </div>
-<% end %>
+  .d-flex.justify-content-center.margin-top25
+    .title.under_bar
+      p ログインページ
 
-<%= render "users/shared/links" %>
+  .d-flex.justify-content-center
+
+    = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+      .margin-top25
+        = f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'メールアドレス'
+
+
+        .margin-top25
+        = f.password_field :password, autocomplete: "current-password", placeholder: 'パスワード'
+
+      - if devise_mapping.rememberable?
+        .d-flex.justify-content-center
+          = f.check_box :remember_me
+          = f.label :次回から自動でログイン, class: "font_small"
+
+        .d-flex.justify-content-center.margin-top25
+          = f.submit "ログイン", class: "submitButton"
+
+  .d-flex.justify-content-center 
+    - if devise_mapping.registerable? && controller_name != 'registrations'
+      .margin-top25
+        p 新規登録はこちらからどうぞ
+        .d-flex.justify-content-center 
+          = link_to "新規登録ページへ" , new_registration_path(resource_name), class: "sign_upButton"
+  
+  .d-flex.justify-content-center 
+    - if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
+    .margin-top25
+      p パスワードを忘れた方はこちらへ
+      .d-flex.justify-content-center 
+        = link_to "パスワード再送ページへ", new_password_path(resource_name), class: "sign_upButton"
+
+      = link_to 'Signin with Google', user_google_oauth2_omniauth_authorize_path, method: :post
