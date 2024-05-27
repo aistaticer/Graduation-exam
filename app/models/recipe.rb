@@ -28,7 +28,7 @@ class Recipe < ApplicationRecord
   belongs_to :genre
   belongs_to :menu
 
-  validates :user_id, :bio, :copy_permission, :serving, presence: true
+  validates :user_id, :bio, :serving, presence: true
   validates :name, length: { maximum: 25, message: "レシピ名は25文字以内で入力してください" }, presence: true
   validates :bio, length: { maximum: 255, message: "レシピ紹介文は255文字以内で入力してください" }, presence: true
   
