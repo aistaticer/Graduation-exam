@@ -24,9 +24,9 @@
           p レシピ作成
       
       - if user_signed_in?
-        = link_to destroy_user_session_path, data: { turbo_method: :delete }, class: "close_header", id: "logout_action" do
-            .i class="fa-solid fa-arrow-right-from-bracket icon_color"
-            p ログアウト
+         = button_to destroy_user_session_path, method: :delete, data: { turbo: false }, class: "close_header", id: "logout_action" do
+          .i class="fa-solid fa-arrow-right-from-bracket icon_color"
+          p ログアウト
       - else
         = link_to new_user_session_path, class: "close_header" do
           .i class="fa-solid fa-arrow-right-to-bracket icon_color"
@@ -43,26 +43,33 @@
     .d-flex-end
       = link_to likes_path, class: "bottom_border_erase" do
         .close_side id = "likes_action"
-          .i class="fa-regular fa-heart icon_color_side"
+          .close_margin
+            .i class="fa-regular fa-heart icon_color_side"
           p いいね一覧
 
     .d-flex-end
       = link_to ranking_index_path, class: "bottom_border_erase" do
         .close_side id = "ranking"
-          .i class="fa-solid fa-ranking-star icon_color_side"
+          .close_margin
+            .i class="fa-solid fa-ranking-star icon_color_side"
           p ランキング
 
     .d-flex-end.hidden
       = link_to user_path(current_user), class: "bottom_border_erase" do
         .close_side id = "user_action"
-          .i class="fa-regular fa-user icon_color_side"
+          .close_margin
+            .i class="fa-regular fa-user icon_color_side"
           p マイページ
 
     .d-flex-end
       = link_to edit_user_registration_path(current_user), class: "bottom_border_erase" do
         .close_side id = "edit_action"
-          .i class="fa-regular fa-user icon_color_side"
+          .close_margin
+            .i class="fa-regular fa-user icon_color_side"
           p ユーザー設定
+- else
+
+  = render "shared/always/sidebar_ph"
 
 
 

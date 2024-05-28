@@ -44,6 +44,7 @@ class RecipesController < ApplicationController
       @url_recipe_new = true
     elsif params[:source] == "copy_and_new"
       @url_recipe_copy = true
+      
       @before_recipe = Recipe.includes(:steps).find(@recipe.copied_recipe.before_recipe)
       if check_before_recipe(@before_recipe, @recipe)
       else

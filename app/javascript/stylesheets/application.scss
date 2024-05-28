@@ -69,7 +69,11 @@ body {
   background-color: rgb(167, 146, 116);
 }
 
-.select{
+.close_header.select {
+  background-color: #e0c7a5;
+}
+
+.select {
   background-color: #e0c7a5;
 }
 
@@ -509,6 +513,9 @@ h2:after {
   display: flex;
   align-items: center;
   justify-content: center;
+  border: none;
+  background-color: transparent;
+  
 
   // .headerの下線と合わせるため
   margin-top: 4px;
@@ -534,12 +541,16 @@ h2:after {
   text-decoration: none; 
 }
 
+.close_margin{
+  margin-right: 5px;
+  margin-left: 5px;
+}
 
 .close_side{
   //アイコンと文字の縦の位置を揃える
   display: flex;
   align-items: center;
-  justify-content: center;
+  //justify-content: center;
 
   margin-top: 10px;
   padding-top: 25px;
@@ -590,7 +601,7 @@ h2:after {
 .sidebar {
   width: 150px;
   height: calc(100vh - 45px);
-  background-color: rgb(237, 207, 148);
+  background-color: rgb(242, 226, 184);
   box-sizing: border-box;
   position: fixed;
   left: 0;
@@ -621,6 +632,10 @@ h2:after {
   .active_state{
     display: none;
   }
+
+  .sidebar_ph.active_state{
+    display: none;
+  }
 }
 
 @media (max-width: 767px) {
@@ -635,4 +650,23 @@ h2:after {
   opacity: 0.5;
   z-index: 10;
   pointer-events: none;
+}
+
+.sidebar_ph{
+  display: none;
+}
+
+@media (max-width: 767px) {
+  .sidebar_ph{
+    display: block;
+    width: 150px;
+    height: calc(100vh - 45px);
+    background-color: rgb(237, 207, 148);
+    box-sizing: border-box;
+    position: fixed;
+    left: 0;
+    top: 45px;
+    border-right: 5px solid #e0c7a5;
+    z-index: 500;
+  }
 }

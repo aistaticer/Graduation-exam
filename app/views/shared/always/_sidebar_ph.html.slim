@@ -1,0 +1,13 @@
+.sidebar_ph.active_state id = "sidebar"
+  .d-flex-end
+    = link_to new_user_session_path, class: "close_header" do
+      .close_side
+        .close_margin
+          .i class="fa-solid fa-arrow-right-to-bracket icon_color_side"
+        p ログイン
+  .d-flex-end
+    = link_to new_user_registration_path, class: "close_header" do
+      .close_side
+        .close_margin
+          .i class="fa-solid fa-arrow-right-to-bracket icon_color_side"
+        p ユーザー登録

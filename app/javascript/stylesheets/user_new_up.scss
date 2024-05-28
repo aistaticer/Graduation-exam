@@ -1,4 +1,4 @@
-.user_container{
+.no_signed_container{
   position: relative;
 	padding-top: 50px;
 	background-color: rgb(245, 238, 224);
@@ -96,7 +96,7 @@ p{
 	font-family: serif;
 }
 
-.user_container .images{
+.images{
   position: absolute;
   left: 10%;
   top: 20%;
@@ -106,7 +106,7 @@ p{
   z-index: 0;
 }
 
-.user_container .images2{
+.images2{
   position: absolute;
   right: 10%;
   top: 20%;

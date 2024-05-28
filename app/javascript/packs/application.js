@@ -96,11 +96,20 @@ function sidebar_display() {
   const content = document.getElementById('content');
   const list = document.getElementById('list');
   const x = document.getElementById('x');
+  const user = document.getElementById('user');
+  const login_state = user.getAttribute('data-user_state');
+  if (login_state == "no"){
+    const no_signed_container = document.getElementById('no_signed_container');
+  }
   
   sidebarDisplay.addEventListener('click', function() {
     sideber.classList.toggle('sidebar_animation');
     sideber.classList.toggle('active_state'); // 'active' クラスをトグル（追加・削除）する
-    content.classList.toggle('using');
+    if (login_state == "yes"){
+      content.classList.toggle('using');
+    }else{
+      no_signed_container.classList.toggle('using');
+    }
 
     list.classList.toggle('active_state');
     x.classList.toggle('active_state')

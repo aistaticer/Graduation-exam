@@ -32,7 +32,6 @@ html
   body
     = render 'shared/always/header'
       
-
     - if @url_recipe_new
       /#= javascript_pack_tag 'react/react_example.js', 'data-turbo-track': 'reload'
     - elsif @url_recipe_show
@@ -48,5 +47,6 @@ html
             = render 'shared/always/footer'
         = yield
     - else
-      .user id = "user" data-user_state = "no"
-      = yield
+      .no_signed_container id = "no_signed_container"
+        .user id = "user" data-user_state = "no"
+        = yield

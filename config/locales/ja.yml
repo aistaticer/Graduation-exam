@@ -8,6 +8,11 @@ ja:
     mailer:
       reset_password_instructions:
         subject: "パスワードリセットのご案内"
+    omniauth_callbacks:
+      success: "Googleアカウントによるログインに成功しました"
+    sessions:
+      signed_in: ログインに成功しました
+      signed_out: "ログアウトしました"
 
   errors:
     format: "%{attribute}%{message}"

@@ -1,0 +1,33 @@
+.logo_position
+  .sidebar_display id = "sidebar_display"
+    .list id = "list"
+      .i class="fa-solid fa-bars"
+    .x.active_state id = "x"
+      .i class="fa-solid fa-xmark"
+
+  = link_to pages_home_path
+    = image_tag "logo5.png", class: "logo_image padding2_5"
+
+
+.d-flex-end
+  - if user_signed_in?
+    = link_to recipes_path, class: "close_header", id:"index_action" do
+      .i.fa-solid.fa-book-open.icon_color
+      p レシピ一覧
+
+    = link_to new_recipe_path, class: "close_header", id: "new_action" do
+      .i class="fa-solid fa-file-pen icon_color"
+      p レシピ作成
+  
+  - if user_signed_in?
+    = button_to destroy_user_session_path, method: :delete, data: { turbo: false }, class: "close_header", id: "logout_action" do
+      .i class="fa-solid fa-arrow-right-from-bracket icon_color"
+      p ログアウト
+  - else
+    = link_to new_user_session_path, class: "close_header" do
+      .i class="fa-solid fa-arrow-right-to-bracket icon_color"
+      p ログイン
+
+    = link_to new_user_registration_path, class: "close_header" do
+      .i class="fa-solid fa-arrow-right-to-bracket icon_color"
+      p ユーザー登録
