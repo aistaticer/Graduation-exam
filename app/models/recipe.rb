@@ -1,5 +1,7 @@
 class Recipe < ApplicationRecord
 
+  belongs_to :user
+
   has_many :steps, dependent: :destroy
   has_one_attached :thumbnail, dependent: :destroy
   accepts_nested_attributes_for :steps

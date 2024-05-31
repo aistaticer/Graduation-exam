@@ -22,7 +22,7 @@ class RecipesController < ApplicationController
 
   def show
     @url_recipe_show = true
-    @recipe = Recipe.includes(:steps,:ingredients,:menu,:genre).find(params[:id])
+    @recipe = Recipe.includes(:user, :steps,:ingredients,:menu,:genre).find(params[:id])
     @comments = @recipe.comments.includes(:user, replies: [:user, {myreply: :user}]).order(created_at: :desc)
     @comment = @recipe.comments.new
     @replies = Comment.includes(:user).where.not(reply_to_id: nil)
@@ -45,7 +45,9 @@ class RecipesController < ApplicationController
     elsif params[:source] == "copy_and_new"
       @url_recipe_copy = true
       
+      #自分の元になったレシピを探し出している
       @before_recipe = Recipe.includes(:steps).find(@recipe.copied_recipe.before_recipe)
+
       if check_before_recipe(@before_recipe, @recipe)
       else
         return
@@ -57,7 +59,6 @@ class RecipesController < ApplicationController
     if @recipe.save
       original_recipe_update
       redirect_to recipe_path(@recipe), flash: { notice: 'レシピが正常に投稿されました。' }, allow_other_host: false
-      Rails.logger.debug("Flash notice: #{flash[:notice]}")
     else
 
       if params[:source] == "new"
@@ -98,6 +99,7 @@ class RecipesController < ApplicationController
     @copied_recipe.steps = @copied_recipe_steps
     @copied_recipe.categories = @copied_recipe_categories
     @copied_recipe.ingredients = @copied_recipe_ingredients
+    @copied_recipe.copied_recipe = @new_copied_recipe
 
     # 配列にレシピの内容を入れてhtmlにわたし、jsが受け取れるようにする。AIのため
     @recipe_name = []
@@ -115,9 +117,17 @@ class RecipesController < ApplicationController
 
     logger.debug(@recipe.name)
     copied_recipe_ids = CopiedRecipe.where(original_recipe: @recipe.copied_recipe.original_recipe).order(:before_recipe).pluck(:recipe_id)
-    @recipes = Recipe.where(id: copied_recipe_ids)
-
+    logger.debug(copied_recipe_ids)
+    recipes = Recipe.where(id: copied_recipe_ids).with_attached_thumbnail
+    @recipes = copied_recipe_ids.map { |id| recipes.find { |recipe| recipe.id == id } }
     StampMiddle.count_like_recipe(@recipes)
+
+    grouped_copied_recipe_ids = CopiedRecipe.where(original_recipe: @recipe.copied_recipe.original_recipe)
+                                        .order(:before_recipe)
+                                        .group_by(&:before_recipe)
+                                        .transform_values { |recipes| recipes.pluck(:recipe_id) }
+    logger.debug(grouped_copied_recipe_ids)
+    #@recipes = Recipe.where(id: grouped_copied_recipe_ids)
     
     @recipe_power = []
     @recipe_id = []
@@ -125,8 +135,8 @@ class RecipesController < ApplicationController
       @recipe_power.push(recipe.likes_count)
       @recipe_id.push(recipe.id)
     end
-    logger.debug(@recipe_power)
-
+    logger.debug("おおおお")
+    logger.debug(copied_recipe_ids)
   end
 
   def ask_open_ai

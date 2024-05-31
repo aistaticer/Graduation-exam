@@ -30,10 +30,22 @@
     - if devise_mapping.rememberable?
       .d-flex.justify-content-center
         = f.check_box :remember_me
-        = f.label :次回から自動でログイン, class: "font_small"
-
+        .alien-center
+          = f.label :remember_me, '次回から自動でログイン', class: 'font_small'
       .d-flex.justify-content-center.margin-top25
         = f.submit "ログイン", class: "submitButton"
+
+.d-flex.justify-content-center.margin-top25
+  p もしくは
+
+.d-flex.justify-content-center
+  .google
+    .effect1
+    .effect2
+    .effect3
+    .effect4
+    .d-flex.justify-content-center
+      = link_to 'Googleアカウントによるログイン', user_google_oauth2_omniauth_authorize_path, method: :post, class: "googleButton"
 
 .d-flex.justify-content-center 
   - if devise_mapping.registerable? && controller_name != 'registrations'
@@ -48,5 +60,3 @@
     p パスワードを忘れた方はこちらへ
     .d-flex.justify-content-center 
       = link_to "パスワード再送ページへ", new_password_path(resource_name), class: "sign_upButton"
-
-    = link_to 'Signin with Google', user_google_oauth2_omniauth_authorize_path, method: :post

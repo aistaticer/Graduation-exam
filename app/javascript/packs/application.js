@@ -42,7 +42,7 @@ document.addEventListener("turbo:render", swipe);
 
 
 document.addEventListener("DOMContentLoaded", function(){
-	console.log("application.js");
+  console.log("application.js");
 })
 
 document.addEventListener("turbo:load", () => {

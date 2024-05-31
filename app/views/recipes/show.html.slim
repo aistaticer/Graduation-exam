@@ -4,36 +4,50 @@
   - decorated_recipe = RecipeDecorator.new(@recipe)
 
   .culumn_set
-    p レシピ名
-    .recipe_name
+    .title
+      p レシピ名
+    .show_recipe_name
       = @recipe.name
-
-  .d-flex
-    .margin-top25
-      p ジャンル
-      = @recipe.genre.name
-
-    .margin-top25.margin-left
-      p メニュー
-      = @recipe.menu.name
 
   .horizontally_image
     .vertical
-      -if @recipe.thumbnail.present?
-        = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "image"
-      - else
-        = image_tag "no_image.jpg", class: "image"
+      .image_center
+        -if @recipe.thumbnail.present?
+          = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "show_image"
+        - else
+          = image_tag "no_image.jpg", class: "show_image"
 
-      p 材料
-      p #{@recipe.serving}人前
-      
-      - @recipe.ingredients.each do |a|
-        .ing_set
-          p #{a.name}
-          p #{a.quantity}
+      .d-flex.justify-content-end
+        - if @recipe.copy_permission == true           
+          .d-flex.content_center.height_limit
+            .i class="fa-solid fa-copy icon_color_side"
+            = link_to "レシピをコピー",copy_and_new_recipes_path(recipe_id: @recipe.id)
+
+        .space_left.height_limit.d-flex.content_center
+          .i class="fa-solid fa-arrow-trend-up icon_color_side"
+          = link_to "進化の軌跡",evolution_recipes_path(recipe_id: @recipe.id) 
+
+      .ingredient
+        .title
+          p 材料
+        p #{@recipe.serving}人分
+        
+        - @recipe.ingredients.each do |a|
+          .ing_set
+            p #{a.name}
+            p #{a.quantity}
+      .margin-top25
+        p ジャンル: #{@recipe.genre.name}
+        p メニュー:#{@recipe.menu.name}
+
+      .d-flex
+        p 作った人:
+        = link_to user_path(@recipe.user), class:"maker" do
+          p #{@recipe.user.name}
 
     .how_to_make
-      p 作り方
+      .title.margin-top25
+        p 作り方
       .horizontally
         - @recipe.steps.each do |step|
           .step_margin
@@ -42,15 +56,6 @@
               p #{step.number}
             .culumn_contents
               p #{step.process}
-
-    - if @recipe.copy_permission == true           
-      .d-flex.content_center.height_limit
-        .i class="fa-solid fa-copy icon_color"
-        = link_to "copy",copy_and_new_recipes_path(recipe_id: @recipe.id)
-
-    .space_left.height_limit.d-flex.content_center
-      .i class="fa-solid fa-arrow-trend-up icon_color"
-      = link_to "evolution",evolution_recipes_path(recipe_id: @recipe.id) 
 
   .root1 id = "root1"
 

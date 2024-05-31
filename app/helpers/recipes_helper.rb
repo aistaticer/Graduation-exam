@@ -19,15 +19,12 @@ module RecipesHelper
       copied_ingredient
     end
 
-    copied_recipe_copied_recipe = original_recipe.copied_recipe
-    #logger.debug(copied_recipe_copied_recipe.original_recipe)
-
-    if copied_recipe_copied_recipe.present?
-      logger.debug("@copied_recipe.copied_recipe が nil じゃない")
-      new_copied_recipe = copied_recipe.build_copied_recipe(before_recipe: params[:recipe_id], original_recipe: copied_recipe_copied_recipe.original_recipe)
+    if original_recipe.copied_recipe.before_recipe.present?
+      logger.debug("before_recipe が nil じゃない")
+      new_copied_recipe = copied_recipe.build_copied_recipe(before_recipe: params[:recipe_id], original_recipe: original_recipe.copied_recipe.original_recipe)
     else
       new_copied_recipe = copied_recipe.build_copied_recipe(before_recipe: params[:recipe_id], original_recipe: params[:recipe_id])
-      logger.debug("@copied_recipe.copied_recipe が nil だよ")
+      logger.debug("before_recipe が nil だよ")
     end
 
     # ここでは保存せずに、複製したレシピオブジェクトを返す

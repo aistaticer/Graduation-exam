@@ -1,18 +1,9 @@
-.background
 
+
+.background
   .d-flex.justify-content-center.margin-top.font
     .title
       p #{@recipe.name}の進化の歴史
-
-
-
-  - @recipes.each do |recipe|
-    .juel_introduce_set id = "set_#{recipe.id}"
-      .juel.absolute id = "#{recipe.id}"
-        = image_tag "ruby.png", class: "small"
-
-      .introduce.absolute.hide id = "introduce_#{recipe.id}"
-        = render 'shared/recipe/recipe_introduce_evolution', recipe: recipe
 
   .a.absolute id = "a"
 
@@ -23,6 +14,25 @@
   - logger.debug(@recipe_id)
   - logger.debug(@recipe_power)
 
-  .margin
-    <canvas id="canvas" class = "canvas_evolution"></canvas>
+.d-flex.justify-content-center
+  .letter_container
+    .appeal_letter
+      p 注目度
+    .recipe_letter
+      p 変化していくレシピ達
+    .flame_container
+      .flame id = "flame"
 
+        /#<canvas id="canvas" width="300" height="300" class = "canvas_evolution"></canvas>
+        - @recipes.each do |recipe|
+
+          .juel_introduce_set id = "set_#{recipe.id}"
+            .juel.absolute id = "#{recipe.id}"
+
+              - if recipe.id == params[:recipe_id].to_i
+                = image_tag "food_me.png", class: "small"
+              - else
+                = image_tag "food_dish.png", class: "small"
+
+            .introduce.absolute.hide id = "introduce_#{recipe.id}"
+              = render 'shared/recipe/recipe_introduce_evolution', recipe: recipe

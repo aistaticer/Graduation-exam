@@ -12,15 +12,11 @@ body {
   font-family: serif, sans-serif;
 }
 
-
-
 .content {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-  padding-top: 50px;
+  position: relative;
+  padding-top: 45px;
   padding-left: 150px;
-  padding-bottom: 100px;
+  padding-bottom: 0px;
   width: 100%;
   background-color: rgb(245, 238, 224);
   min-height: 100vh;
@@ -33,6 +29,7 @@ body {
     flex-grow: 1;
     padding-top: 50px;
     padding-left: 0px;
+    padding-bottom: 100px;
     width: 100%;
     background-color: rgb(245, 238, 224);
     min-height: 100vh;
@@ -669,4 +666,10 @@ h2:after {
     border-right: 5px solid #e0c7a5;
     z-index: 500;
   }
+}
+
+.alien-center {
+  display: flex;
+  align-items: center;
+  text-align: center;
 }

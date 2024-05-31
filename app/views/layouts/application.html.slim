@@ -36,14 +36,14 @@ html
       /#= javascript_pack_tag 'react/react_example.js', 'data-turbo-track': 'reload'
     - elsif @url_recipe_show
       /#= javascript_pack_tag 'react/react_show.js', 'data-turbo-track': 'reload'
-    - elsif  @url_recipe_evolution
-      /#= javascript_pack_tag 'evolution', 'data-turbo-track': 'reload'
+    - elsif @url_recipe_evolution
+      = javascript_pack_tag 'react/react_evolution', 'data-turbo-track': 'reload'
     
     - if user_signed_in?
       .content id = "content"
         = render 'shared/flash_error'
         .footer.align-items-center.justify-content-center
-          .header_mp.d-flex
+          .header_mp.d-flex.align-items-center.justify-content-center
             = render 'shared/always/footer'
         = yield
     - else

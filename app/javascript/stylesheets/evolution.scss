@@ -8,8 +8,8 @@
 
 
 .small{
-  width: 20px;
-  height: 20px;
+  width: 40px;
+  height: 40px;
 }
 
 .p{
@@ -51,18 +51,16 @@
 }
 
 .canvas_evolution{
-  width: auto;
+  width: 300px;
+  height: 300px;
   box-shadow: 0 0 40px 15px rgba(0, 0, 0, .5);
   background-color: white;
-  animation: slideIn 3s ease-in-out;
+  //animation: slideIn 3s ease-in-out;
 
-  position: fixed;
-  left: 300px;
-  top: 200px;
 }
 
 .juel{
-  animation: slide 3s ease-in-out;
+  //animation: slide 3s ease-in-out;
   z-index: 500;
 }
 
@@ -84,7 +82,8 @@
 }
 
 .background {
-  height: 100vh;
+  height: auto;
+  display: flex;
   background-color: rgb(250, 228, 228)
 }
 
@@ -103,9 +102,6 @@
   z-index: 500;
 }
 
-.margin{
-  margin: 100px;
-}
 
 .margin-top{
 	margin-top: 20px;
@@ -171,4 +167,50 @@
     opacity: 1;
     transform: translateX(0);
   }
+}
+
+.flame_container {
+  position: relative;
+  width: 80%; /* 画面の2倍の幅 */
+  margin: 30px;
+  height: auto; /* 任意の高さ */
+  overflow: auto; /* スクロール可能にする */
+  white-space: nowrap; /* テキストの折り返しを防ぐ */
+  background-color: rgb(166, 241, 241);
+  padding: 10px;
+}
+
+
+.flame{
+  position: relative;
+  width: 100%;
+  height: 300px;
+  background-color: rgb(166, 241, 241);
+  overflow: visible;
+}
+
+.juel_introduce{
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  z-index: 1000000000;
+}
+
+.appeal_letter{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: 1000;
+}
+
+.letter_container{
+  position: relative;
+  width: 90%;
+}
+
+.recipe_letter{
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  z-index: 1000;
 }

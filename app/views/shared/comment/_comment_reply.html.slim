@@ -20,7 +20,7 @@
     /# 返信コメント主名前を表示
     p 返信先 #{replycomment.user.name}
     .comment_arrangement
-      = f.text_area :body, class: 'form-control' 
+      = f.text_area :body, class: 'form-control width40 margin-left-zero' 
       = f.hidden_field :parent_id, value: comment.id, id: "parent_id"
       = f.hidden_field :reply_to_id, value: replycomment.id, id: "reply_to_id"
       = f.submit '返信', class: 'submit_button'
