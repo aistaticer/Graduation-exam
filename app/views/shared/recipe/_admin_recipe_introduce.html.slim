@@ -1,0 +1,30 @@
+.recipe_card
+
+  - decorated_recipe = RecipeDecorator.new(recipe)
+  = link_to recipe_path(recipe) , class: "bottom_border_erase"do
+    -if recipe.thumbnail.present?
+      = image_tag decorated_recipe.resized_recipe_thumbnail(size: 300), id: "yourImageId", class: "recipe_image"
+    - else
+      = image_tag "no_image.jpg", class: "recipe_image"
+    .recipe_name
+      = recipe.name
+  
+  .recipe_bio
+    = recipe.bio
+
+  .d-flex
+    = recipe.genre.name
+    br
+    = recipe.menu.name
+
+  /# レシピ削除.
+  .stamp_container
+
+    = link_to edit_recipe_path(recipe), class: "trash" do
+      .icon_center
+        <i class="fa-solid fa-pen"></i>
+        p 編集
+    .margin-left
+      = link_to recipe_path(recipe), class: "trash", data: { turbo_method: :delete, confirm: 'Are you sure?' }
+        .i class="fa-solid fa-trash"
+    

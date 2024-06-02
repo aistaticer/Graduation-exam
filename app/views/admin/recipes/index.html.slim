@@ -1,0 +1,14 @@
+.justify-content-center.d-flex
+  h2
+    p 管理画面　レシピ一覧
+
+.recipes-container
+  - @recipes.each do |recipe|
+    = render 'shared/recipe/admin_recipe_introduce', recipe: recipe
+
+br
+.justify-content-center.d-flex
+  - if @recipes.total_pages == 1
+    = render 'kaminari/only_one_page', recipes: @recipes
+  - else
+    = paginate @recipes, window: 2, remote: true

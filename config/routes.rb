@@ -25,4 +25,17 @@ Rails.application.routes.draw do
 
   root 'pages#home'
 
+  get 'privacy_policy', to: 'pages#privacy_policy'
+  get 'contact', to: 'pages#contact'
+
+  namespace :admin do
+    get 'dashboard', to: 'dashboard#index'
+
+    resources :recipes do
+      resources :comments, only: [:index,:destroy]
+    end
+
+    resources :users
+  end
+
 end

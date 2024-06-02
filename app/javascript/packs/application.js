@@ -118,3 +118,31 @@ function sidebar_display() {
 
 document.addEventListener("turbo:load",sidebar_display);
 //document.addEventListener("turbo:render", sidebar_display);
+
+
+function flash_remove() {
+  document.addEventListener("click", function(event) {
+    let state = false;
+    console.log(event.target.classList);
+    if (event.target.closest('.flash')) {
+      state = true
+      console.log(state);
+    }
+
+    if (state == true) {
+      var error= document.getElementById('error');
+      var message = document.getElementById('message');
+
+      error.classList.add("fade-up-out");
+      error.classList.remove("fade-down-in");
+
+
+      setTimeout(function() {
+        message.classList.remove("message");
+
+      }, 1000);
+    }
+  });
+};
+
+document.addEventListener("turbo:load",flash_remove);

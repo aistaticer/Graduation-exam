@@ -1,3 +1,9 @@
-- flash.each do |key, message|
-  .flash class="#{key}"
-    = message
+.error.fade-down-in id = "error"
+  - flash.each do |key, message|
+    .message id = "message"
+      .flash class="#{key}"
+        = message
+
+        .d-flex.justify-content-center
+          .i class="fa-solid fa-chevron-up"
+

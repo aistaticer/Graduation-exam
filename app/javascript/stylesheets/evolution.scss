@@ -64,6 +64,10 @@
   z-index: 500;
 }
 
+.juel:hover{
+  opacity: 0.5;
+}
+
 .text{
   animation: slideIn 3s ease-in-out;
 }
@@ -83,8 +87,9 @@
 
 .background {
   height: auto;
-  display: flex;
-  background-color: rgb(250, 228, 228)
+  border-radius: 100px;
+  background-color: rgb(250, 228, 228);
+  margin: 20px;
 }
 
 .introduce{
@@ -124,11 +129,16 @@
 .title{
   display: flex;
   align-items: center;
+  text-align: center;
   flex-direction: column;
-  width: 80vw;
-  border-bottom: 2px solid orange;
-
+  font-size: 30px;
   animation: slideIn 2s ease-in-out;
+}
+
+@media (max-width: 767px) {
+  .title{
+    font-size: 15px;
+  }
 }
 
 .link{
@@ -171,8 +181,8 @@
 
 .flame_container {
   position: relative;
-  width: 80%; /* 画面の2倍の幅 */
-  margin: 30px;
+  width: 100%; /* 画面の2倍の幅 */
+  margin: 30px 0 30px 0;
   height: auto; /* 任意の高さ */
   overflow: auto; /* スクロール可能にする */
   white-space: nowrap; /* テキストの折り返しを防ぐ */
@@ -199,8 +209,9 @@
 .appeal_letter{
   position: absolute;
   top: 0px;
-  left: 0px;
+  left: -10px;
   z-index: 1000;
+  font-weight: bold;
 }
 
 .letter_container{
@@ -213,4 +224,5 @@
   bottom: 0px;
   right: 0px;
   z-index: 1000;
+  font-weight: bold;
 }

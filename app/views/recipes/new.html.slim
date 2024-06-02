@@ -1,6 +1,6 @@
 = render 'shared/error_recipe'
 
-= form_with model: @recipe, html: { data: { turbo: false } } do |f|
+= form_with model: @recipe , local:true do |f|
 
   = hidden_field_tag :source, "new" 
 
@@ -29,7 +29,7 @@
       .margin-left.margin-top30
         p 材料
       .ingredient.margin-left id = "ingredients_form"
-        = f.select :serving, options_for_select((1..10).step(1).map { |n| [n, n] }.unshift(["何人前", nil])), {}, { class: 'ingre_form width20px' }
+        = f.select :serving, options_for_select((1..10).step(1).map { |n| [n, n] }.unshift(["何人分", nil])), {}, { class: 'ingre_form width20px' }
         .margin-top30
           = render partial: 'shared/recipe/ingredient_form', locals: {f: f}
       .d-flex.justify-content-end.width80.margin-top

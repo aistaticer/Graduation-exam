@@ -24,13 +24,15 @@ html
       = javascript_pack_tag 'copy', 'data-turbo-track': 'reload'
     - elsif @url_user_show
       = javascript_pack_tag 'user_show', 'data-turbo-track': 'reload'
-
+    - elsif  @url_recipe_edit
+      = javascript_pack_tag 'new', 'data-turbo-track': 'reload'
 
 
 	/#= javascript_importmap_tags
 
   body
     = render 'shared/always/header'
+    = render 'shared/flash_error'
       
     - if @url_recipe_new
       /#= javascript_pack_tag 'react/react_example.js', 'data-turbo-track': 'reload'
@@ -41,12 +43,13 @@ html
     
     - if user_signed_in?
       .content id = "content"
-        = render 'shared/flash_error'
         .footer.align-items-center.justify-content-center
           .header_mp.d-flex.align-items-center.justify-content-center
             = render 'shared/always/footer'
         = yield
+        = render 'shared/always/footer_3link'
     - else
       .no_signed_container id = "no_signed_container"
         .user id = "user" data-user_state = "no"
         = yield
+        = render 'shared/always/footer_3link'

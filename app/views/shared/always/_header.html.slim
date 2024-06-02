@@ -24,9 +24,9 @@
           p レシピ作成
       
       - if user_signed_in?
-         = button_to destroy_user_session_path, method: :delete, data: { turbo: false }, class: "close_header", id: "logout_action" do
-          .i class="fa-solid fa-arrow-right-from-bracket icon_color"
-          p ログアウト
+          = button_to destroy_user_session_path, method: :delete, data: { turbo: false }, class: "close_header", id: "logout_action" do
+            .i class="fa-solid fa-arrow-right-from-bracket icon_color"
+            p ログアウト
       - else
         = link_to new_user_session_path, class: "close_header" do
           .i class="fa-solid fa-arrow-right-to-bracket icon_color"

@@ -1,6 +1,6 @@
 class Recipe < ApplicationRecord
 
-  belongs_to :user
+  belongs_to :user, optional: true
 
   has_many :steps, dependent: :destroy
   has_one_attached :thumbnail, dependent: :destroy
@@ -30,7 +30,7 @@ class Recipe < ApplicationRecord
   belongs_to :genre
   belongs_to :menu
 
-  validates :user_id, :bio, :serving, presence: true
+  validates :bio, :serving, presence: true
   validates :name, length: { maximum: 25, message: "レシピ名は25文字以内で入力してください" }, presence: true
   validates :bio, length: { maximum: 255, message: "レシピ紹介文は255文字以内で入力してください" }, presence: true
   

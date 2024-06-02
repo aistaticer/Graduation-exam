@@ -1,0 +1,25 @@
+- if user_signed_in? 
+  .privacy_etc_link_container
+    .d-flex.justify-content-center.margin-top25
+      p INFOMATION
+    .privacy_etc_position.links_font.d-flex.justify-content-center
+      = link_to "利用規約" ,contact_path
+      .margin-left30
+      = link_to "プライバシーポリシー" ,privacy_policy_path
+      .margin-left30
+      p お問い合わせ
+    .d-flex.justify-content-center.links_font
+      p © 2024 evolution-recipes Copyright All Rights Reserved.
+
+- else
+  .privacy_etc_link_logout_container
+    .d-flex.justify-content-center.margin-top25
+      p INFOMATION
+    .privacy_etc_position.links_font.d-flex.justify-content-center
+      = link_to "利用規約" ,contact_path
+      .margin-left30
+      = link_to "プライバシーポリシー" ,privacy_policy_path
+      .margin-left30
+      p お問い合わせ
+    .d-flex.justify-content-center.links_font
+      p © 2024 evolution-recipes Copyright All Rights Reserved.

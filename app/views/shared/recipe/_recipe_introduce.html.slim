@@ -27,7 +27,7 @@
       = render 'shared/stamps/delicious_count', recipe: recipe
 
   .stamp_container
-    .d-flex.justify-content-end.width
+    .d-flex.justify-content-start.width
       /# いいね.
       - if recipe.user_like == true
         = render 'shared/stamps/like_delete', recipe: recipe, stamp_middle: recipe.current_user_like_id
@@ -38,6 +38,12 @@
 
     /# レシピ削除.
     - if @url_user_show == true && current_user == user
+
+      = link_to edit_recipe_path(recipe), class: "trash" do
+        .icon_center
+          <i class="fa-solid fa-pen"></i>
+          p 編集
       .margin-left
         = link_to recipe_path(recipe), class: "trash", data: { turbo_method: :delete, confirm: 'Are you sure?' }
           .i class="fa-solid fa-trash"
+    

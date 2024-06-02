@@ -1,5 +1,7 @@
 class RecipesController < ApplicationController
   before_action :custom_authenticate_user!
+  before_action :set_recipe, only: [:edit, :update]
+
   #before_action :some_action
 
   include RecipesHelper
@@ -9,10 +11,6 @@ class RecipesController < ApplicationController
     @url_recipe_index = true;
     @q = Recipe.ransack(params[:q])
     @recipes = @q.result.includes(:steps,:genre,:menu).with_attached_thumbnail.all.page(params[:page]).per(8)
-
-    #@stamp_middles = StampMiddle.all
-    #StampMiddle.liked_by_user?(@recipes,current_user.id)
-    #StampMiddle.count_like_recipe(@recipes)
 
     delicious_type = StampsType.find_by(name: "Delicious")
     like_type = StampsType.find_by(name: "Like")
@@ -40,40 +38,75 @@ class RecipesController < ApplicationController
   def create
     @recipe = Recipe.new(recipe_params_carry_up_number)
 
+    # まず、レシピを保存を試みる
+    recipe_saved = @recipe.save
+
+    custom_messages = []
+
     if params[:source] == "new"
       @url_recipe_new = true
+      process_check = true
     elsif params[:source] == "copy_and_new"
       @url_recipe_copy = true
-      
       #自分の元になったレシピを探し出している
       @before_recipe = Recipe.includes(:steps).find(@recipe.copied_recipe.before_recipe)
-
-      if check_before_recipe(@before_recipe, @recipe)
-      else
-        return
-      end
-
+      process_check = check_before_recipe(@before_recipe, @recipe)
     end
 
     @recipe.user_id = current_user.id
-    if @recipe.save
-      original_recipe_update
-      redirect_to recipe_path(@recipe), flash: { notice: 'レシピが正常に投稿されました。' }, allow_other_host: false
-    else
 
-      if params[:source] == "new"
-        render :new, status: :unprocessable_entity
+    respond_to do |format|
+      if @recipe.save && process_check
+        original_recipe_update
+        flash[:success] = "バッカもーん"
+        
+        format.html { redirect_to recipe_path(@recipe), success: "レシピを正常に作成しました" }
+        
+      else
 
-      elsif params[:source] == "copy_and_new"
-        # @recipeをcopy_and_newで定義するためエラー文を変数に代入
-        @error_messages = @recipe.errors.full_messages
-        copy_and_new
-        render :copy_and_new, status: :unprocessable_entity
+        if params[:source] == "new"
+
+          format.turbo_stream do
+            flash.now[:alert] = @recipe.errors.full_messages.join("<br>").html_safe
+            render turbo_stream: turbo_stream.replace("error", partial: "shared/flash_error")
+          end
+
+
+        elsif params[:source] == "copy_and_new"
+          # @recipeをcopy_and_newで定義するためエラー文を変数に代入
+          @error_messages = @recipe.errors.full_messages
+          logger.debug(@error_messages)
+          logger.debug(@recipe.errors.messages)
+          
+          # @recipe.saveの後だと設定したエラーメッセージが消えるから改めて設定している
+          save_after_message_set(process_check);
+          
+
+          format.turbo_stream do
+            flash.now[:alert] = @recipe.errors.full_messages.join("<br>").html_safe
+            render turbo_stream: turbo_stream.replace("error", partial: "shared/flash_error")
+          end
+
+        end
       end
     end
   end
 
   def edit
+    @url_recipe_edit = true
+  end
+
+  def update
+    respond_to do |format|
+      if @recipe.update(recipe_params_carry_up_number)
+        format.html { redirect_to recipe_path(@recipe), success: "レシピを正常に作成しました" }
+      else
+        format.turbo_stream do
+          flash.now[:alert] = @recipe.errors.full_messages.join("<br>").html_safe
+          render turbo_stream: turbo_stream.replace("error", partial: "shared/flash_error")
+        end
+      end
+    end
   end
 
   def destroy
@@ -175,6 +208,10 @@ class RecipesController < ApplicationController
 
   private
 
+  def set_recipe
+    @recipe = @recipe = Recipe.includes(:user, :steps,:ingredients,:menu,:genre).find(params[:id])
+  end
+
   def making(name, steps)
     # 最初に料理名を含む文字列を用意する
     result = "料理名:#{name}。作り方"
@@ -239,17 +276,21 @@ class RecipesController < ApplicationController
 
   def check_before_recipe(before_recipe,recipe)
     recipe_processes = [];
+    custom_messages = [];
     before_processes = before_recipe.steps.pluck(:process)
     @recipe.steps.each do |step|
       recipe_processes << step.process
     end
 
     if before_processes == recipe_processes
-      flash.now[:alert] = "作り方が完全に一致しています。一部変更してください"
-      render :new
       return false
-    else 
-      return true
+    end
+    true
+  end
+
+  def save_after_message_set(process_check)
+    if(process_check == false)
+      @recipe.errors.add(:base, "作り方が完全に一致しています。一部変更してください")
     end
   end
 end

@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :log_flash_messages
+  before_action :check_admin, only: [:create]
 
 	def custom_authenticate_user!
     if !user_signed_in? && request.path != new_user_registration_path
@@ -35,6 +36,12 @@ class ApplicationController < ActionController::Base
   def log_flash_messages
     flash.each do |key, message|
       Rails.logger.info "Flash message - #{key}: #{message}"
+    end
+  end
+
+  def check_admin
+    if current_user&.admin?
+      redirect_to admin_dashboard_path
     end
   end
 

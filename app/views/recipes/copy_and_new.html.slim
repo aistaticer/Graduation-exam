@@ -1,10 +1,5 @@
-/# エラー文が存在しない場合空の@error_messagesを定義
-- if defined?(@error_messages) == false
-  - @error_messages = []
 
-= render partial: 'shared/error_recipe_copy', locals: {recipe: @error_messages}
-
-= form_with model: @copied_recipe,  html: { data: { turbo: false } }  do |f|
+= form_with model: @copied_recipe, local:true do |f|
   = hidden_field_tag :source, "copy_and_new"
   = hidden_field_tag :recipe_id, params[:recipe_id]
   .new_container.new_back
@@ -30,7 +25,7 @@
           = f.file_field :thumbnail, id: 'fileInput', style: 'display: none;'
 
       .ingredient.margin-left.margin-top30 id = "ingredients_form"
-        = f.select :serving, options_for_select((1..10).step(1).map { |n| [n, n] }.unshift(["何人前", nil])), {}, { class: 'ingre_form width20px　custom-select-container' }
+        = f.select :serving, options_for_select((1..10).step(1).map { |n| [n, n] }.unshift(["何人分", nil]), f.object.serving), {}, { class: 'ingre_form width20px' }
         .margin-top30
           = render partial: 'shared/recipe/ingredient_form', locals: {f: f}
 
@@ -96,6 +91,3 @@
 
 /# jsでレシピの手順と名前が見れるようにする
 .step id = "steps" data-steps = @steps_array data-recipe_name = @recipe_name
-
-
-

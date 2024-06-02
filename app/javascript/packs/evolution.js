@@ -15,8 +15,6 @@ function evolution_figure(){
 
 
   flame.style.width = recipe_power.length * 60 +500 + "px";
-  console.log(recipe_power.count)
-
 
   document.body.addEventListener('click', function(e) {
     if(!e.target.closest('.juel') && introduce_state == true)  {
@@ -32,17 +30,26 @@ function evolution_figure(){
     juel2[i] = document.getElementById(`${recipe_id[i]}`);
     juel2[i].style.position = 'absolute';
     juel2[i].style.left = i*60 + 'px';
-    juel2[i].style.top = - recipe_power[i] * 10 + flame.offsetHeight/2 + 'px';
+    if(recipe_power[i]> 29){
+      recipe_power[i] = 29
+    }
+
+    console.log(recipe_power[i] * 150)
+    juel2[i].style.top = - recipe_power[i] * 10 + flame.offsetHeight - 30 + 'px';
 
     introduce[i] = document.getElementById(`introduce_${recipe_id[i]}`);
     introduce[i].style.position = 'absolute';
     introduce[i].style.left = i*60 + 30 + "px";
-    introduce[i].style.top = - recipe_power[i] * 10 + flame.offsetHeight/2 - 90+ 'px';
+    introduce[i].style.top = - recipe_power[i] * 10 + flame.offsetHeight - 120+ 'px';
   
     juel2[i].addEventListener('click', function(event) {
-      introduce[i].classList.toggle('hide');
-      introduce_state = true;
-      introduce_number = i;
+      console.log(introduce_state)
+      if(introduce_state == false){
+        console.log(111)
+        introduce[i].classList.toggle('hide');
+        introduce_state = true;
+        introduce_number = i;
+      }
     })
   }
 }
