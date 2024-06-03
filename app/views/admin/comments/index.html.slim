@@ -1,0 +1,8 @@
+- @users.each do |user|
+  .comment_user
+    .comment_user_name
+      p 投稿主:#{user.name}
+    - user.comments.each do |comment|
+      = comment.body
+      = link_to '削除', admin_comment_path(comment), data: { turbo_method: :delete} 
+      br

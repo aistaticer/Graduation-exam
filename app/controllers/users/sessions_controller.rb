@@ -2,7 +2,13 @@
 
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
+  before_action :check_admin_to_links, only: [:create]
 
+  def check_admin_to_links
+    if current_user&.admin?
+      redirect_to admin_dashboard_path
+    end
+  end
   # GET /resource/sign_in
   # def new
   #   super

@@ -31,11 +31,11 @@ Rails.application.routes.draw do
   namespace :admin do
     get 'dashboard', to: 'dashboard#index'
 
-    resources :recipes do
-      resources :comments, only: [:index,:destroy]
-    end
+    resources :recipes
 
     resources :users
+
+    resources :comments, only: [:index,:destroy]
   end
 
 end

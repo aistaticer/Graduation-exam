@@ -1,0 +1,8 @@
+.wrap
+  - @users.each do |user|
+    .d-flex
+      .user_close
+        .d-flex.icon_center
+          = user.name
+          .margin-left
+            = button_to '削除' , admin_user_path(user), method: :delete, data: { turbo: false }, class: "user_trash"

@@ -67,6 +67,14 @@
           .close_margin
             .i class="fa-regular fa-user icon_color_side"
           p ユーザー設定
+
+    - if current_user.admin?
+      .d-flex-end
+        = link_to admin_dashboard_path, class: "bottom_border_erase" do
+          .close_side id = ""
+            .close_margin
+              .i class="fa-regular fa-user icon_color_side"
+            p 管理画面
 - else
 
   = render "shared/always/sidebar_ph"

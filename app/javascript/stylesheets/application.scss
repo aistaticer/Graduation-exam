@@ -853,3 +853,46 @@ h2:after {
   }
 }
 
+//管理画面
+
+.user_trash{
+  border-radius: 5px;
+  border: 1px solid #c6baac;; /* ボーダーを消す */
+  background: none; /* バックグラウンドを消す */
+  padding: 10px; /* パディングを消す */
+  color: inherit; /* テキストカラーを継承する */
+  cursor: pointer; /* カーソルをポインターにする */
+  text-decoration: none;
+
+}
+
+.user_trash:hover{
+  background-color: #c6baac;
+  z-index: 10;
+}
+
+.user_close{
+  width: auto;
+  background-color: #d8cfc6;
+  margin: 10px;
+  padding: 10px
+}
+
+.wrap{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.comment_user{
+  background-color: #cbc0b4;
+  width: 90%;
+  padding: 10px;
+  margin:10px;
+  word-wrap: break-word; 
+
+}
+
+.comment_user_name{
+  margin-bottom: 20px;
+}
+
