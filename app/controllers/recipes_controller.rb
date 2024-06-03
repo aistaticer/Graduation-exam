@@ -58,9 +58,12 @@ class RecipesController < ApplicationController
     respond_to do |format|
       if @recipe.save && process_check
         original_recipe_update
-        flash[:success] = "バッカもーん"
-        
-        format.html { redirect_to recipe_path(@recipe), success: "レシピを正常に作成しました" }
+        flash[:notice] = "レシピを正常に作成しました"
+        format.turbo_stream do
+          # turboだと二つのリクエストが出てフラッシュメッセージが消える。だからscrptによって強制的に遷移させてる
+          render turbo_stream: turbo_stream.replace("error", "<script>window.location = '#{recipe_path(@recipe)}';</script>")
+        end
+        #format.html { redirect_to recipe_path(@recipe)}
         
       else
 
@@ -81,7 +84,6 @@ class RecipesController < ApplicationController
           # @recipe.saveの後だと設定したエラーメッセージが消えるから改めて設定している
           save_after_message_set(process_check);
           
-
           format.turbo_stream do
             flash.now[:alert] = @recipe.errors.full_messages.join("<br>").html_safe
             render turbo_stream: turbo_stream.replace("error", partial: "shared/flash_error")

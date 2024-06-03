@@ -4,6 +4,8 @@ import "@hotwired/turbo-rails"
 import "bootstrap"
 import "../stylesheets/application.scss"
 import "../stylesheets/sidebar.scss"
+
+
 //import Swiper from 'swiper';
 //import 'swiper/swiper-bundle.css';
 
@@ -56,9 +58,9 @@ document.addEventListener("turbo:load", () => {
 
   //userStateViaAttribute=yesならログインしている
   if (userStateViaAttribute == "no"){
-    import("./user_new_up.js").then(module => {
+    //import("./user_new_up.js").then(module => {
       // モジュールの使用
-    });
+    //});
     return
   }
 
@@ -98,6 +100,7 @@ function sidebar_display() {
   const x = document.getElementById('x');
   const user = document.getElementById('user');
   const login_state = user.getAttribute('data-user_state');
+
   if (login_state == "no"){
     const no_signed_container = document.getElementById('no_signed_container');
   }

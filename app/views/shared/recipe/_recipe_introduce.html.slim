@@ -12,10 +12,9 @@
   .recipe_bio
     = recipe.bio
 
-  .d-flex
-    = recipe.genre.name
-    br
-    = recipe.menu.name
+  .menu_etc_font
+    p ジャンル: #{recipe.genre.name}
+    p メニュー:  #{recipe.menu.name}
 
   .d-flex
     /# 美味しそうスタンプ

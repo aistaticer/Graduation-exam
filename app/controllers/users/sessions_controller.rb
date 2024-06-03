@@ -9,6 +9,11 @@ class Users::SessionsController < Devise::SessionsController
       redirect_to admin_dashboard_path
     end
   end
+
+  def new
+    @url_sign_in = true
+    super
+  end
   # GET /resource/sign_in
   # def new
   #   super

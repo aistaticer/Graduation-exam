@@ -200,6 +200,11 @@ body {
   }
 }
 
+.menu_etc_font{
+  font-size: 10px;
+  padding: 10px;
+}
+
 .ranking-container {
   width: 90%;
   overflow: hidden;
@@ -213,7 +218,6 @@ body {
   cursor: grab;
 }
 
-/* 親要素に position: relative を設定 */
 .parent-element {
   position: relative;
 }

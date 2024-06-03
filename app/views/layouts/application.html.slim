@@ -26,9 +26,8 @@ html
       = javascript_pack_tag 'user_show', 'data-turbo-track': 'reload'
     - elsif  @url_recipe_edit
       = javascript_pack_tag 'new', 'data-turbo-track': 'reload'
-
-
-	/#= javascript_importmap_tags
+    -elsif @url_sign_in
+      = javascript_pack_tag 'user_new_up', 'data-turbo-track': 'reload'
 
   body
     = render 'shared/always/header'
