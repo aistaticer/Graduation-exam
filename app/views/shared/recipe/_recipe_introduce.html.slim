@@ -17,7 +17,7 @@
     br
     = recipe.menu.name
 
-  .d-flex.width
+  .d-flex
     /# 美味しそうスタンプ
     - if recipe.user_delicious == true
       = render 'shared/stamps/delicious_delete', recipe: recipe, stamp_middle: recipe.current_user_delicious_id

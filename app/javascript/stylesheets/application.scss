@@ -180,9 +180,10 @@ body {
   //margin: 2em 0;
   margin: 10px auto;
   padding: 20px 20px 40px 20px;
-  border: solid 1px #ffb15e;
+  border-radius: 5px;
+
   background: #faf2f2;
-  box-shadow: 2px 2px 10px #c1874d, -2px 2px 10px #c1874d, 2px -2px 10px #c1874d, -2px -2px 10px #c1874d;
+  box-shadow: 4px 4px 10px #555252;
   width: 220px;
   height: auto;
 }
@@ -190,11 +191,9 @@ body {
 @media (max-width: 768px) {
   .recipe_card {
     position: relative;
-    //margin: 2em 0;
-    //margin: 10px auto;
-    border: solid 1px #ffb15e;
+    border-radius: 5px;
     background: #faf2f2;
-    box-shadow: 2px 2px 10px #c1874d, -2px 2px 10px #c1874d, 2px -2px 10px #c1874d, -2px -2px 10px #c1874d;
+    box-shadow: 4px 4px 10px #555252;
     max-width: 100%;
     height: auto;
     padding: 20px 20px 40px 20px;
