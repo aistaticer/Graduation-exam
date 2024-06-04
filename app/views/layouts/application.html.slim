@@ -30,25 +30,26 @@ html
       = javascript_pack_tag 'user_new_up', 'data-turbo-track': 'reload'
 
   body
-    = render 'shared/always/header'
-    = render 'shared/flash_error'
+    .font_set
+      = render 'shared/always/header'
+      = render 'shared/flash_error'
+        
+      - if @url_recipe_new
+        /#= javascript_pack_tag 'react/react_example.js', 'data-turbo-track': 'reload'
+      - elsif @url_recipe_show
+        /#= javascript_pack_tag 'react/react_show.js', 'data-turbo-track': 'reload'
+      - elsif @url_recipe_evolution
+        = javascript_pack_tag 'react/react_evolution', 'data-turbo-track': 'reload'
       
-    - if @url_recipe_new
-      /#= javascript_pack_tag 'react/react_example.js', 'data-turbo-track': 'reload'
-    - elsif @url_recipe_show
-      /#= javascript_pack_tag 'react/react_show.js', 'data-turbo-track': 'reload'
-    - elsif @url_recipe_evolution
-      = javascript_pack_tag 'react/react_evolution', 'data-turbo-track': 'reload'
-    
-    - if user_signed_in?
-      .content id = "content"
-        .footer.align-items-center.justify-content-center
-          .header_mp.d-flex.align-items-center.justify-content-center
-            = render 'shared/always/footer'
-        = yield
-        = render 'shared/always/footer_3link'
-    - else
-      .no_signed_container id = "no_signed_container"
-        .user id = "user" data-user_state = "no"
-        = yield
-        = render 'shared/always/footer_3link'
+      - if user_signed_in?
+        .content id = "content"
+          .footer.align-items-center.justify-content-center
+            .header_mp.d-flex.align-items-center.justify-content-center
+              = render 'shared/always/footer'
+          = yield
+          = render 'shared/always/footer_3link'
+      - else
+        .no_signed_container id = "no_signed_container"
+          = yield
+          .user id = "user" data-user_state = "no"
+          = render 'shared/always/footer_3link'

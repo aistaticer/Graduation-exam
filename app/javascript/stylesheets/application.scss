@@ -7,9 +7,12 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 @import '~bootstrap/scss/bootstrap';
 @import 'swiper/swiper-bundle';
 
-
 body {
-  font-family: serif, sans-serif;
+  //font-family: serif, sans-serif;
+}
+
+.font_set{
+  font-family: serif;
 }
 
 .admin{

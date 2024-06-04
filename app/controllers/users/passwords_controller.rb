@@ -2,9 +2,15 @@
 
 class Users::PasswordsController < Devise::PasswordsController
   # GET /resource/password/new
-  # def new
-  #   super
-  # end
+   def new
+    @url_sign_in = true
+    super
+   end
+
+   def edit
+    @url_sign_in = true
+    super
+   end
 
   # POST /resource/password
   # def create

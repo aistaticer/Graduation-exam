@@ -1,0 +1,26 @@
+.d-flex.justify-content-center
+  .passward_reset
+    .d-flex.justify-content-center
+      .passward_title
+        p パスワード変更
+
+    = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :put }, data: { turbo: false }) do |f|
+      = render "users/shared/error_messages", resource: resource
+      = f.hidden_field :reset_password_token
+
+      .d-flex.justify-content-center
+        .set
+          .d-flex.margin-top25
+            p 新しいパスワード
+            - if @minimum_password_length
+              p （#{@minimum_password_length}文字以上）
+          = f.password_field :password, autofocus: true, autocomplete: "new-password", class: "form-edit"
+
+      .d-flex.justify-content-center
+        .set
+          .d-flex.margin-top25
+            p 新しいパスワードの再入力
+          = f.password_field :password_confirmation, autocomplete: "new-password", class: "form-edit"
+    
+      .d-flex.justify-content-center
+        = f.submit "パスワード変更", class: "submit"

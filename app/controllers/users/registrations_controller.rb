@@ -4,6 +4,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
 	before_action :configure_permitted_parameters, if: :devise_controller?
   #before_action :custom_authenticate_user!
 
+
+  def new
+    @url_sign_in = true
+    super
+  end
+
   def destroy
     resource.destroy
     Devise.sign_out_all_scopes ? sign_out : sign_out(resource_name)

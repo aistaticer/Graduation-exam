@@ -241,6 +241,61 @@ p{
   }
 }
 
+//パスワードリセット画面
+
+.passward_title{
+  font-size: 20px;
+}
+
+.passward_reset{
+  margin-top: 100px;
+  border-radius: 5px;
+  background-color: white;
+  width: 400px;
+  height: 300px;
+}
+
+.form{
+  border-radius: 5px;
+  padding: 5%;
+  border: 1px solid rgb(135, 130, 130);
+  margin-top: 25px;
+  width: 100%;
+  height: 30px;
+}
+
+.form-edit{
+  border-radius: 5px;
+  padding: 5%;
+  border: 2px solid rgb(135, 130, 130);
+  width: 100%;
+  height: 30px;
+}
+
+.set{
+  width: 80%;
+}
+
+.submit{
+  border: none;
+  background-color: antiquewhite;
+  border-radius: 5px;
+  margin-top: 25px;
+  width: 80%;
+  height: 30px;
+}
+
+.submit:hover{
+  background-color: rgb(219, 205, 186);
+}
+
+.submit:active{
+  background-color: rgb(183, 172, 155);
+}
+
+.width250{
+  width: 250px;
+}
 
 
 

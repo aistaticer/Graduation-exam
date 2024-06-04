@@ -5,6 +5,9 @@ ja:
       invalid: "ログインできませんでした"
     passwords:
       send_instructions: "パスワードリセットの指示を送信しました"
+      updated: "パスワードが正常に更新されました"
+      updated_not_active: "パスワードが正常に更新されました。しかし、アカウントはまだ有効化されていません"
+      send_paranoid_instructions: "もしアカウントが存在する場合、パスワードリセットの指示が送信されます"
     mailer:
       reset_password_instructions:
         subject: "パスワードリセットのご案内"
@@ -13,6 +16,10 @@ ja:
     sessions:
       signed_in: ログインに成功しました
       signed_out: "ログアウトしました"
+      already_signed_in: "既にログインしています"
+      already_signed_out: "既にログアウトしています"
+    failure:
+      already_authenticated: "既にログインしています。新しいセッションを開始するには、一度ログアウトしてください。"
 
   errors:
     format: "%{attribute}%{message}"

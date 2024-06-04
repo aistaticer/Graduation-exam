@@ -1,0 +1,14 @@
+.d-flex.justify-content-center
+  .passward_reset
+    .d-flex.justify-content-center.margin-top25
+      p パスワードリセット
+
+    .d-flex.justify-content-center
+      .width250
+        = form_for(resource, as: resource_name, url: password_path(resource_name), html: { method: :post }) do |f|
+          = render "devise/shared/error_messages", resource: resource
+
+          = f.email_field :email, autofocus: true, autocomplete: "email", class: "form", placeholder: "メールアドレス" 
+
+          .d-flex.justify-content-center
+            = f.submit "送信", class: "submit"
