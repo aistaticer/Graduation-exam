@@ -2,12 +2,16 @@ document.addEventListener("DOMContentLoaded", function(){
 	console.log("copy.js");
 })
 
-document.addEventListener('DOMContentLoaded', (event) => {
+document.addEventListener('DOMContentLoaded', () => {
   var stepElement = document.getElementById("steps");
   var steps = JSON.parse(stepElement.dataset.steps);
   var name = JSON.parse(stepElement.dataset.recipe_name);
 
   document.getElementById("askOpenAI").addEventListener("click", function() {
+    // 出力中のメッセージを表示
+    var resultElement = document.getElementById('result');
+    resultElement.innerHTML = "出力中...";
+
     fetch('/path_to_your_action', {
       method: 'POST',
       headers: {
@@ -22,8 +26,8 @@ document.addEventListener('DOMContentLoaded', (event) => {
     })
     .then(response => response.json())
     .then(data => {
-      document.getElementById('result').classList.add('margin');
-      document.getElementById('result').innerHTML = data.content; // 結果を表示する要素のIDに置き換える
+      resultElement.classList.add('margin');
+      resultElement.innerHTML = data.content; // 結果を表示する要素のIDに置き換える
     });
   });
 });

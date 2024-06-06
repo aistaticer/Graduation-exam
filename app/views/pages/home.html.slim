@@ -1,64 +1,71 @@
 .user_container
-  .explanation_title.text-center
-    .margin-top25
-      p サイトの目的
+  .text-center.margin-top25
+    p Evolution Recipes
 
   .text-center.margin-top25
-    p 自分にとって最高のレシピを見つけ、作り出し、共有すること
+    p Evolution Recipesは　レシピを共有、進化させることが目的のサービスです
   
-  .title.text-center.margin-top25
-    p 活用方法
+  .text-center.margin-top25
+    p 主な機能
+
+  .d-flex.justify-content-center.wrap.margin-top25
+   
+    .ability_close id = "account"
+      p アカウント登録
+    
+    .ability_close id = "recipe_index"
+      p レシピ一覧
+    .ability_close id = "copy"
+      p レシピコピー
+    .ability_close id = "ai"
+      p AIの助言
+    .ability_close id = "history"
+      p 進化の歴史
+
+  .content_introduce id = "account_introduce"
+    .gif_position.margin-top25.introduce_title
+      p アカウント登録
+    .gif_position.margin-top25
+      p Googleアカウントで登録可能
+    .gif_position.margin-top25
+      = image_tag "account.gif", class: "gif_size"
+  
+  .content_introduce id = "index_introduce"
+    .gif_position.margin-top25.introduce_title
+      p レシピ一覧
+    .gif_position.margin-top25
+      p 新着レシピをチェックできる
+    .gif_position.margin-top25
+      = image_tag "index.gif", class: "gif_size"
+  
+  .content_introduce id = "copy_introduce"
+    .gif_position.margin-top25.introduce_title
+      p レシピコピー
+    .gif_position.margin-top25
+      p 既存のレシピをコピーできる
+    .gif_position.margin-top25
+      = image_tag "copy.gif", class: "gif_size"
+
+  .content_introduce id = "ai_introduce"
+    .gif_position.margin-top25.introduce_title
+      p AIによる助言
+    .gif_position.margin-top25
+      p コピーするレシピの改善案を答えてくれる
+    .gif_position.margin-top25
+      = image_tag "ai.gif", class: "gif_size"
+  
+  .content_introduce id = "history_introduce"
+    .gif_position.margin-top25.introduce_title
+      p レシピの歴史
+    .gif_position.margin-top25
+      p レシピの変遷を確認できる
+    .gif_position.margin-top25
+      = image_tag "history.gif", class: "gif_size"
 
 
-  .explanation
-    .text-center.explanation_title
-      p レシピの発見はこちらから
+  .reject id = "reject"
 
-    .d-flex.justify-content-center
-      = image_tag 'index.png', class:"top_images"
 
-    .text-center.margin-top25
-      p レシピ一覧から新着レシピが確認できます。検索も可能です
 
-  .margin-top25
-    .explanation
-      .text-center.explanation_title
-        p より良きレシピを思いついたらこちらからコピーして共有ください
 
-      .d-flex.justify-content-center
-        = image_tag 'copy.png', class:"top_images"
 
-      .text-center.margin-top25
-        p レシピ詳細画面からcopyのリンクをクリック。レシピコピー作成画面に移動します。
-
-  .margin-top25
-    .explanation
-      .text-center.explanation_title
-        p インスピレーションが欲しくなったら
-
-      .d-flex.justify-content-center
-        = image_tag 'ai.png', class:"top_images"
-      
-      .text-center.margin-top25
-        p レシピコピー作成画面からAIの改善案がもらえます。今まで考えたこともない改善案が出力されるかもしれません
-
-  .margin-top25
-    .explanation
-      .text-center.explanation_title
-        p レシピの変遷を知りたい場合はこちらへ
-      
-      .d-flex.justify-content-center
-        = image_tag 'copy.png', class:"top_images"
-
-      .d-flex.justify-content-center.margin40
-        .i class="fa-solid fa-arrow-down" style="font-size: 4em;"
-      
-      .d-flex.justify-content-center
-        = image_tag 'evolution.png', class:"top_images"
-
-      .text-center.margin-top25
-        p レシピ詳細画面からevolutionのリンクをクリック。レシピの進化した歴史が表示されます
-
-  .explanation
-    .text-center.margin-top25
-      p いいね機能も搭載されているので、お気に入りのレシピはいいねして保存、見返しましょう

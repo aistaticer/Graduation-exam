@@ -28,7 +28,7 @@
               p 必須
 
         .margin_auto 
-          = f.text_field :name, autofocus: true, autocomplete: "name", class: "width300"
+          = f.text_field :name, autofocus: true, autocomplete: "name", class: "width300 form"
         
         .margin_auto.font_serif
           p 画像
@@ -37,7 +37,7 @@
         .margin_auto.margin-top25
             p 紹介文
         .margin_auto.padding2_5 
-          = f.text_area :bio, autofocus: true, autocomplete: "bio", class: "width300"
+          = f.text_area :bio, autofocus: true, autocomplete: "bio", class: "width300 form introduce_height"
         
         .margin_auto.margin-top25
           .d-flex.font_serif
@@ -45,7 +45,7 @@
             .caution
               p 必須
         .margin_auto 
-          = f.email_field :email, autocomplete: "email", class: "width300"
+          = f.email_field :email, autocomplete: "email", class: "width300 form"
         
         .margin_auto.margin-top25
           .d-flex.font_serif
@@ -53,16 +53,29 @@
             .caution
                 p 必須
           
-          = f.password_field :password, autocomplete: "new-password", class: "width300"
+          = f.password_field :password, autocomplete: "new-password", class: "width300 form"
         .margin_auto
           .d-flex.font_serif
             p パスワード確認
             .caution
               p 必須
         .margin_auto
-          = f.password_field :password_confirmation, autocomplete: "new-password", class: "width300"
+          = f.password_field :password_confirmation, autocomplete: "new-password", class: "width300 form"
         .d-flex.justify-content-end.margin-top25
           = f.submit "登録する", class: "sign_upButton sign_upButton2"
+        
+        .d-flex.justify-content-center.margin-top25
+          p もしくは
+
+        .d-flex.justify-content-center
+          .google
+            .effect1
+            .effect2
+            .effect3
+            .effect4
+            .d-flex.justify-content-center
+              = link_to 'Googleアカウントによるログイン', user_google_oauth2_omniauth_authorize_path, method: :post, class: "googleButton"
+        
         .d-flex.justify-content-center.margin-top25
           - if controller_name != 'sessions'
             .font_serif.text-center

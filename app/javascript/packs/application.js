@@ -126,7 +126,7 @@ document.addEventListener("turbo:load",sidebar_display);
 function flash_remove() {
   document.addEventListener("click", function(event) {
     let state = false;
-    console.log(event.target.classList);
+    
     if (event.target.closest('.flash')) {
       state = true
       console.log(state);
@@ -149,3 +149,54 @@ function flash_remove() {
 };
 
 document.addEventListener("turbo:load",flash_remove);
+
+function top_select() {
+  const account = document.getElementById('account_introduce');
+  const index = document.getElementById('index_introduce');
+  const copy = document.getElementById('copy_introduce');
+  const history = document.getElementById('history_introduce');
+  const ai = document.getElementById('ai_introduce');
+  
+  //const reject = document.getElementById('reject');
+  var select;
+  document.addEventListener("click", function(event) {
+    let targetElement = event.target;
+    // ability_close クラスを持つ親要素を探す
+    while (targetElement && !targetElement.classList.contains('ability_close') && !targetElement.classList.contains('content_introduce')) {
+      targetElement = targetElement.parentElement;
+    }
+
+    if(targetElement){
+      if(targetElement.id == "account"){
+        select = account
+      }else if(targetElement.id == "recipe_index"){
+        select = index
+      }else if(targetElement.id == "copy"){
+        select = copy
+      }else if(targetElement.id == "history"){
+        select = history
+      }else if(targetElement.id == "ai"){
+        select = ai
+      }
+    }
+
+    console.log(targetElement)
+    console.log(event.target)
+
+    select.style.display = (!targetElement || 
+      (targetElement.className != "ability_close" && targetElement.className != "content_introduce"))
+     ? "none"
+     : "block";
+
+    reject.style.display = (!targetElement || 
+      (targetElement.className != "ability_close" && targetElement.className != "content_introduce"))
+     ? "none"
+     : "block";
+
+  })
+}
+
+document.addEventListener("turbo:load",top_select);
+
+
+
