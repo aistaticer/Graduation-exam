@@ -87,14 +87,13 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
 
 .content {
   position: relative;
+  
   padding-top: 45px;
   padding-left: 150px;
   padding-bottom: 150px;
   width: 100%;
   background-color: rgb(245, 238, 224);
   min-height: 100vh;
-
-
 }
 
 @media (max-width: 767px) {
@@ -1008,4 +1007,12 @@ h2:after {
 
 .wrap{
   flex-wrap: wrap;
+}
+
+.bold{
+  font-weight: bold;
+}
+
+.direction{
+  margin-left: 20px;
 }

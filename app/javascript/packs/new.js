@@ -11,70 +11,78 @@ function addformEventListener() {
   const form = document.querySelector('form[action^="/recipes"]');
   const addformButton = document.getElementById('addformButton');
   const submit = document.getElementById('submit');
+  const process = document.getElementById('process');
   let process_number = document.querySelectorAll('.form-control.form-control-custom').length;
-  console.log(process_number);
 
   addformButton.addEventListener('click', function(e) {
-    //e.preventDefault(); // ページのリロードを防ぐ
-    console.log(process_number)
+
     process_number++;
     const newField = document.createElement('div'); // 新しいフォーム要素のコンテナ
 
-
     newField.innerHTML = `
-      <div = class = "form margin-top margin-left">
-        <div class = "d-flex width80">
+      <div = class = "margin-top">
+        <div class = "d-flex height40">
           <div class = "number">    
             ${process_number}
           </div>
           <input type="hidden" name="recipe[steps_attributes][${process_number}][number]" value="${process_number}">
-          <textarea name="recipe[steps_attributes][${process_number}][process]" placeholder="ここにテキストを入力してください" class="form-control"></textarea>
+          <textarea name="recipe[steps_attributes][${process_number}][process]" placeholder="作り方を入力してください" class="form-control form-control-custom height40"></textarea>
         </div>
       </div>
     `;
-    step.insertBefore(newField, addformButton);
+
+    document.getElementById('process_form').appendChild(newField);
     addformButton.scrollIntoView();
+    initializeTextarea()
   });
 }
 
 document.addEventListener("turbo:load", addformEventListener);
-document.addEventListener("turbo:render", addformEventListener);
 
 function addingre_form(){
   let process_number = 0;
   const addingreformButton = document.getElementById('addingreformButton'); // ボタンのIDがこれだと仮定
+  
   addingreformButton.addEventListener('click', function(e) {
     e.preventDefault(); // ボタンのデフォルトの動作を防ぐ
     process_number++; // フォームを追加するたびに数を増やす
 
     const newField = document.createElement('div'); // 新しいフォーム要素のコンテナ
-    newField.className = "d-flex margin-top";
+    newField.className = "d-flex";
     newField.innerHTML = `
-        <textarea name="recipe[ingredients_attributes][${process_number}][name]" placeholder="材料名" class="ingre_form"></textarea>
-        <textarea name="recipe[ingredients_attributes][${process_number}][quantity]" placeholder="量 50ccなど" class="ingre_form margin-left"></textarea>
+        <textarea name="recipe[ingredients_attributes][${process_number}][name]" placeholder="材料名" class="ingre_form width200"></textarea>
+        <textarea name="recipe[ingredients_attributes][${process_number}][quantity]" placeholder="量 50ccなど" class="ingre_form width200 margin-left"></textarea>
     `;
 
     // フォームを追加する場所を指定する。例えば、idが`formContainer`の要素の中に追加。
     document.getElementById('ingredients_form').appendChild(newField);
-    addingreformButton.scrollIntoView();
+    
+    scrollToElementWithOffset('uso', 150);
+    //addingreformButton.scrollIntoView();
+    initializeTextarea()
   });
 }
 
 document.addEventListener("turbo:load", addingre_form);
-document.addEventListener("turbo:render", addingre_form);
+
+function scrollToElementWithOffset(elementId, offset) {
+  const element = document.getElementById(elementId);
+  if (element) {
+    element.scrollIntoView(true); // 要素の上部までスクロール
+    window.scrollBy(0, -offset); // オフセットを追加
+  }
+}
+
 
 
 document.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById('fileInput').addEventListener('change', function() {
-    console.log("aaa");
-    // 以下、ファイル選択後の処理。
   });
 });
 
 function imagepreview(){
   $('#fileInput').change(function() {
 
-    console.log("画像きた");
     // ファイル情報を取得
     var file = this.files[0];
     
@@ -102,7 +110,6 @@ function imagepreview(){
 };
 
 document.addEventListener("turbo:load", imagepreview);
-document.addEventListener("turbo:render", imagepreview);
 
 $(document).ready(function() {
   $('#category').select2();
@@ -117,7 +124,6 @@ function imageclick(){
 }
 
 document.addEventListener("turbo:load", imageclick);
-document.addEventListener("turbo:render", imageclick);
 
 function initializeTextarea() {
   $('textarea').each(function () {
@@ -125,7 +131,6 @@ function initializeTextarea() {
     this.style.height = (this.scrollHeight) + 'px';
     this.baseScrollHeight = this.scrollHeight;
   }).off('input').on('input', function () {
-    //this.style.height = 'auto';
     if (this.scrollHeight > this.baseScrollHeight) {
       this.style.height = (this.scrollHeight) + 'px';
     }
@@ -133,7 +138,121 @@ function initializeTextarea() {
 }
 
 document.addEventListener("turbo:load", initializeTextarea);
-document.addEventListener("turbo:render", initializeTextarea);
 
+function stepform() {
 
+  let targetElement;
+  let number = 0;
+  let judge;
+  const new_container = document.getElementById('new_container');
+  const move_button = document.getElementById('move_button');
+  const process = document.getElementById('step_form_number6');
+
+  document.addEventListener("click", function(e) {
+
+    // 次へのボタンが押されたらtrue,前へならfalseを返す
+    judge = move_botton(e)
+
+    targetElement = e.target;
+    while (targetElement && !targetElement.classList.contains('move')) {
+      targetElement = targetElement.parentElement;
+    }
+
+    switch (judge) {
+      case 'advance':
+        number = number+1
+        if(number > 7){
+          number = 7;
+        }
+        break;
+      case 'back':
+        number = number-1
+        if(number < 1){
+          number = 1;
+        }
+        break;
+    }
+
+    // 次へもしくは前へボタンを押してたら
+    if(judge){
+      for (let i = 0; i <= 7; i++) {
+        const direction = document.getElementById('direction' + i);
+        const step_form = document.getElementById('step_form_number' + i);
+        const now_content = document.getElementById('now_content' + i);
+        if (direction) {
+          if (i == number) {
+
+            new_container.style.display = 'block';
+            direction.classList.remove('none');
+            step_form.classList.remove('none');
+            step_form.classList.remove('margin-top25');     
+            
+            now_content.classList.add('now_content');
+
+            if(number == 7){
+              if (window.innerWidth >= 768) {
+                var newContainer = document.getElementById('new_container'); // new_containerの取得方法を確認してね
+                newContainer.style.display = 'flex';
+              }
+              new_container.classList.remove('margin-left');
+              new_container.classList.remove('margin-top');
+              new_container.classList.add('new_back');
+
+              move_button.classList.add('none');
+
+              process.style.height = "auto"
+
+              for(let num = 0; num <= 7; num++){
+                const step_form = document.getElementById('step_form_number' + num);
+                step_form.classList.add('margin-top25');     
+                step_form.classList.remove('none');
+              }
+            }
+
+          } else {
+            direction.classList.add('none');
+            step_form.classList.add('none');
+            now_content.classList.remove('now_content');
+          }
+
+        }
+      }
+    }
+  })
+
+  document.querySelectorAll('.new_back').forEach(el => {
+    console.log(el.id);
+  });
+}
+
+function move_botton(e){
+
+  let move_botton;
+  let result;
+
+  move_botton = e.target;
+  while (move_botton && !move_botton.classList.contains('advance') && !move_botton.classList.contains('back')) {
+    move_botton = move_botton.parentElement;
+  }
+
+  if(move_botton){
+    switch (move_botton.id) {
+      case 'advance':
+        result = 'advance';
+        break;
+      case 'back':
+        result = 'back';
+        break;
+    }
+  }
+
+  return result;
+}
+
+function progress_ratio (pieces,number){
+  pieces = 7
+  number = 1;
+}
+
+document.addEventListener("turbo:load", stepform);
 

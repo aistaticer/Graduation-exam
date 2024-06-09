@@ -1,0 +1,14 @@
+.example
+  .ingredient id = "ingredients_form"
+
+
+    p 材料
+
+    = f.select :serving, options_for_select((1..10).step(1).map { |n| [n, n] }.unshift(["何人分", nil])), {}, { class: 'ingre_form width20px' }
+    
+    .margin-top30
+      = render partial: 'shared/recipe/ingredient_form', locals: {f: f}
+  
+  .d-flex.justify-content-end.margin-top
+    .addingreform.addformbutton id = "addingreformButton"
+      p +

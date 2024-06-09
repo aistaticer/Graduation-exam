@@ -1,52 +1,63 @@
-= form_with model: @copied_recipe, local:true do |f|
-  = hidden_field_tag :source, "copy_and_new"
-  = hidden_field_tag :recipe_id, params[:recipe_id]
-  .new_container.new_back
-    .name_image
-      .margin-top30.margin-left
+= @recipe.inspect
+
+
+= form_with model: @recipe, url: copy_create_recipes_path, method: :post, local: true do |f|
+
+  = hidden_field_tag :source, "new" 
+  = f.hidden_field :user_id, value: current_user.id
+
+  .new_container.d-flex.new_back.margin-left.margin-top id = "new_container"
+    .split
+      .name id =  "step_form_number0"
         = f.label :name, 'レシピ名'
-        .width80
-          = f.text_field :name, placeholder: 'レシピ名を入力', class: 'form-control'
+        = f.text_field :name, placeholder: 'レシピ名を入力', class: 'form-control width80'
+    
+      .category.margin-top id =  "step_form_number1"
 
-      .margin-top30.margin-left
-        = f.label :category_ids, "カテゴリー"
-      .margin-top.margin-left
-        /#= f.collection_select :category_ids, @categories, :id , :name, {},  {id: "category", multiple: true, class: "form-control"}
-        = f.collection_select :genre_id, Genre.all, :id, :name, { prompt: 'ジャンルを選択してください' }
-        = f.collection_select :menu_id, Menu.all, :id, :name, { prompt: '料理名を選択してください' }
+        p カテゴリー
+        .margin-top
+          
+          = f.collection_select :genre_id, Genre.all, :id, :name, { prompt: 'ジャンルを選択してください' }, { class: 'custom-select width80' }
+          = f.collection_select :menu_id, Menu.all, :id, :name, { prompt: '料理名を選択してください' }, { class: 'custom-select width80' }
 
-      .image_color
-        .image_message
+
+      .thumbnail.margin-top30  id =  "step_form_number2"
+        p サムネイル
+        .image_message.margin-top
           p クリックして料理の画像をのせてください
 
         .select_image
           = image_tag 'camera.jpeg', id: 'imagePreview', class: 'select_image'
           = f.file_field :thumbnail, id: 'fileInput', style: 'display: none;'
 
-      .ingredient.margin-left.margin-top30 id = "ingredients_form"
-        = f.select :serving, options_for_select((1..10).step(1).map { |n| [n, n] }.unshift(["何人分", nil]), f.object.serving), {}, { class: 'ingre_form width20px' }
-        .margin-top30
-          = render partial: 'shared/recipe/ingredient_form', locals: {f: f}
+      .margin-to30
+      .ingredient.margin-to30 id =  "step_form_number3"
+        p 材料
+        .ingredients_form id = "ingredients_form"
+          = f.select :serving, options_for_select((1..10).step(1).map { |n| [n, n] }.unshift(["何人分", nil]), f.object.serving), {}, { class: 'ingre_form width20px' }
+          .margin-top30
+            = render partial: 'shared/recipe/ingredient_form', locals: {f: f}
 
-      .d-flex.justify-content-end.width80.margin-top
-        .addingreform.addformbutton id = "addingreformButton"
-          p +
+        .dd id = "uso"
 
-    .bio_proccess id = "step"
+        .d-flex.justify-content-end.width200.margin-top
+          .addingreform.addformbutton id = "addingreformButton"
+            p +
 
+    .split id = "second_split"
 
-      .margin-left.margin-top30
+      .bio id =  "step_form_number4"
         = f.label :bio, 'レシピ紹介文'
-        = f.text_area :bio, placeholder: 'レシピ紹介文を入力', class: 'form-control width80' 
+        = f.text_area :bio, placeholder: 'レシピ紹介文を入力', class: 'form-control width80 height60' 
 
-      .margin-left.margin-top30
-        = f.label :copy_permission, 'コピー許可'
+      .copy.margin-top30 id =  "step_form_number5"
+        p コピー許可
         = f.radio_button :copy_permission, 'true', checked: true
         = f.label :copy_permission, 'Yes', value: 'true'
         = f.radio_button :copy_permission, 'false'
-        = f.label :copy_permission, 'No', value: 'false'      
+        = f.label :copy_permission, 'No', value: 'false'
 
-      .margin-left.margin-top30
+      .margin-top30
         .d-flex
           p AIによる改善案
           .margin-left
@@ -59,34 +70,33 @@
         .result.padding id = "result"
           .empty
 
-        .d-flex.justify-content-end.width80.margin-top30
-          .btn-solid id="askOpenAI"
-            p 出力
+      .process id =  "step_form_number6"
+        - process_number = 0
+        .margin-top30
+          = '作り方'
+        .process_form id = "process_form"
+          = f.fields_for :steps do |step_form|
+            - process_number += 1
 
+            .margin-top
+              .d-flex
+                .number
+                  = process_number
+                = step_form.hidden_field :number, value: process_number
+                = step_form.text_area :process, placeholder: '作り方を入力してください', class: 'form-control form-control-custom height60'
+        
+        .a id = "process"
 
-      - process_number = 0
-      .margin-top.margin-left
-        = '作り方'
-      = f.fields_for :steps do |step_form|
-        - process_number += 1
+        .d-flex.justify-content-end.width90.margin-top id = "addformButton"
+          .addformbutton.addform_step id = ""
+            p +
 
-        .form.margin-top.margin-left
-          .d-flex.width80
-            .number
-              = process_number
-            = step_form.hidden_field :number, value: process_number
-            = step_form.text_area :process, placeholder: '作り方を入力してください', class: 'form-control form-control-custom'
-      
-      .d-flex.justify-content-end.width80.margin-top id = "addformButton"
-        .addformbutton.addform_step
-          p +
-
-      = f.fields_for :copied_recipe do |copied_recipe_form|
-        = copied_recipe_form.hidden_field :original_recipe, value: @new_copied_recipe.original_recipe
-        = copied_recipe_form.hidden_field :before_recipe, value: @new_copied_recipe.before_recipe
-
-      .d-flex.justify-content-end.width80.margin-top30
-        = f.submit 'レシピを作成する', id: "submit", class: 'submitButton'
+      .step_form_submit id =  "step_form_number7"
+        = f.fields_for :copied_recipe do |copied_recipe_form|
+          = copied_recipe_form.hidden_field :original_recipe, value: @recipe.id
+        br
+        .d-flex.justify-content-end.width8
+          = f.submit 'レシピを作成する', id: "submit", class: 'submitButton'
 
 /# jsでレシピの手順と名前が見れるようにする
 .step id = "steps" data-steps = @steps_array data-recipe_name = @recipe_name

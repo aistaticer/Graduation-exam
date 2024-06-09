@@ -16,6 +16,9 @@ Rails.application.routes.draw do
     collection do
       get :copy_and_new
       get :evolution
+      
+      post :copy_create
+
     end
   end
 

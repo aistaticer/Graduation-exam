@@ -1,0 +1,7 @@
+
+.copy
+  p コピー許可
+  = f.radio_button :copy_permission, 'true', checked: true
+  = f.label :copy_permission, 'Yes', value: 'true'
+  = f.radio_button :copy_permission, 'false'
+  = f.label :copy_permission, 'No', value: 'false'

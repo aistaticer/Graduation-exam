@@ -2,8 +2,6 @@ class RecipesController < ApplicationController
   before_action :custom_authenticate_user!
   before_action :set_recipe, only: [:edit, :update]
 
-  #before_action :some_action
-
   include RecipesHelper
   require 'openai'
 
@@ -12,10 +10,7 @@ class RecipesController < ApplicationController
     @q = Recipe.ransack(params[:q])
     @recipes = @q.result.includes(:steps,:genre,:menu).with_attached_thumbnail.all.page(params[:page]).per(8)
 
-    delicious_type = StampsType.find_by(name: "Delicious")
-    like_type = StampsType.find_by(name: "Like")
-    StampMiddle.stamped_by_user?(@recipes,current_user.id,delicious_type,like_type)
-    StampMiddle.count_stamp_recipe(@recipes,delicious_type,like_type)
+    stamp_set(@recipes)
   end
 
   def show
@@ -29,68 +24,78 @@ class RecipesController < ApplicationController
 
   def new
     @url_recipe_new = true
+    #@recipe = Recipe.new
     @recipe = Recipe.new
+
     set_step_build
     @recipe.ingredients.build
     @recipe.build_copied_recipe
   end
 
+  def copy_create
+    # レシピをコピーして作成する処理
+    @recipe = Recipe.new(recipe_params_carry_up_number)
+    logger.debug(@recipe.name)
+    @url_recipe_copy = true
+
+    #自分の元になったレシピを探し出している
+    @before_recipe = Recipe.includes(:steps).find(@recipe.copied_recipe.before_recipe)
+    # コピーの「作り方」が同じじゃないかを確認している 同じならfalseを返す
+    process_check = check_before_recipe(@before_recipe, @recipe)
+
+    
+    if @recipe.save && process_check
+      original_recipe_update
+      flash[:notice] = "レシピを正常に作成しました"
+
+      #　レシピの保存に成功したらscrptによって強制的に画面遷移させてる。turboだと二つのリクエストが出てフラッシュメッセージが消えるから.
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("error", "<script>window.location = '#{recipe_path(@recipe)}';</script>")
+        end
+      end
+    else
+
+      # @recipe.saveの後だと設定したエラーメッセージが消えるから改めて設定している
+      save_after_message_set(process_check);
+
+      respond_to do |format|
+        format.turbo_stream do
+          flash.now[:alert] = @recipe.errors.full_messages.join("<br>").html_safe
+          render turbo_stream: turbo_stream.replace("error", partial: "shared/flash_error")
+        end
+      end
+    end 
+  end
+
   def create
     @recipe = Recipe.new(recipe_params_carry_up_number)
 
-    # まず、レシピを保存を試みる
-    recipe_saved = @recipe.save
+    @url_recipe_new = true
 
-    custom_messages = []
+    if @recipe.save
 
-    if params[:source] == "new"
-      @url_recipe_new = true
-      process_check = true
-    elsif params[:source] == "copy_and_new"
-      @url_recipe_copy = true
-      #自分の元になったレシピを探し出している
-      @before_recipe = Recipe.includes(:steps).find(@recipe.copied_recipe.before_recipe)
-      process_check = check_before_recipe(@before_recipe, @recipe)
-    end
+      #　新しく保存するレシピの、オリジナルのレシピのidを保存している
+      original_recipe_update
+      session.delete(:recipe_params)
 
-    @recipe.user_id = current_user.id
-
-    respond_to do |format|
-      if @recipe.save && process_check
-        original_recipe_update
-        flash[:notice] = "レシピを正常に作成しました"
+      flash[:notice] = "レシピを正常に作成しました"
+      respond_to do |format|
         format.turbo_stream do
           # turboだと二つのリクエストが出てフラッシュメッセージが消える。だからscrptによって強制的に遷移させてる
           render turbo_stream: turbo_stream.replace("error", "<script>window.location = '#{recipe_path(@recipe)}';</script>")
         end
-        #format.html { redirect_to recipe_path(@recipe)}
-        
-      else
+      end
 
-        if params[:source] == "new"
+    else
 
-          format.turbo_stream do
-            flash.now[:alert] = @recipe.errors.full_messages.join("<br>").html_safe
-            render turbo_stream: turbo_stream.replace("error", partial: "shared/flash_error")
-          end
-
-
-        elsif params[:source] == "copy_and_new"
-          # @recipeをcopy_and_newで定義するためエラー文を変数に代入
-          @error_messages = @recipe.errors.full_messages
-          logger.debug(@error_messages)
-          logger.debug(@recipe.errors.messages)
-          
-          # @recipe.saveの後だと設定したエラーメッセージが消えるから改めて設定している
-          save_after_message_set(process_check);
-          
-          format.turbo_stream do
-            flash.now[:alert] = @recipe.errors.full_messages.join("<br>").html_safe
-            render turbo_stream: turbo_stream.replace("error", partial: "shared/flash_error")
-          end
-
+      respond_to do |format|
+        format.turbo_stream do
+          flash.now[:alert] = @recipe.errors.full_messages.join("<br>").html_safe
+          render turbo_stream: turbo_stream.replace("error", partial: "shared/flash_error")
         end
       end
+
     end
   end
 
@@ -99,10 +104,17 @@ class RecipesController < ApplicationController
   end
 
   def update
-    respond_to do |format|
-      if @recipe.update(recipe_params_carry_up_number)
-        format.html { redirect_to recipe_path(@recipe), success: "レシピを正常に作成しました" }
-      else
+    if @recipe.update(recipe_params_carry_up_number)
+
+      flash[:notice] = "レシピを更新しました"
+      respond_to do |format|
+        format.turbo_stream do
+          render turbo_stream: turbo_stream.replace("error", "<script>window.location = '#{recipe_path(@recipe)}';</script>")
+        end
+      end
+
+    else
+      respond_to do |format|
         format.turbo_stream do
           flash.now[:alert] = @recipe.errors.full_messages.join("<br>").html_safe
           render turbo_stream: turbo_stream.replace("error", partial: "shared/flash_error")
@@ -116,6 +128,25 @@ class RecipesController < ApplicationController
     recipe.destroy
     redirect_back(fallback_location: recipes_path, notice: 'レシピの削除に成功しました')
   end
+
+=begin
+  def copy_and_new
+
+    @url_recipe_copy = true
+    
+    # オリジナルのレシピを検索して代入
+    recipe = Recipe.find(params[:recipe_id])
+
+    #@new_copied_recipeはコピー関連の情報を持つ子モデル
+    @copied_recipe, @new_copied_recipe, @copied_recipe_ingredients = copy_recipe_helper(recipe)
+
+    @recipe = @copied_recipe
+
+    # 配列にレシピの内容を入れてhtmlにわたし、jsが受け取れるようにする。AIのため
+    ai_pass_array()
+
+  end
+=end
 
   def copy_and_new
 
@@ -150,9 +181,9 @@ class RecipesController < ApplicationController
     @recipe = Recipe.includes(:steps,:ingredients, :copied_recipe).find(params[:recipe_id])
     @url_recipe_evolution = true
 
-    logger.debug(@recipe.name)
+
     copied_recipe_ids = CopiedRecipe.where(original_recipe: @recipe.copied_recipe.original_recipe).order(:before_recipe).pluck(:recipe_id)
-    logger.debug(copied_recipe_ids)
+
     recipes = Recipe.where(id: copied_recipe_ids).with_attached_thumbnail
     @recipes = copied_recipe_ids.map { |id| recipes.find { |recipe| recipe.id == id } }
     StampMiddle.count_like_recipe(@recipes)
@@ -161,17 +192,13 @@ class RecipesController < ApplicationController
                                         .order(:before_recipe)
                                         .group_by(&:before_recipe)
                                         .transform_values { |recipes| recipes.pluck(:recipe_id) }
-    logger.debug(grouped_copied_recipe_ids)
-    #@recipes = Recipe.where(id: grouped_copied_recipe_ids)
-    
+
     @recipe_power = []
     @recipe_id = []
     @recipes.each do |recipe|
       @recipe_power.push(recipe.likes_count)
       @recipe_id.push(recipe.id)
     end
-    logger.debug("おおおお")
-    logger.debug(copied_recipe_ids)
   end
 
   def ask_open_ai
@@ -194,7 +221,6 @@ class RecipesController < ApplicationController
         parameters: {
             model: "gpt-3.5-turbo",
             messages: [{ role: "user", content: making(recipe_name, recipe_steps)}],
-            #max_tokens: 50,
         })
     logger.debug(response.dig("choices", 0, "message", "content"))
     render json: { content: response.dig("choices", 0, "message", "content") }
@@ -209,6 +235,22 @@ class RecipesController < ApplicationController
   end
 
   private
+
+  def ai_pass_array()
+    @recipe_name = []
+    @recipe_name.push(@copied_recipe.name)
+    @steps_array = []
+    @copied_recipe.steps.each do|step|
+      @steps_array.push(step.process)
+    end
+  end
+
+  def stamp_set(recipes)
+    delicious_type = StampsType.find_by(name: "Delicious")
+    like_type = StampsType.find_by(name: "Like")
+    StampMiddle.stamped_by_user?(recipes,current_user.id,delicious_type,like_type)
+    StampMiddle.count_stamp_recipe(recipes,delicious_type,like_type)
+  end
 
   def set_recipe
     @recipe = @recipe = Recipe.includes(:user, :steps,:ingredients,:menu,:genre).find(params[:id])
@@ -229,7 +271,11 @@ class RecipesController < ApplicationController
 
   # Strong Parameters
   def recipe_params
-    params.require(:recipe).permit(:name, :serving, :thumbnail, :thumbnail_edited, :bio, :copy_permission, :menu_id, :genre_id, ingredients_attributes: [:id, :name, :quantity], steps_attributes: [:id, :number, :process], copied_recipe_attributes: [:id, :original_recipe, :before_recipe], category_ids: [])
+    params.require(:recipe).permit(:name, :serving, :thumbnail, :thumbnail_edited, :bio, :copy_permission, :menu_id, :genre_id,
+                                   ingredients_attributes: [:id, :name, :quantity], 
+                                   steps_attributes: [:id, :number, :process], 
+                                   copied_recipe_attributes: [:id, :original_recipe, :before_recipe], 
+                                   category_ids: [])
   end
 
   def set_step_build
@@ -242,7 +288,18 @@ class RecipesController < ApplicationController
 
   def recipe_params_carry_up_number
     # まず、通常通りにparamsを取得
-    params.require(:recipe).permit(:name, :serving, :thumbnail, :thumbnail_edited, :bio, :copy_permission, :menu_id, :genre_id, ingredients_attributes: [:id, :name, :quantity], steps_attributes: [:id, :number, :process], copied_recipe_attributes: [:id, :original_recipe, :before_recipe], category_ids: []).tap do |whitelisted|
+    params.require(:recipe).permit(:name, 
+                                  :user_id, 
+                                  :serving, 
+                                  :thumbnail,
+                                  :bio, 
+                                  :copy_permission, 
+                                  :menu_id, :genre_id, 
+                                  ingredients_attributes: [:id, :name, :quantity], 
+                                  steps_attributes: [:id, :number, :process], 
+                                  copied_recipe_attributes: [:id, :original_recipe, :before_recipe], 
+                                  category_ids: []).tap do |whitelisted|
+                                    
       # steps_attributesがあれば、descriptionが空のものを除外
       if whitelisted[:steps_attributes]
         whitelisted[:steps_attributes].reject! { |_, step_attribute| step_attribute[:process].blank? }
@@ -269,7 +326,7 @@ class RecipesController < ApplicationController
     end
   end
 
-  #　新しく保存するレシピの元を辿ったオリジナルののレシピを保存している
+  #　新しく保存するレシピの、オリジナルのレシピのidを保存している
   def original_recipe_update
     if @recipe.copied_recipe.original_recipe == nil
       @recipe.create_copied_recipe(original_recipe: @recipe.id)
@@ -296,3 +353,4 @@ class RecipesController < ApplicationController
     end
   end
 end
+

@@ -159,6 +159,7 @@ function top_select() {
   
   //const reject = document.getElementById('reject');
   var select;
+  let state;
   document.addEventListener("click", function(event) {
     let targetElement = event.target;
     // ability_close クラスを持つ親要素を探す
@@ -167,31 +168,50 @@ function top_select() {
     }
 
     if(targetElement){
-      if(targetElement.id == "account"){
-        select = account
-      }else if(targetElement.id == "recipe_index"){
-        select = index
-      }else if(targetElement.id == "copy"){
-        select = copy
-      }else if(targetElement.id == "history"){
-        select = history
-      }else if(targetElement.id == "ai"){
-        select = ai
+      switch(targetElement.id) {
+        case "account":
+          state = "on"
+          select = account;
+          break;
+        case "recipe_index":
+          state = "on"
+          select = index;
+          break;
+        case "copy":
+          state = "on"
+          select = copy;
+          break;
+        case "history":
+          state = "on"
+          select = history;
+          break;
+        case "ai":
+          state = "on"
+          select = ai;
+          break;
+        default:
+          state = "on"
+          select = account
+          break;
       }
     }
 
-    console.log(targetElement)
-    console.log(event.target)
 
-    select.style.display = (!targetElement || 
-      (targetElement.className != "ability_close" && targetElement.className != "content_introduce"))
-     ? "none"
-     : "block";
 
-    reject.style.display = (!targetElement || 
-      (targetElement.className != "ability_close" && targetElement.className != "content_introduce"))
-     ? "none"
-     : "block";
+    if(state == "on"){
+      select.style.display = (!targetElement || 
+        (targetElement.className != "ability_close" && 
+        targetElement.className != "content_introduce"))
+      ? "none"
+      : "block";
+
+      reject.style.display = (!targetElement || 
+        (targetElement.className != "ability_close" && 
+        targetElement.className != "content_introduce"))
+      ? "none"
+      : "block";
+    }
+    
 
   })
 }

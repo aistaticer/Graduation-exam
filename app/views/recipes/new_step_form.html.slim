@@ -1,0 +1,81 @@
+= render 'shared/error_recipe'
+
+.d-flex.justify-content-center.margin-top25
+  p レシピ作成
+
+.d-flex.justify-content-center.margin-top25
+  .step_form_container.myElement id = "myElement"
+    
+    = form_with model: @recipe, url: session_create_recipes_path, local: true do |f|
+      = hidden_field_tag :source, "new" 
+      = f.hidden_field :user_id, value: current_user.id
+
+      - step_form_number = 0
+      .step_form.none id =  "step_form_number#{step_form_number}"
+        .direction.bold
+          p レシピ名をご記入ください
+        .new_back
+          .name
+            = f.label :name, 'レシピ名'
+            .width80
+              = f.text_field :name, placeholder: 'レシピ名を入力', class: 'form-control'
+
+      - step_form_number = 1
+      .step_form.none id =  "step_form_number#{step_form_number}"
+        .direction.bold
+          p レシピのコピーを許可をどうするかをお選びください
+        .new_back     
+          = render partial: "shared/new_step_form/copy", locals: { f: f }
+
+      - step_form_number = 2
+      .step_form.none id =  "step_form_number#{step_form_number}"
+        .direction.bold
+          p レシピのジャンル、料理名をお選びください
+        .new_back
+          = render partial: "shared/new_step_form/category", locals: { f: f }
+
+      - step_form_number = 3
+      .step_form.none id =  "step_form_number#{step_form_number}"
+        .direction.bold
+          p 材料の種類と量を何人分なのか合わせてご記入ください
+        .new_back
+          = render partial: "shared/new_step_form/ingredient", locals: { f: f }
+
+      - step_form_number = 4
+      .step_form.none id =  "step_form_number#{step_form_number}"
+        .direction.bold
+          p レシピ紹介文をご記入ください
+        .new_back
+          = render partial: "shared/new_step_form/introduce", locals: { f: f }
+
+      - step_form_number = 5
+      .step_form.none id =  "step_form_number#{step_form_number}"
+        .direction.bold
+          p 作り方をご記入ください
+        .new_back
+          = render partial: "shared/new_step_form/process", locals: { f: f }
+      
+      - step_form_number = 6
+      .step_form.none id =  "step_form_number#{step_form_number}"
+        .direction.bold
+          p レシピのサムネイルをアップロードしてください
+        .new_back
+          = render partial: "shared/new_step_form/image", locals: { f: f }
+      
+      
+      .d-flex.justify-content-end.width8
+        = button_to "", id: "submit", class: "submitButton" do
+          i.fa-solid.fa-right-long
+
+  .move id = "move"
+    i.fa-solid.fa-right-long
+
+br
+br
+
+.container1 
+  .example1
+    .pp
+
+
+

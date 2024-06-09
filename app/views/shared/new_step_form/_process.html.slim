@@ -1,0 +1,20 @@
+.proccess id = "step"
+  - process_number = 0
+  .margin-top.margin-left
+    = '作り方'
+  = f.fields_for :steps do |step_form|
+    - process_number += 1
+
+    .form.margin-top.margin-left
+      .d-flex.width80
+        .number
+          = process_number
+        = step_form.hidden_field :number, value: process_number
+        = step_form.text_area :process, placeholder: '作り方を入力してください', class: 'form-control form-control-custom height40'
+
+  .d-flex.justify-content-end.width80.margin-top id = "addformButton"
+    .addformbutton.addform_step id = ""
+      p +
+
+  = f.fields_for :copied_recipe do |copied_recipe_form|
+    = copied_recipe_form.hidden_field :original_recipe, value: @recipe.id

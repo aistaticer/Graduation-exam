@@ -1,0 +1,7 @@
+.category
+  p カテゴリー
+
+  .margin-top
+    
+    = f.collection_select :genre_id, Genre.all, :id, :name, { prompt: 'ジャンルを選択してください' }
+    = f.collection_select :menu_id, Menu.all, :id, :name, { prompt: '料理名を選択してください' }
