@@ -23,6 +23,10 @@ ja:
 
   errors:
     format: "%{attribute}%{message}"
+    
+    attributes:
+      user_id:
+        blank: "が空です"
 
   activerecord:
 

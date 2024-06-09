@@ -1,5 +1,5 @@
 = render 'shared/error_recipe'
-= @recipe.inspect
+
 .d-flex
   .complete
     .center.now_content id = "now_content0"
@@ -47,33 +47,49 @@
 
 
   .direction.bold.margin-top25 id =  "direction0"
-    p レシピ名をご記入ください
+    .d-flex
+      p レシピ名をご記入ください
+      .caution
+        p 必須
 
   .direction.bold.margin-top25.none id =  "direction1"
-    p カテゴリーを選択してください
+    .d-flex
+      p カテゴリーを選択してください
+      .caution
+        p 必須
   
   .direction.bold.margin-top25.none id =  "direction2"
     p サムネイルをアップロードしますか？
 
   .direction.bold.margin-top25.none id =  "direction3"
-    p 材料をご記入ください
-
+    .d-flex
+      p 材料をご記入ください
+      .caution
+        p 必須
   .direction.bold.margin-top25.none id =  "direction4"
-    p レシピの紹介をしてください
+    .d-flex
+      p レシピの紹介をしてください
+      .caution
+        p 必須
 
   .direction.bold.margin-top25.none id =  "direction5"
-    p コピーの許可はどうなさいますか？
+    .d-flex
+      p コピーの許可はどうなさいますか？
+      .caution
+        p 必須
 
   .direction.bold.margin-top25.none id =  "direction6"
-    p 作り方をご記入ください
+    .d-flex
+      p 作り方をご記入ください
+      .caution
+        p 必須
 
   .direction.bold.margin-top25.none id =  "direction7"
     p 最終確認
     .margin-top
     p 問題がなければ作成してください
 
-  /#.new_container.new_back.height300 id = "new_container"
-  .new_container.margin-left.margin-top id = "new_container"
+  .new_container.margin-left.margin-top.animate_r id = "new_container"
     .split
       .name id =  "step_form_number0"
         = f.label :name, 'レシピ名'
@@ -132,7 +148,7 @@
           = f.fields_for :steps do |step_form|
             - process_number += 1
 
-            .margin-top
+            .process-margin
               .d-flex
                 .number
                   = process_number

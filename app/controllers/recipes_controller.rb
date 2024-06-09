@@ -35,7 +35,9 @@ class RecipesController < ApplicationController
   def copy_create
     # レシピをコピーして作成する処理
     @recipe = Recipe.new(recipe_params_carry_up_number)
-    logger.debug(@recipe.name)
+
+    @recipe.user_id = current_user.id
+    
     @url_recipe_copy = true
 
     #自分の元になったレシピを探し出している
@@ -129,7 +131,6 @@ class RecipesController < ApplicationController
     redirect_back(fallback_location: recipes_path, notice: 'レシピの削除に成功しました')
   end
 
-=begin
   def copy_and_new
 
     @url_recipe_copy = true
@@ -140,15 +141,13 @@ class RecipesController < ApplicationController
     #@new_copied_recipeはコピー関連の情報を持つ子モデル
     @copied_recipe, @new_copied_recipe, @copied_recipe_ingredients = copy_recipe_helper(recipe)
 
-    @recipe = @copied_recipe
-
     # 配列にレシピの内容を入れてhtmlにわたし、jsが受け取れるようにする。AIのため
     ai_pass_array()
 
   end
-=end
 
-  def copy_and_new
+
+=begin  def copy_and_new
 
     @url_recipe_copy = true
     
@@ -176,7 +175,7 @@ class RecipesController < ApplicationController
     end
 
   end
-
+=end
   def evolution
     @recipe = Recipe.includes(:steps,:ingredients, :copied_recipe).find(params[:recipe_id])
     @url_recipe_evolution = true
@@ -271,7 +270,7 @@ class RecipesController < ApplicationController
 
   # Strong Parameters
   def recipe_params
-    params.require(:recipe).permit(:name, :serving, :thumbnail, :thumbnail_edited, :bio, :copy_permission, :menu_id, :genre_id,
+    params.require(:recipe).permit(:name, :serving, :thumbnail, :user_id, :bio, :copy_permission, :menu_id, :genre_id,
                                    ingredients_attributes: [:id, :name, :quantity], 
                                    steps_attributes: [:id, :number, :process], 
                                    copied_recipe_attributes: [:id, :original_recipe, :before_recipe], 

@@ -1,10 +1,8 @@
-= @recipe.inspect
 
+= form_with model: @copied_recipe, url: copy_create_recipes_path, method: :post, local: true do |f|
 
-= form_with model: @recipe, url: copy_create_recipes_path, method: :post, local: true do |f|
-
-  = hidden_field_tag :source, "new" 
-  = f.hidden_field :user_id, value: current_user.id
+  = hidden_field_tag :source, "copy_and_new"
+  = hidden_field_tag :recipe_id, params[:recipe_id]
 
   .new_container.d-flex.new_back.margin-left.margin-top id = "new_container"
     .split
@@ -93,7 +91,10 @@
 
       .step_form_submit id =  "step_form_number7"
         = f.fields_for :copied_recipe do |copied_recipe_form|
-          = copied_recipe_form.hidden_field :original_recipe, value: @recipe.id
+          = copied_recipe_form.hidden_field :original_recipe, value: @new_copied_recipe.original_recipe
+          = copied_recipe_form.hidden_field :before_recipe, value: @new_copied_recipe.before_recipe
+
+
         br
         .d-flex.justify-content-end.width8
           = f.submit 'レシピを作成する', id: "submit", class: 'submitButton'

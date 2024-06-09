@@ -1,7 +1,7 @@
-=begin
+
 module RecipesHelper
   def copy_recipe_helper(recipe)
-    logger.debug("実行された")
+
     original_recipe = Recipe.includes(:steps,:categories,:ingredients,:copied_recipe).find(recipe.id)
     copied_recipe = original_recipe.dup
     copied_recipe.name += "（コピー）"
@@ -35,8 +35,8 @@ module RecipesHelper
     return copied_recipe, new_copied_recipe, copied_recipe.ingredients
   end
 end
-=end
 
+=begin
 module RecipesHelper
   def copy_recipe_helper(recipe)
     logger.debug("実行された")
@@ -71,3 +71,4 @@ module RecipesHelper
     return copied_recipe, copied_recipe_steps, copied_recipe_categories, copied_recipe_ingredients, new_copied_recipe
   end
 end
+=end

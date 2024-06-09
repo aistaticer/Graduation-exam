@@ -8,10 +8,8 @@ document.addEventListener("DOMContentLoaded", function(){
 })
 
 function addformEventListener() {
-  const form = document.querySelector('form[action^="/recipes"]');
+
   const addformButton = document.getElementById('addformButton');
-  const submit = document.getElementById('submit');
-  const process = document.getElementById('process');
   let process_number = document.querySelectorAll('.form-control.form-control-custom').length;
 
   addformButton.addEventListener('click', function(e) {
@@ -139,6 +137,19 @@ function initializeTextarea() {
 
 document.addEventListener("turbo:load", initializeTextarea);
 
+function hasTargetClass(element, targetClasses) {
+  return targetClasses.some(className => element.classList.contains(className));
+}
+
+function search_target(e,target){
+
+  target = ["a","b"]
+  let targetElement = e.target;
+  while (targetElement && !targetElement.classList.contains("a")&& !targetElement.classList.contains("b")) {
+    targetElement = targetElement.parentElement;
+  }
+}
+
 function stepform() {
 
   let targetElement;
@@ -150,13 +161,17 @@ function stepform() {
 
   document.addEventListener("click", function(e) {
 
+
+    const targetClasses = ["advance", "b"];
+
+    while (targetElement && !hasTargetClass(targetElement, targetClasses)) {
+      targetElement = targetElement.parentElement;
+    }
+
     // 次へのボタンが押されたらtrue,前へならfalseを返す
     judge = move_botton(e)
 
-    targetElement = e.target;
-    while (targetElement && !targetElement.classList.contains('move')) {
-      targetElement = targetElement.parentElement;
-    }
+    search_target(e,'move')
 
     switch (judge) {
       case 'advance':
@@ -179,42 +194,44 @@ function stepform() {
         const direction = document.getElementById('direction' + i);
         const step_form = document.getElementById('step_form_number' + i);
         const now_content = document.getElementById('now_content' + i);
-        if (direction) {
-          if (i == number) {
 
-            new_container.style.display = 'block';
-            direction.classList.remove('none');
-            step_form.classList.remove('none');
-            step_form.classList.remove('margin-top25');     
-            
-            now_content.classList.add('now_content');
+        if (i == number) {
 
-            if(number == 7){
-              if (window.innerWidth >= 768) {
-                var newContainer = document.getElementById('new_container'); // new_containerの取得方法を確認してね
-                newContainer.style.display = 'flex';
-              }
-              new_container.classList.remove('margin-left');
-              new_container.classList.remove('margin-top');
-              new_container.classList.add('new_back');
+          new_container.style.display = 'block';
+          
+          direction.classList.remove('none');
+          
+          step_form.classList.remove('none');
+          
+          now_content.classList.add('now_content');
 
-              move_button.classList.add('none');
-
-              process.style.height = "auto"
-
-              for(let num = 0; num <= 7; num++){
-                const step_form = document.getElementById('step_form_number' + num);
-                step_form.classList.add('margin-top25');     
-                step_form.classList.remove('none');
-              }
+          // 最後になったら全てのフォームを表示して、ボタンを消す
+          if(number == 7){
+            if (window.innerWidth >= 768) {
+              var newContainer = document.getElementById('new_container'); // new_containerの取得方法を確認してね
+              newContainer.style.display = 'flex';
             }
+            new_container.classList.remove('margin-left');
+            new_container.classList.remove('margin-top');
+            new_container.classList.add('new_back');
 
-          } else {
-            direction.classList.add('none');
-            step_form.classList.add('none');
-            now_content.classList.remove('now_content');
+            
+
+            move_button.classList.add('none');
+
+            process.style.height = "auto"
+
+            for(let num = 0; num <= 7; num++){
+              const step_form = document.getElementById('step_form_number' + num);
+              step_form.classList.add('margin-top25');     
+              step_form.classList.remove('none');
+            }
           }
 
+        } else {
+          direction.classList.add('none');
+          step_form.classList.add('none');
+          now_content.classList.remove('now_content');
         }
       }
     }
@@ -247,11 +264,6 @@ function move_botton(e){
   }
 
   return result;
-}
-
-function progress_ratio (pieces,number){
-  pieces = 7
-  number = 1;
 }
 
 document.addEventListener("turbo:load", stepform);
