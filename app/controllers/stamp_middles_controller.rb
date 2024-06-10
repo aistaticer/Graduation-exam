@@ -66,10 +66,12 @@ class StampMiddlesController < ApplicationController
 
     if @stamp.destroy
       
+      # ランキングの場合はレシピが重複する恐れがあるからリロードさせてる
       page_load and return
 
-      if stamp_name == "Delicious"
-        logger.debug("Delicious")
+      case stamp_name
+      when "Delicious"
+
         StampMiddle.count_stamp_recipe([@recipe], stamp_type, nil)
         respond_to do |format|
           format.turbo_stream do
@@ -80,9 +82,8 @@ class StampMiddlesController < ApplicationController
           end
           format.html { redirect_to recipes_path }
         end
-      end
-
-      if stamp_name == "Like"
+      
+      when "Like"
         StampMiddle.count_stamp_recipe([@recipe], nil, stamp_type)
         respond_to do |format|
           format.turbo_stream do
@@ -94,6 +95,8 @@ class StampMiddlesController < ApplicationController
           format.html { redirect_to recipes_path }
         end
       end
+
     end
+
   end
 end

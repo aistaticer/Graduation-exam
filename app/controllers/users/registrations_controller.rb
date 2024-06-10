@@ -17,6 +17,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
     yield resource if block_given?
     respond_with_navigational(resource){ redirect_to after_sign_out_path_for(resource_name) }
   end
+  
+  def edit
+    @url_user_edit = true;
+  end
 
   protected
 

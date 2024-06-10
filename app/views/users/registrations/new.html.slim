@@ -33,11 +33,6 @@
         .margin_auto.font_serif
           p 画像
           = f.file_field :avatar, autofocus: true, autocomplete: "avatar"
-
-        .margin_auto.margin-top25
-            p 紹介文
-        .margin_auto.padding2_5 
-          = f.text_area :bio, autofocus: true, autocomplete: "bio", class: "width300 form introduce_height"
         
         .margin_auto.margin-top25
           .d-flex.font_serif
@@ -61,6 +56,12 @@
               p 必須
         .margin_auto
           = f.password_field :password_confirmation, autocomplete: "new-password", class: "width300 form"
+
+        .margin_auto.margin-top25
+            p 紹介文
+        .margin_auto.padding2_5 
+          = f.text_area :bio, autofocus: true, autocomplete: "bio", class: "width300 form introduce_height"
+
         .d-flex.justify-content-end.margin-top25
           = f.submit "登録する", class: "sign_upButton sign_upButton2"
         

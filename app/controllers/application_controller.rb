@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  before_action :log_flash_messages
+  #before_action :log_flash_messages
 
 	def custom_authenticate_user!
     if !user_signed_in? && request.path != new_user_registration_path

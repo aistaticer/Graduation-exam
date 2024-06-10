@@ -146,36 +146,6 @@ class RecipesController < ApplicationController
 
   end
 
-
-=begin  def copy_and_new
-
-    @url_recipe_copy = true
-    
-    # オリジナルのレシピを検索して代入
-    @recipe = Recipe.find(params[:recipe_id])
-
-    @q = Category.ransack(params[:q])
-    @categories = @q.result(distinct: true).order(:hiragana)
-    others = @categories.find { |category| category.name == "その他" }
-    @categories = @categories.reject { |category| category.name == "その他" } + [others] if others
-
-    @copied_recipe, @copied_recipe_steps, @copied_recipe_categories, @copied_recipe_ingredients, @new_copied_recipe = copy_recipe_helper(@recipe)
-
-    @copied_recipe.steps = @copied_recipe_steps
-    @copied_recipe.categories = @copied_recipe_categories
-    @copied_recipe.ingredients = @copied_recipe_ingredients
-    @copied_recipe.copied_recipe = @new_copied_recipe
-
-    # 配列にレシピの内容を入れてhtmlにわたし、jsが受け取れるようにする。AIのため
-    @recipe_name = []
-    @recipe_name.push(@copied_recipe.name)
-    @steps_array = []
-    @copied_recipe.steps.each do|step|
-      @steps_array.push(step.process)
-    end
-
-  end
-=end
   def evolution
     @recipe = Recipe.includes(:steps,:ingredients, :copied_recipe).find(params[:recipe_id])
     @url_recipe_evolution = true
@@ -205,7 +175,6 @@ class RecipesController < ApplicationController
     user_id = current_user.id
     usage_record = UsageRecord.find_by(user_id: user_id)
 
-    logger.debug(Date.today)
     if usage_record && usage_record.last_used_on == Date.today
       render json: { content: "使用制限に到達しました" }, status: :forbidden
       return
@@ -215,13 +184,13 @@ class RecipesController < ApplicationController
 
     recipe_steps = params["recipe_steps"]
     recipe_name = params["recipe_name"]
-    logger.debug(making(recipe_name, recipe_steps))
+
     response = client.chat(
         parameters: {
             model: "gpt-3.5-turbo",
             messages: [{ role: "user", content: making(recipe_name, recipe_steps)}],
         })
-    logger.debug(response.dig("choices", 0, "message", "content"))
+
     render json: { content: response.dig("choices", 0, "message", "content") }
   
     # 使用状況の変更

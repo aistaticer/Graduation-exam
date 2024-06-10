@@ -494,12 +494,15 @@
   height: auto;
 }
 
-@keyframes slideright {
-  from {
-    transform: translateX(-25vw);
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0);
   }
-  to {
-    transform: translateX(0); /* 画面外に移動 */
+  40% {
+    transform: translateY(-30px);
+  }
+  60% {
+    transform: translateY(-15px);
   }
 }
 
@@ -513,7 +516,7 @@
 }
 
 .animate_r {
-  animation: slideright 1s forwards; /* アニメーションを適用 */
+  animation: bounce 1s forwards; /* アニメーションを適用 */
 }
 
 .animate_l {

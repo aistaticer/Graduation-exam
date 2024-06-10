@@ -3,10 +3,6 @@ import $ from 'jquery';
 import 'select2';
 import 'select2/dist/css/select2.css';
 
-document.addEventListener("DOMContentLoaded", function(){
-	console.log("new.js");
-})
-
 function addformEventListener() {
 
   const addformButton = document.getElementById('addformButton');
@@ -70,8 +66,6 @@ function scrollToElementWithOffset(elementId, offset) {
     window.scrollBy(0, -offset); // オフセットを追加
   }
 }
-
-
 
 document.addEventListener('DOMContentLoaded', (event) => {
   document.getElementById('fileInput').addEventListener('change', function() {
@@ -137,19 +131,6 @@ function initializeTextarea() {
 
 document.addEventListener("turbo:load", initializeTextarea);
 
-function hasTargetClass(element, targetClasses) {
-  return targetClasses.some(className => element.classList.contains(className));
-}
-
-function search_target(e,target){
-
-  target = ["a","b"]
-  let targetElement = e.target;
-  while (targetElement && !targetElement.classList.contains("a")&& !targetElement.classList.contains("b")) {
-    targetElement = targetElement.parentElement;
-  }
-}
-
 function stepform() {
 
   let targetElement;
@@ -171,8 +152,7 @@ function stepform() {
     // 次へのボタンが押されたらtrue,前へならfalseを返す
     judge = move_botton(e)
 
-    search_target(e,'move')
-
+    //　ボタンの種類によってnumberを更新
     switch (judge) {
       case 'advance':
         number = number+1
@@ -182,8 +162,8 @@ function stepform() {
         break;
       case 'back':
         number = number-1
-        if(number < 1){
-          number = 1;
+        if(number < 0){
+          number = 0;
         }
         break;
     }
@@ -197,25 +177,29 @@ function stepform() {
 
         if (i == number) {
 
+          console.log(i)
+
           new_container.style.display = 'block';
           
           direction.classList.remove('none');
+          direction.classList.add('animate_r')
           
           step_form.classList.remove('none');
+          step_form.classList.add('animate_r')
           
           now_content.classList.add('now_content');
 
           // 最後になったら全てのフォームを表示して、ボタンを消す
           if(number == 7){
             if (window.innerWidth >= 768) {
-              var newContainer = document.getElementById('new_container'); // new_containerの取得方法を確認してね
+              var newContainer = document.getElementById('new_container');
               newContainer.style.display = 'flex';
             }
+
             new_container.classList.remove('margin-left');
             new_container.classList.remove('margin-top');
             new_container.classList.add('new_back');
-
-            
+            new_container.classList.add('animate_r');
 
             move_button.classList.add('none');
 
@@ -225,6 +209,7 @@ function stepform() {
               const step_form = document.getElementById('step_form_number' + num);
               step_form.classList.add('margin-top25');     
               step_form.classList.remove('none');
+              console.log(step_form.id)
             }
           }
 
@@ -236,10 +221,6 @@ function stepform() {
       }
     }
   })
-
-  document.querySelectorAll('.new_back').forEach(el => {
-    console.log(el.id);
-  });
 }
 
 function move_botton(e){

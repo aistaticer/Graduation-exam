@@ -46,7 +46,7 @@
   = f.hidden_field :user_id, value: current_user.id
 
 
-  .direction.bold.margin-top25 id =  "direction0"
+  .direction.bold.margin-top25.animate_r id =  "direction0"
     .d-flex
       p レシピ名をご記入ください
       .caution
@@ -89,9 +89,9 @@
     .margin-top
     p 問題がなければ作成してください
 
-  .new_container.margin-left.margin-top.animate_r id = "new_container"
+  .new_container.margin-left.margin-top id = "new_container"
     .split
-      .name id =  "step_form_number0"
+      .name.animate_r id =  "step_form_number0"
         = f.label :name, 'レシピ名'
         = f.text_field :name, placeholder: 'レシピ名を入力', class: 'form-control width80'
     

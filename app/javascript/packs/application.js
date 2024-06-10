@@ -5,11 +5,6 @@ import "bootstrap"
 import "../stylesheets/application.scss"
 import "../stylesheets/sidebar.scss"
 
-
-//import Swiper from 'swiper';
-//import 'swiper/swiper-bundle.css';
-
-
 import $ from 'jquery';
 window.$ = $;
 window.jQuery = $;
@@ -40,12 +35,6 @@ function swipe(){
 };
 
 document.addEventListener("turbo:load",swipe);
-document.addEventListener("turbo:render", swipe);
-
-
-document.addEventListener("DOMContentLoaded", function(){
-  console.log("application.js");
-})
 
 document.addEventListener("turbo:load", () => {
 
@@ -55,14 +44,6 @@ document.addEventListener("turbo:load", () => {
   // getAttributeを使う方法
   const userStateViaAttribute = userElement.getAttribute('data-user_state');
   const current_user_id = userElement.getAttribute('data-user_id');
-
-  //userStateViaAttribute=yesならログインしている
-  if (userStateViaAttribute == "no"){
-    //import("./user_new_up.js").then(module => {
-      // モジュールの使用
-    //});
-    return
-  }
 
   if (window.location.pathname === '/recipes/new') {
     var index = document.getElementById("new_action")
@@ -76,12 +57,6 @@ document.addEventListener("turbo:load", () => {
   }else if(window.location.pathname.startsWith('/users/edit')){
     var index = document.getElementById("edit_action")
     index.classList.add("select")
-    import("./user_new_up.js").then(module => {
-      // モジュールの使用
-    });
-    import("./user_show.js").then(module => {
-      // モジュールの使用
-    });
   }else if(window.location.pathname.startsWith('/users/'+ current_user_id)){
     var index = document.getElementById("user_action")
     index.classList.add("select")
