@@ -13,8 +13,9 @@
     = recipe.bio
 
   .menu_etc_font
-    p ジャンル: #{recipe.genre.name}
-    p メニュー:  #{recipe.menu.name}
+    
+    p ジャンル: #{link_to recipe.genre.name, search_recipes_path(q: { genre_name_cont: recipe.genre.name }), method: :get}
+    p メニュー:  #{link_to recipe.menu.name, search_recipes_path(q: { menu_name_cont: recipe.menu.name }), method: :get}
 
   .d-flex
     /# 美味しそうスタンプ

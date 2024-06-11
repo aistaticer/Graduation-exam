@@ -202,6 +202,15 @@ class RecipesController < ApplicationController
   
   end
 
+  def search
+    @url_recipe_index = true;
+    @q = Recipe.ransack(params[:q])
+    @total_recipes_count = @q.result.count
+    @recipes = @q.result.includes(:steps,:genre,:menu).with_attached_thumbnail.all.page(params[:page]).per(8)
+
+    stamp_set(@recipes)
+  end
+
   private
 
   def ai_pass_array()

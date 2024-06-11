@@ -1,0 +1,15 @@
+.justify-content-center.d-flex.margin-top25
+  p ##{params[:q]["genre_name_cont"]}#{params[:q]["menu_name_cont"]}
+.justify-content-center.d-flex
+  p #{@total_recipes_count}件
+
+.recipes-container
+  - @recipes.each do |recipe|
+    = render 'shared/recipe/recipe_introduce', recipe: recipe
+
+br
+  .justify-content-center.d-flex
+    - if @recipes.total_pages == 1
+      = render 'kaminari/only_one_page', recipes: @recipes
+    - else
+  	  = paginate @recipes, window: 2, remote: true

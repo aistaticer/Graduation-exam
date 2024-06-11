@@ -19,6 +19,8 @@ Rails.application.routes.draw do
       
       post :copy_create
 
+      get :search
+
     end
   end
 
