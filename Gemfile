@@ -29,7 +29,7 @@ gem "google-cloud-vision"
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 
-gem 'xml-sitemap'
+gem 'sitemap_generator'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
