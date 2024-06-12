@@ -166,12 +166,9 @@ function top_select() {
           break;
         default:
           state = "on"
-          select = account
           break;
       }
     }
-
-
 
     if(state == "on"){
       select.style.display = (!targetElement || 
