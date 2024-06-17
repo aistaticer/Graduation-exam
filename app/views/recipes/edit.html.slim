@@ -31,10 +31,10 @@
           = f.file_field :thumbnail, id: 'fileInput', style: 'display: none;'
 
       .margin-to30
-      .ingredient.margin-to30 id =  "step_form_number3"
+      .ingredient.margin-top30 id =  "step_form_number3"
         p 材料
         .ingredients_form id = "ingredients_form"
-          /#= f.select :serving, options_for_select((1..10).step(1).map { |n| [n, n] }.unshift(["何人分", nil]), f.object.serving), {}, { class: 'ingre_form width20px' }
+          = f.select :serving, options_for_select((1..10).step(1).map { |n| [n, n] }.unshift(["何人分", nil]), f.object.serving), {}, { class: 'ingre_form width20px' }
           .margin-top30
             = render partial: 'shared/recipe/ingredient_form', locals: {f: f}
 
