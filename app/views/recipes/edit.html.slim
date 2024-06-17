@@ -57,19 +57,6 @@
         = f.radio_button :copy_permission, 'false'
         = f.label :copy_permission, 'No', value: 'false'
 
-      .margin-top30
-        .d-flex
-          p AIによる改善案
-          .margin-left
-            .line id = "ai"
-              .i class="fa-solid fa-circle-question"
-        .append id = "append"
-          .margin-left
-            p AIが改善案を答えてくれます。
-            p 1日、1度に制限されています。
-        .result.padding id = "result"
-          .empty
-
       .process id =  "step_form_number6"
         - process_number = 0
         .margin-top30
