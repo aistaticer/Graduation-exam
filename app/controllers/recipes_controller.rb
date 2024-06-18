@@ -162,6 +162,8 @@ class RecipesController < ApplicationController
                                         .group_by(&:before_recipe)
                                         .transform_values { |recipes| recipes.pluck(:recipe_id) }
 
+    logger.debug(grouped_copied_recipe_ids)
+
     @recipe_power = []
     @recipe_id = []
     @recipes.each do |recipe|
