@@ -308,6 +308,7 @@
   border-radius: 5px;
   background-color: #e5cab4;
   white-space: pre-wrap;
+  text-align: left;
 }
 
 .empty{
@@ -360,29 +361,6 @@
 
 .padding{
   padding: 5px;
-}
-
-.line {
-  border-radius: 100%;
-  width: auto;
-  height: auto; /* 線の太さ */
-  background-color: rgb(226, 185, 185); /* 線の色 */
-  animation-name: drawLine; /* 定義したキーフレーム */
-  animation-duration: 2s; /* アニメーションの期間 */
-  animation-iteration-count: infinite; /* 無限に繰り返す */
-  animation-timing-function: linear; /* 一定速度で */
-
-}
-
-@keyframes drawLine {
-  0%, 100% { /* 開始点と終了点 */
-    width: 0;
-    height: 0;
-  }
-  50% { /* 中間点 */
-    width: 100%;
-    height: 100%;
-  }
 }
 
 .example {
