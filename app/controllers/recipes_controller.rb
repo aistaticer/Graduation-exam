@@ -157,12 +157,10 @@ class RecipesController < ApplicationController
     @recipes = copied_recipe_ids.map { |id| recipes.find { |recipe| recipe.id == id } }
     StampMiddle.count_like_recipe(@recipes)
 
-    grouped_copied_recipe_ids = CopiedRecipe.where(original_recipe: @recipe.copied_recipe.original_recipe)
+    @grouped_copied_recipe_ids = CopiedRecipe.where(original_recipe: @recipe.copied_recipe.original_recipe)
                                         .order(:before_recipe)
                                         .group_by(&:before_recipe)
                                         .transform_values { |recipes| recipes.pluck(:recipe_id) }
-
-    logger.debug(grouped_copied_recipe_ids)
 
     @recipe_power = []
     @recipe_id = []
