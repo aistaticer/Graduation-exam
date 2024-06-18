@@ -1,6 +1,3 @@
-
-= @a
-
 .background
   .d-flex.title
     p #{@recipe.name}の進化の歴史
@@ -25,10 +22,6 @@
 
           .juel_introduce_set id = "set_#{recipe.id}"
             .juel.absolute id = "#{recipe.id}"
-
-              = recipe.id
-              br
-              = recipe.copied_recipe.before_recipe
 
               - if recipe.id == params[:recipe_id].to_i
                 = image_tag "food_me.png", class: "small"
