@@ -110,7 +110,7 @@ https://evolution-recipes-949263457034.herokuapp.com/
 - AWS S3
 - RDS（PostgreSQL）
 - heroku
-- Next.js
+- node.js
 - puma
 
 ## システム構成図
