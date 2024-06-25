@@ -2,7 +2,7 @@
 module RecipesHelper
   def copy_recipe_helper(recipe)
 
-    original_recipe = Recipe.includes(:steps,:categories,:ingredients,:copied_recipe).find(recipe.id)
+    original_recipe = Recipe.includes(:steps,:ingredients,:copied_recipe).find(recipe.id)
     copied_recipe = original_recipe.dup
     copied_recipe.name += "（コピー）"
 
@@ -28,7 +28,6 @@ module RecipesHelper
     end
 
     copied_recipe.steps = copied_recipe_steps
-    copied_recipe.categories = copied_recipe_categories
     copied_recipe.ingredients = copied_recipe_ingredients
     copied_recipe.copied_recipe = new_copied_recipe
 

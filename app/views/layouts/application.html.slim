@@ -38,9 +38,9 @@ html
       = render 'shared/flash_error'
         
       - if @url_recipe_new
-        /#= javascript_pack_tag 'react/react_example.js', 'data-turbo-track': 'reload'
+        
       - elsif @url_recipe_show
-        /#= javascript_pack_tag 'react/react_show.js', 'data-turbo-track': 'reload'
+        
       - elsif @url_recipe_evolution
         = javascript_pack_tag 'react/react_evolution', 'data-turbo-track': 'reload'
       

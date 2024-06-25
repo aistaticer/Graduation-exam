@@ -95,8 +95,6 @@ function sidebar_display() {
 };
 
 document.addEventListener("turbo:load",sidebar_display);
-//document.addEventListener("turbo:render", sidebar_display);
-
 
 function flash_remove() {
   document.addEventListener("click", function(event) {
@@ -104,7 +102,6 @@ function flash_remove() {
     
     if (event.target.closest('.flash')) {
       state = true
-      console.log(state);
     }
 
     if (state == true) {
@@ -113,7 +110,6 @@ function flash_remove() {
 
       error.classList.add("fade-up-out");
       error.classList.remove("fade-down-in");
-
 
       setTimeout(function() {
         message.classList.remove("message");
@@ -132,7 +128,6 @@ function top_select() {
   const history = document.getElementById('history_introduce');
   const ai = document.getElementById('ai_introduce');
   
-  //const reject = document.getElementById('reject');
   var select;
   let state;
   document.addEventListener("click", function(event) {
@@ -183,8 +178,6 @@ function top_select() {
       ? "none"
       : "block";
     }
-    
-
   })
 }
 

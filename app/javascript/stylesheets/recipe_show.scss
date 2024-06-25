@@ -3,9 +3,15 @@
   height: auto;
   padding: 20px;
   overflow: hidden;
-  //overflow-x: auto;
-  //scrollbar-width: none; /* Firefox */
-  //-ms-overflow-style: none;  /* Internet Explorer 10+ */
+}
+
+.comment_font{
+  font-weight: bold;
+  font-size: 17px;
+}
+
+.comment_name{
+  font-size: 14px;
 }
 
 //_comment.replyhtml.slim

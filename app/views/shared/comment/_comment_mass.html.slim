@@ -1,0 +1,9 @@
+= render partial: 'shared/comment/comment_body', locals: {recipe: recipe, comment: comment }
+
+- if comment.replies.present?
+  - @comment_with_reply_ids << comment.id
+
+
+.space_top.show id = "replies_#{comment.id}"
+  - comment.replies.each do | reply |
+    = render partial: 'shared/comment/comment_reply', locals: { recipe: recipe, comment: comment, replycomment: reply } 

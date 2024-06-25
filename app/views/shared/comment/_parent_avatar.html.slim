@@ -1,0 +1,7 @@
+/# link_toが上のクラスと同じ高さを取ってしまうから.avatarで縮めてる.
+.avatar
+  = link_to user_path(comment.user), class: 'comment_link' do
+    - if comment.user.avatar.present?
+      = image_tag comment.user.avatar, class: "avater"
+    - else
+      = image_tag 'user.jpeg', class:"avater"
