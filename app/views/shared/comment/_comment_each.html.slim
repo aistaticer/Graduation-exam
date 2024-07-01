@@ -12,15 +12,7 @@
 - parent_comments.each do |comment|
   .comment_mass id = "comment_mass_#{comment.id}"
     = render partial: 'shared/comment/comment_mass', locals: {recipe: recipe, comment: comment }
-    
-    /= render partial: 'shared/comment/comment_body', locals: {recipe: recipe, comment: comment }
 
-    /- if comment.replies.present?
-      - comment_with_reply_ids << comment.id
-
-    /.space_top.show id = "replies_#{comment.id}"
-      - comment.replies.each do | reply |
-        = render partial: 'shared/comment/comment_reply', locals: { recipe: recipe, comment: comment, replycomment: reply }
 
 script
   | var commentWithReplyIds = #{@comment_with_reply_ids.to_json};

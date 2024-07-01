@@ -1,5 +1,6 @@
 = render partial: 'shared/comment/comment_body', locals: {recipe: recipe, comment: comment }
 
+- logger.debug(comment.id)
 - if comment.replies.present?
   - @comment_with_reply_ids << comment.id
 

@@ -25,9 +25,11 @@ class CommentsController < ApplicationController
           end
           
           if(child_comment_place_value.present?)
+            @comment_with_reply_ids = []
             @parent_comment = Comment.find(params[:comment][:parent_id])
-            turbo_streams << turbo_stream.append(child_comment_place_value, partial: "shared/comment/comment_reply", locals: { recipe: @recipe, replycomment: @comment, comment: @parent_comment, decorated_recipe: decorated_recipe })
-            #turbo_streams << turbo_stream.update(child_comment_place_value, partial: "shared/comment/comment_mass", locals: { recipe: @recipe, comment: @comment, parent_comments: @parent_comments, decorated_recipe: decorated_recipe })
+            -logger.debug(@parent_comment.body)
+            #turbo_streams << turbo_stream.append(child_comment_place_value, partial: "shared/comment/comment_reply", locals: { recipe: @recipe, replycomment: @comment, comment: @parent_comment, decorated_recipe: decorated_recipe })
+            turbo_streams << turbo_stream.update(child_comment_place_value, partial: "shared/comment/comment_mass", locals: { recipe: @recipe, comment: @parent_comment, parent_comments: @parent_comments, decorated_recipe: decorated_recipe })
             #turbo_streams << turbo_stream.update("comments", partial: "shared/comment/comment_each", locals: { recipe: @recipe, parent_comments: @parent_comments, decorated_recipe: decorated_recipe  })
           end
 
