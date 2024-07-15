@@ -10,8 +10,7 @@
       = render partial: 'shared/comment/comment_form', locals: {recipe: recipe}
 
 - parent_comments.each do |comment|
-  .comment_mass id = "comment_mass_#{comment.id}"
-    = render partial: 'shared/comment/comment_mass', locals: {recipe: recipe, comment: comment }
+  = render partial: 'shared/comment/comment_mass', locals: {recipe: recipe, comment: comment }
 
 
 script

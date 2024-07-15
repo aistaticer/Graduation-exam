@@ -5,8 +5,6 @@ class CommentsController < ApplicationController
     @comment = @recipe.comments.build(comment_params)
     @comment.user = current_user
 
-    @comments = @recipe.comments.includes(:user, replies: [:user, {myreply: :user}]).order(created_at: :desc)
-    @parent_comments = @comments.where(parent_id:nil)
     decorated_recipe = RecipeDecorator.new(@recipe)
     
     parent_comment_place_value = params[:comment][:parent_comment_place]
@@ -27,10 +25,7 @@ class CommentsController < ApplicationController
           if(child_comment_place_value.present?)
             @comment_with_reply_ids = []
             @parent_comment = Comment.find(params[:comment][:parent_id])
-            -logger.debug(@parent_comment.body)
-            #turbo_streams << turbo_stream.append(child_comment_place_value, partial: "shared/comment/comment_reply", locals: { recipe: @recipe, replycomment: @comment, comment: @parent_comment, decorated_recipe: decorated_recipe })
             turbo_streams << turbo_stream.update(child_comment_place_value, partial: "shared/comment/comment_mass", locals: { recipe: @recipe, comment: @parent_comment, parent_comments: @parent_comments, decorated_recipe: decorated_recipe })
-            #turbo_streams << turbo_stream.update("comments", partial: "shared/comment/comment_each", locals: { recipe: @recipe, parent_comments: @parent_comments, decorated_recipe: decorated_recipe  })
           end
 
           turbo_streams << turbo_stream.update("error", partial: "shared/flash_error", locals: { notice: flash[:notice] })
