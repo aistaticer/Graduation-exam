@@ -53,6 +53,7 @@ html
           = render 'shared/always/footer_3link'
       - else
         .no_signed_container id = "no_signed_container"
-          = yield
+          .content
+            = yield
           .user id = "user" data-user_state = "no"
           = render 'shared/always/footer_3link'

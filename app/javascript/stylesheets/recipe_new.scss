@@ -84,13 +84,6 @@
   width: 100%;
 }
 
-
-@media (max-width: 767px) {
-  .split{
-    width: 100%;
-  }
-}
-
 .back,.advance{
   border: none; /* 枠線なし */
   padding: 15px 32px; /* パディング */
@@ -284,14 +277,6 @@
   display: block;
   height: auto;
 }
-
-@media (max-width: 767px) {
-  .new_container{
-    display: block;
-    height: auto;
-  }
-}
-
 
 .select2-container {
   width: 80% !important; /* select2の幅を親要素の100%に設定 */

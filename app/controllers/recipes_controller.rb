@@ -9,7 +9,6 @@ class RecipesController < ApplicationController
     @url_recipe_index = true;
     @q = Recipe.ransack(params[:q])
     @recipes = @q.result.includes(:steps,:genre,:menu).with_attached_thumbnail.all.page(params[:page]).per(8)
-
     stamp_set(@recipes)
   end
 
@@ -43,9 +42,9 @@ class RecipesController < ApplicationController
 
     #自分の元になったレシピを探し出している
     @before_recipe = Recipe.includes(:steps).find(@recipe.copied_recipe.before_recipe)
+    
     # コピーの「作り方」が同じじゃないかを確認している 同じならfalseを返す
     process_check = check_before_recipe(@before_recipe, @recipe)
-
     
     if @recipe.save && process_check
       original_recipe_update
